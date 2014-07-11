@@ -2,5 +2,9 @@
 local.properties
 src/.idea/*
 .DS_Store
-build/*
+src/build/*
 *.iml
+build/*
+
+# Strings file with the location of our parse secret keys
+src/app/src/main/res/values/secret_keys.xml
