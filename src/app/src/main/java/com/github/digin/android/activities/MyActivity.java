@@ -1,4 +1,4 @@
-package com.github.digin.android;
+package com.github.digin.android.activities;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -6,6 +6,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.github.digin.android.R;
 import com.github.digin.android.constants.ParseKeys;
 
 
