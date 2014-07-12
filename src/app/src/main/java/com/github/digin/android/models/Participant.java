@@ -1,11 +1,11 @@
-package com.github.digin.android.model;
+package com.github.digin.android.models;
 
 /**
  *  The Participant class contains fields generic to every participant
  *  of the event. Chefs, breweries, etc.
  *  Created by mike on 7/11/14.
  */
-public class Participant {
+public class Participant extends ParseBackedModel {
 
     private String name;
     private String city;

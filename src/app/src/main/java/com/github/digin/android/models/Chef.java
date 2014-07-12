@@ -1,4 +1,4 @@
-package com.github.digin.android.model;
+package com.github.digin.android.models;
 
 /**
  *  A chef as defined by the official digin website is generally just a restaurant.
