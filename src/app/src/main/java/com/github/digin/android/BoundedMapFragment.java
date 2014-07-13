@@ -25,7 +25,7 @@ public class BoundedMapFragment extends MapFragment {
     private final int MIN_ZOOM = 15;
 
     private GoogleMap mMap = getMap();
-    private OverscrollHandler mOverscrollHandler = new OverscrollHandler();
+//    private OverscrollHandler mOverscrollHandler = new OverscrollHandler();
     private Context mContext;
 
     @Override
@@ -35,9 +35,24 @@ public class BoundedMapFragment extends MapFragment {
         mMap = getMap();
         CameraUpdate upd = CameraUpdateFactory.newLatLngZoom(new LatLng(39.766639, -86.171351), 17);
         mMap.moveCamera(upd);
-        mOverscrollHandler.sendEmptyMessageDelayed(0,100);
 
+        mMap.setOnCameraChangeListener(new GoogleMap.OnCameraChangeListener() {
+            @Override
+            public void onCameraChange(CameraPosition position) {
 
+                float zoom = 0;
+                if(position.zoom < MIN_ZOOM) zoom = MIN_ZOOM;
+                if(position.zoom > MAX_ZOOM) zoom = MAX_ZOOM;
+                LatLng correction = getLatLngCorrection(position.target);
+
+                if(zoom != 0 || correction.latitude != 0 || correction.longitude != 0) {
+                    zoom = (zoom==0)?position.zoom:zoom;
+                    CameraPosition newPosition = new CameraPosition(correction, zoom, position.tilt, position.bearing);
+                    CameraUpdate update = CameraUpdateFactory.newCameraPosition(newPosition);
+                    mMap.animateCamera(update);
+                }
+            }
+        });
     }
 
     /**
@@ -64,26 +79,26 @@ public class BoundedMapFragment extends MapFragment {
     }
 
 
-   /**
-    * Bounds the user to the overlay.
-    */
-    private class OverscrollHandler extends Handler {
-        @Override
-        public void handleMessage(Message msg) {
-            CameraPosition position = mMap.getCameraPosition();
-            float zoom = 0;
-            if(position.zoom < MIN_ZOOM) zoom = MIN_ZOOM;
-            if(position.zoom > MAX_ZOOM) zoom = MAX_ZOOM;
-            LatLng correction = getLatLngCorrection(position.target);
-
-            if(zoom != 0 || correction.latitude != 0 || correction.longitude != 0) {
-                zoom = (zoom==0)?position.zoom:zoom;
-                CameraPosition newPosition = new CameraPosition(correction, zoom, position.tilt, position.bearing);
-                CameraUpdate update = CameraUpdateFactory.newCameraPosition(newPosition);
-                mMap.moveCamera(update);
-            }
-
-            sendEmptyMessageDelayed(0,100);
-        }
-    }
+//   /**
+//    * Bounds the user to the overlay.
+//    */
+//    private class OverscrollHandler extends Handler {
+//        @Override
+//        public void handleMessage(Message msg) {
+//            CameraPosition position = mMap.getCameraPosition();
+//            float zoom = 0;
+//            if(position.zoom < MIN_ZOOM) zoom = MIN_ZOOM;
+//            if(position.zoom > MAX_ZOOM) zoom = MAX_ZOOM;
+//            LatLng correction = getLatLngCorrection(position.target);
+//
+//            if(zoom != 0 || correction.latitude != 0 || correction.longitude != 0) {
+//                zoom = (zoom==0)?position.zoom:zoom;
+//                CameraPosition newPosition = new CameraPosition(correction, zoom, position.tilt, position.bearing);
+//                CameraUpdate update = CameraUpdateFactory.newCameraPosition(newPosition);
+//                mMap.moveCamera(update);
+//            }
+//
+//            sendEmptyMessageDelayed(0,100);
+//        }
+//    }
 }
