@@ -1,24 +1,15 @@
 package com.github.digin.android.data;
 
-import android.app.Activity;
-import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
 import android.graphics.Color;
-import android.util.DisplayMetrics;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polygon;
 import com.google.android.gms.maps.model.PolygonOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 
 import java.util.ArrayList;
 import java.util.List;
-
 
 public class MapOverlayData {
 
@@ -141,10 +132,11 @@ public class MapOverlayData {
             for(double[] coord : tent) {
                 tentPts.add(new LatLng(coord[1], coord[0]));
             }
-            Polygon polygon = map.addPolygon(new PolygonOptions()
-                    .addAll(tentPts)
-                    .strokeColor(Color.BLACK)
-                    .fillColor(Color.WHITE));
+            map.addPolygon(new PolygonOptions()
+                .addAll(tentPts)
+                .strokeColor(Color.BLACK)
+                .fillColor(Color.WHITE));
         }
     }
+
 }
