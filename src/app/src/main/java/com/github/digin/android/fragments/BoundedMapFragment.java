@@ -1,6 +1,7 @@
 package com.github.digin.android.fragments;
 
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.github.digin.android.data.MapOverlayData;
 import com.google.android.gms.maps.CameraUpdate;
@@ -49,6 +50,7 @@ public class BoundedMapFragment extends MapFragment {
         MapOverlayData.addTents(mMap);
         MapOverlayData.addGate
                 (mMap);
+
     }
 
     /**
