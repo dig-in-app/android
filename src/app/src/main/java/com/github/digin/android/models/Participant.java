@@ -1,11 +1,21 @@
 package com.github.digin.android.models;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+
+import com.github.digin.android.ImageHelper;
+import com.github.digin.android.bitmap.ImageRenderer;
+
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
 /**
  *  The Participant class contains fields generic to every participant
  *  of the event. Chefs, breweries, etc.
  *  Created by mike on 7/11/14.
  */
-public class Participant extends ParseBackedModel {
+public class Participant extends ParseBackedModel implements ImageRenderer{
 
     private String name;
     private String city;
@@ -78,6 +88,29 @@ public class Participant extends ParseBackedModel {
         result = 31 * result + (yelpURL != null ? yelpURL.hashCode() : 0);
         result = 31 * result + (thumbnail != null ? thumbnail.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public Bitmap renderBitmap(int sizePX) {
+        final String url = "http://lorempixel.com/300/300/";
+
+        HttpURLConnection httpURLConnection = null;
+        try {
+            httpURLConnection = (HttpURLConnection) new URL(url).openConnection();
+            final InputStream is = httpURLConnection.getInputStream();
+            Bitmap gravitar = BitmapFactory.decodeStream(is, null, new BitmapFactory.Options());
+            return ImageHelper.getRoundedCornerBitmap(gravitar, 500);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            httpURLConnection.disconnect();
+        }
+        return null;
+    }
+
+    @Override
+    public String getUniqueImageId() {
+        return Integer.toString(hashCode());
     }
 
 }

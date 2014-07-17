@@ -8,3 +8,5 @@ build/*
 
 # Strings file with the location of our parse secret keys
 src/app/src/main/res/values/secret_keys.xml
+
+*.keystore
