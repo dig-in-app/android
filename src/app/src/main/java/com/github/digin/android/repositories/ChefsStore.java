@@ -29,6 +29,8 @@ public class ChefsStore {
         // Do a cache check to see if we need to update the local list.
         boolean invalid = isCacheInvalid();
 
+
+
     }
 
     /** Checks the status of the local cache to see if anything has changed up on Parse */
