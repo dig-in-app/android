@@ -1,4 +1,4 @@
-package com.github.digin.android.data;
+package com.github.digin.android.constants;
 
 import android.graphics.Color;
 

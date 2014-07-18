@@ -1,9 +1,8 @@
 package com.github.digin.android.fragments;
 
 import android.os.Bundle;
-import android.widget.Toast;
 
-import com.github.digin.android.data.MapOverlayData;
+import com.github.digin.android.constants.MapOverlayData;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
