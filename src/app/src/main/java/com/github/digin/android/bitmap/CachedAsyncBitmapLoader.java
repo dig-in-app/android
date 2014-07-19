@@ -22,32 +22,32 @@ public final class CachedAsyncBitmapLoader {
      * <p/>
      * This is optimized for calling in a listView's getView() method.
      *
-     * @param imageOwner The owner that the image is created from.
+     * @param imageUrl   The url for the image.
      * @param imageView  The imageview to place the bitmap in
      * @param host       The host of the cache that this will use.
      * @param size       The size of the image that should be rendered (renders as a square)
      */
-    public static void loadBitmapAsCachedAsyncTask(ImageRenderer imageOwner,
+    public static void loadBitmapAsCachedAsyncTask(String imageUrl,
                                                    ImageView imageView, BitmapCacheHost host, int size) {
-        final Bitmap bitmap = host.getBitmapFromMemCache(imageOwner.getUniqueImageId());
+        final Bitmap bitmap = host.getBitmapFromMemCache(imageUrl);
 
         if (bitmap != null) {
             imageView.setImageBitmap(bitmap);
-        } else if (cancelPotentialWork(imageOwner, imageView)) {
+        } else if (cancelPotentialWork(imageUrl, imageView)) {
             BitmapWorkerTask task = new BitmapWorkerTask(host, imageView, size);
             AsyncDrawable downloadedDrawable = new AsyncDrawable(task);
             imageView.setImageDrawable(downloadedDrawable);
-            task.execute(imageOwner);
+            task.execute(imageUrl);
         }
     }
 
-    private static boolean cancelPotentialWork(ImageRenderer imageOwner,
+    private static boolean cancelPotentialWork(String imageUrl,
                                                ImageView imageView) {
         BitmapWorkerTask bitmapLoaderTask = getBitmapWorkerTask(imageView);
 
         if (bitmapLoaderTask != null) {
-            String bitmapPath = bitmapLoaderTask.imageOwner.getUniqueImageId();
-            if ((bitmapPath == null) || (!bitmapPath.equals(imageOwner.getUniqueImageId()))) {
+            String bitmapPath = bitmapLoaderTask.imageUrl;
+            if ((bitmapPath == null) || (!bitmapPath.equals(imageUrl))) {
                 bitmapLoaderTask.cancel(true);
             } else {
                 // The same URL is already being downloaded.
@@ -69,9 +69,9 @@ public final class CachedAsyncBitmapLoader {
     }
 
 
-    private static class BitmapWorkerTask extends AsyncTask<ImageRenderer, Void, Bitmap> {
+    private static class BitmapWorkerTask extends AsyncTask<String, Void, Bitmap> {
         private final WeakReference<ImageView> imageViewReference;
-        public ImageRenderer imageOwner = null;
+        public String imageUrl = null;
         private BitmapCacheHost cacheHost;
         private int sizeofImage;
 
@@ -82,10 +82,10 @@ public final class CachedAsyncBitmapLoader {
         }
 
         @Override
-        protected Bitmap doInBackground(ImageRenderer... imageOwners) {
-            imageOwner = imageOwners[0];
-            Bitmap bitmap = imageOwner.renderBitmap(sizeofImage);
-            cacheHost.addBitmapToMemoryCache(imageOwner.getUniqueImageId(), bitmap);
+        protected Bitmap doInBackground(String... imageUrls) {
+            imageUrl = imageUrls[0];
+            Bitmap bitmap = BitmapDownloader.getBitmap(imageUrl);
+            cacheHost.addBitmapToMemoryCache(imageUrl, bitmap);
             return bitmap;
         }
 

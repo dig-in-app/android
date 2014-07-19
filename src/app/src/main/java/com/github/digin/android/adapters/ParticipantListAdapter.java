@@ -64,35 +64,9 @@ public class ParticipantListAdapter extends ArrayAdapter<Participant> {
 
         holder.text.setText(getItem(position).toString());
 
-        CachedAsyncBitmapLoader.loadBitmapAsCachedAsyncTask(getItem(position), holder.image, host, PROFILE_PICTURE_SMALL_SIZE);
+        CachedAsyncBitmapLoader.loadBitmapAsCachedAsyncTask(getItem(position).getThumbnail(), holder.image, host, PROFILE_PICTURE_SMALL_SIZE);
 
         return rowView;
-
-        //-------------
-//        View rowView = convertView;
-//        // reuse views
-//        if (rowView == null) {
-//            rowView = inflater.inflate(R.layout.rowlayout, null);
-//            // configure view holder
-//            ViewHolder viewHolder = new ViewHolder();
-//            viewHolder.text = (TextView) rowView.findViewById(R.id.TextView01);
-//            viewHolder.image = (ImageView) rowView
-//                    .findViewById(R.id.ImageView01);
-//            rowView.setTag(viewHolder);
-//        }
-//
-//        // fill data
-//        ViewHolder holder = (ViewHolder) rowView.getTag();
-//        String s = names[position];
-//        holder.text.setText(s);
-//        if (s.startsWith("Windows7") || s.startsWith("iPhone")
-//                || s.startsWith("Solaris")) {
-//            holder.image.setImageResource(R.drawable.no);
-//        } else {
-//            holder.image.setImageResource(R.drawable.ok);
-//        }
-//
-//        return rowView;
     }
 
     static class ViewHolder {

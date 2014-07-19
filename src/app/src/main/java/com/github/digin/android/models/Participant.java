@@ -15,7 +15,7 @@ import java.net.URL;
  *  of the event. Chefs, breweries, etc.
  *  Created by mike on 7/11/14.
  */
-public class Participant extends ParseBackedModel implements ImageRenderer{
+public class Participant extends ParseBackedModel {
 
     private String name;
     private String city;
@@ -56,6 +56,7 @@ public class Participant extends ParseBackedModel implements ImageRenderer{
     }
 
     public String getThumbnail() {
+        thumbnail = "http://lorempixel.com/300/300";
         return thumbnail;
     }
 
@@ -90,27 +91,5 @@ public class Participant extends ParseBackedModel implements ImageRenderer{
         return result;
     }
 
-    @Override
-    public Bitmap renderBitmap(int sizePX) {
-        final String url = "http://lorempixel.com/300/300/";
-
-        HttpURLConnection httpURLConnection = null;
-        try {
-            httpURLConnection = (HttpURLConnection) new URL(url).openConnection();
-            final InputStream is = httpURLConnection.getInputStream();
-            Bitmap gravitar = BitmapFactory.decodeStream(is, null, new BitmapFactory.Options());
-            return ImageHelper.getRoundedCornerBitmap(gravitar, 500);
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            httpURLConnection.disconnect();
-        }
-        return null;
-    }
-
-    @Override
-    public String getUniqueImageId() {
-        return Integer.toString(hashCode());
-    }
 
 }
