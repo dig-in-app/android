@@ -6,23 +6,23 @@ package com.github.digin.android.models.map;
  */
 public class Location {
 
-    private double latitude, longitude;
+    private double lat, lng;
     private int altitude;
 
-    public double getLatitude() {
-        return latitude;
+    public double getLat() {
+        return lat;
     }
 
-    public void setLatitude(double latitude) {
-        this.latitude = latitude;
+    public void setLat(double lat) {
+        this.lat = lat;
     }
 
-    public double getLongitude() {
-        return longitude;
+    public double getLng() {
+        return lng;
     }
 
-    public void setLongitude(double longitude) {
-        this.longitude = longitude;
+    public void setLng(double lng) {
+        this.lng = lng;
     }
 
     public int getAltitude() {
@@ -41,8 +41,8 @@ public class Location {
         Location location = (Location) o;
 
         if (altitude != location.altitude) return false;
-        if (Double.compare(location.latitude, latitude) != 0) return false;
-        if (Double.compare(location.longitude, longitude) != 0) return false;
+        if (Double.compare(location.lat, lat) != 0) return false;
+        if (Double.compare(location.lng, lng) != 0) return false;
 
         return true;
     }
@@ -51,9 +51,9 @@ public class Location {
     public int hashCode() {
         int result;
         long temp;
-        temp = Double.doubleToLongBits(latitude);
+        temp = Double.doubleToLongBits(lat);
         result = (int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(longitude);
+        temp = Double.doubleToLongBits(lng);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         result = 31 * result + altitude;
         return result;
