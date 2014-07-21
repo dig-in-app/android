@@ -14,7 +14,7 @@ import com.google.android.gms.maps.model.LatLngBounds;
 
 public class BoundedMapFragment extends MapFragment {
 
-    private final LatLngBounds BOUNDS = new LatLngBounds(new LatLng(39.764251, -86.174382), new LatLng(39.769694, -86.166399));
+    private final LatLngBounds BOUNDS = new LatLngBounds( new LatLng(39.766111, -86.173218), new LatLng(39.767892, -86.170160));
     private final int MAX_ZOOM = 21;
     private final int MIN_ZOOM = 15;
 
@@ -24,9 +24,9 @@ public class BoundedMapFragment extends MapFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mMap = getMap();
-        CameraUpdate upd = CameraUpdateFactory.newLatLngZoom(new LatLng(39.766639, -86.171351), 17);
+        CameraUpdate upd = CameraUpdateFactory.newLatLngZoom(new LatLng(39.766862, -86.172005), 17);
         mMap.moveCamera(upd);
-        mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+        mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
         mMap.setOnCameraChangeListener(new GoogleMap.OnCameraChangeListener() {
             @Override
