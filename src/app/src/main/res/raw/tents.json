@@ -1,0 +1,80 @@
+{
+    "tents": [
+        {
+            "name": "VIP Tent",
+            "center": { "latitude": 50, "longitude": 50 },
+            "bounds": [
+                { "latitude": -86.172211, "longitude": 39.767138 },
+                { "latitude": -86.172099, "longitude": 39.767142 },
+                { "latitude": -86.172112, "longitude": 39.766956 },
+                { "latitude": -86.172217, "longitude": 39.766952 }
+            ]
+        },
+
+        {
+            "name":"Tent 1",
+            "center": { "latitude": 50, "longitude": 50 },
+            "bounds": [
+                { "latitude": -86.171300, "longitude": 39.767455 },
+                { "latitude": -86.171377, "longitude": 39.767401 },
+                { "latitude": -86.171289, "longitude": 39.767346 },
+                { "latitude": -86.171211, "longitude": 39.767406}
+            ]
+        },
+
+        {
+            "name": "Tent 2",
+            "center": { "latitude": 50, "longitude": 50 },
+            "bounds": [
+                { "latitude": -86.171651, "longitude": 39.767560 },
+                { "latitude": -86.171739, "longitude": 39.767500 },
+                { "latitude": -86.171643, "longitude": 39.767422 },
+                { "latitude": -86.171549, "longitude": 39.767486}
+            ]
+        },
+
+        {
+            "name": "Tent 3",
+            "center": { "latitude": 50, "longitude": 50 },
+            "bounds": [
+                { "latitude": -86.172147, "longitude": 39.767566 },
+                { "latitude": -86.172069, "longitude": 39.767515 },
+                { "latitude": -86.171978, "longitude": 39.767581 },
+                { "latitude": -86.172059, "longitude": 39.767626 }
+            ]
+        },
+
+        {
+            "name": "Tent 4",
+            "center": { "latitude": 50, "longitude": 50 },
+            "bounds": [
+                { "latitude": -86.172348, "longitude": 39.767645 },
+                { "latitude": -86.172413, "longitude": 39.767601 },
+                { "latitude": -86.172327, "longitude": 39.767531 },
+                { "latitude": -86.172257, "longitude": 39.767583 }
+            ]
+        },
+
+        {
+            "name": "Test 5",
+            "center": { "latitude": 50, "longitude": 50 },
+            "bounds": [
+                { "latitude": -86.171353, "longitude": 39.766942 },
+                { "latitude": -86.171412, "longitude": 39.766894 },
+                { "latitude": -86.171345, "longitude": 39.766855 },
+                { "latitude": -86.171294, "longitude": 39.766903 }
+            ]
+        },
+
+        {
+            "name": "Tent 6",
+            "center": { "latitude": 50, "longitude": 50 },
+            "bounds": [
+                { "latitude": -86.171367, "longitude": 39.766670 },
+                { "latitude": -86.171436, "longitude": 39.766620 },
+                { "latitude": -86.171369, "longitude": 39.766554 },
+                { "latitude": -86.171286, "longitude": 39.766614 }
+            ]
+        }
+    ]
+}
