@@ -15,8 +15,8 @@ import com.google.android.gms.maps.model.LatLngBounds;
 public class BoundedMapFragment extends MapFragment {
 
     private final LatLngBounds BOUNDS = new LatLngBounds( new LatLng(39.766111, -86.173218), new LatLng(39.767892, -86.170160));
-    private final int MAX_ZOOM = 21;
-    private final int MIN_ZOOM = 15;
+    private final int MAX_ZOOM = 22;
+    private final int MIN_ZOOM = 17;
 
     private GoogleMap mMap = getMap();
 
