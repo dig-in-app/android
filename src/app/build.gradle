@@ -23,6 +23,10 @@ android {
             storeFile file('../../debug.keystore')
         }
     }
+    packagingOptions {
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/NOTICE'
+    }
 }
 
 dependencies {
