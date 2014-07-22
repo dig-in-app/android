@@ -7,7 +7,6 @@ package com.github.digin.android.models.map;
 public class Location {
 
     private double lat, lng;
-    private int altitude;
 
     public double getLat() {
         return lat;
@@ -25,14 +24,6 @@ public class Location {
         this.lng = lng;
     }
 
-    public int getAltitude() {
-        return altitude;
-    }
-
-    public void setAltitude(int altitude) {
-        this.altitude = altitude;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -40,7 +31,6 @@ public class Location {
 
         Location location = (Location) o;
 
-        if (altitude != location.altitude) return false;
         if (Double.compare(location.lat, lat) != 0) return false;
         if (Double.compare(location.lng, lng) != 0) return false;
 
@@ -55,7 +45,6 @@ public class Location {
         result = (int) (temp ^ (temp >>> 32));
         temp = Double.doubleToLongBits(lng);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
-        result = 31 * result + altitude;
         return result;
     }
 
