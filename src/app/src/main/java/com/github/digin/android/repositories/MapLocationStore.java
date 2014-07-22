@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.digin.android.R;
 import com.github.digin.android.logging.Logger;
+import com.google.android.gms.maps.model.LatLng;
 import com.github.digin.android.models.map.LocationList;
 import com.github.digin.android.models.map.Tent;
 import com.github.digin.android.models.map.TentList;
