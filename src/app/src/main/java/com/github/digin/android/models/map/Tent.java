@@ -1,5 +1,7 @@
 package com.github.digin.android.models.map;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -10,11 +12,11 @@ import java.util.List;
 public class Tent {
 
     private String name;
-    private Location center;
-    private List<Location> bounds;
+    private LatLng center;
+    private List<LatLng> bounds;
 
     public Tent() {
-        this.bounds = new LinkedList<Location>();
+        this.bounds = new LinkedList<LatLng>();
     }
 
     public String getName() {
@@ -25,19 +27,19 @@ public class Tent {
         this.name = name;
     }
 
-    public Location getCenter() {
+    public LatLng getCenter() {
         return center;
     }
 
-    public void setCenter(Location center) {
+    public void setCenter(LatLng center) {
         this.center = center;
     }
 
-    public List<Location> getBounds() {
+    public List<LatLng> getBounds() {
         return bounds;
     }
 
-    public void setBounds(List<Location> bounds) {
+    public void setBounds(List<LatLng> bounds) {
         this.bounds = bounds;
     }
 

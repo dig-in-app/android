@@ -7,13 +7,12 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.digin.android.R;
 import com.github.digin.android.logging.Logger;
-import com.github.digin.android.models.map.Location;
+import com.github.digin.android.models.map.LatLng;
 import com.github.digin.android.models.map.LocationList;
 import com.github.digin.android.models.map.Tent;
 import com.github.digin.android.models.map.TentList;
 
 
-import java.io.IOError;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
@@ -56,7 +55,7 @@ public class MapLocationStore {
 
     }
 
-    public List<Location> getMapBounds() {
+    public List<LatLng> getMapBounds() {
         return mapBounds.getLocations();
     }
 

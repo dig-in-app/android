@@ -1,5 +1,7 @@
 package com.github.digin.android.models.map;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import java.util.List;
 
 /**
@@ -7,13 +9,13 @@ import java.util.List;
  */
 public class LocationList {
 
-    private List<Location> locations;
+    private List<LatLng> locations;
 
-    public List<Location> getLocations() {
+    public List<LatLng> getLocations() {
         return locations;
     }
 
-    public void setLocations(List<Location> locations) {
+    public void setLocations(List<LatLng> locations) {
         this.locations = locations;
     }
 
