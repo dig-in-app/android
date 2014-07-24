@@ -1,5 +1,7 @@
 package com.github.digin.android.models.map;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import java.util.List;
 
 /**

@@ -48,6 +48,7 @@ public class ParticipantListFragment extends ListFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        setListAdapter(new ParticipantListAdapter(getActivity(), R.layout.drawer_item,R.id.text, people, (BitmapCacheHost) getActivity().getApplication()));
+        setListAdapter(new ParticipantListAdapter(getActivity(), 0, R.id.text, people, (BitmapCacheHost) getActivity().getApplication()));
     }
+
 }

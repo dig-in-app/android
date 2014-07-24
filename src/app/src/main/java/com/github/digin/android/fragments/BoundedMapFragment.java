@@ -50,8 +50,7 @@ public class BoundedMapFragment extends MapFragment {
         });
 
         MapOverlayData.addTents(mMap);
-        mMap.addPolyline(new PolylineOptions().addAll(new MapLocationStore(getActivity()).getMapBounds()).color(Color.RED).width(5));
-
+        MapOverlayData.addGate(mMap);
     }
 
     /**

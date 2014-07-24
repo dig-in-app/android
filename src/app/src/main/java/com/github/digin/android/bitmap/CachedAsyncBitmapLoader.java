@@ -7,6 +7,8 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.widget.ImageView;
 
+import com.github.digin.android.ImageCacheEntry;
+
 import java.lang.ref.WeakReference;
 
 /**
@@ -22,32 +24,32 @@ public final class CachedAsyncBitmapLoader {
      * <p/>
      * This is optimized for calling in a listView's getView() method.
      *
-     * @param imageUrl   The url for the image.
+     * @param entry      The owner that the image is created from.
      * @param imageView  The imageview to place the bitmap in
      * @param host       The host of the cache that this will use.
      * @param size       The size of the image that should be rendered (renders as a square)
      */
-    public static void loadBitmapAsCachedAsyncTask(String imageUrl,
+    public static void loadBitmapAsCachedAsyncTask(ImageCacheEntry entry,
                                                    ImageView imageView, BitmapCacheHost host, int size) {
-        final Bitmap bitmap = host.getBitmapFromMemCache(imageUrl);
+        final Bitmap bitmap = host.getBitmapFromMemCache(entry.getId());
 
         if (bitmap != null) {
             imageView.setImageBitmap(bitmap);
-        } else if (cancelPotentialWork(imageUrl, imageView)) {
+        } else if (cancelPotentialWork(entry, imageView)) {
             BitmapWorkerTask task = new BitmapWorkerTask(host, imageView, size);
             AsyncDrawable downloadedDrawable = new AsyncDrawable(task);
             imageView.setImageDrawable(downloadedDrawable);
-            task.execute(imageUrl);
+            task.execute(entry);
         }
     }
 
-    private static boolean cancelPotentialWork(String imageUrl,
+    private static boolean cancelPotentialWork(ImageCacheEntry entry,
                                                ImageView imageView) {
         BitmapWorkerTask bitmapLoaderTask = getBitmapWorkerTask(imageView);
 
         if (bitmapLoaderTask != null) {
-            String bitmapPath = bitmapLoaderTask.imageUrl;
-            if ((bitmapPath == null) || (!bitmapPath.equals(imageUrl))) {
+            String bitmapPath = bitmapLoaderTask.entry.getId();
+            if ((bitmapPath == null) || (!bitmapPath.equals(entry.getId()))) {
                 bitmapLoaderTask.cancel(true);
             } else {
                 // The same URL is already being downloaded.
@@ -69,9 +71,9 @@ public final class CachedAsyncBitmapLoader {
     }
 
 
-    private static class BitmapWorkerTask extends AsyncTask<String, Void, Bitmap> {
+    private static class BitmapWorkerTask extends AsyncTask<ImageCacheEntry, Void, Bitmap> {
         private final WeakReference<ImageView> imageViewReference;
-        public String imageUrl = null;
+        public ImageCacheEntry entry = null;
         private BitmapCacheHost cacheHost;
         private int sizeofImage;
 
@@ -82,10 +84,10 @@ public final class CachedAsyncBitmapLoader {
         }
 
         @Override
-        protected Bitmap doInBackground(String... imageUrls) {
-            imageUrl = imageUrls[0];
-            Bitmap bitmap = BitmapDownloader.getBitmap(imageUrl);
-            cacheHost.addBitmapToMemoryCache(imageUrl, bitmap);
+        protected Bitmap doInBackground(ImageCacheEntry... entries) {
+            entry = entries[0];
+            Bitmap bitmap = BitmapDownloader.getBitmap(entry.getUrl());
+            cacheHost.addBitmapToMemoryCache(entry.getId(), bitmap);
             return bitmap;
         }
 

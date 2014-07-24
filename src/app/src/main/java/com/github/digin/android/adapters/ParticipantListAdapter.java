@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.github.digin.android.ImageCacheEntry;
 import com.github.digin.android.R;
 import com.github.digin.android.bitmap.BitmapCacheHost;
 import com.github.digin.android.bitmap.CachedAsyncBitmapLoader;
@@ -64,7 +65,11 @@ public class ParticipantListAdapter extends ArrayAdapter<Participant> {
 
         holder.text.setText(getItem(position).toString());
 
-        CachedAsyncBitmapLoader.loadBitmapAsCachedAsyncTask(getItem(position).getThumbnail(), holder.image, host, PROFILE_PICTURE_SMALL_SIZE);
+
+        Participant p = getItem(position);
+        ImageCacheEntry ic = new ImageCacheEntry(p.getThumbnail(), Integer.toString(p.hashCode()));
+
+        CachedAsyncBitmapLoader.loadBitmapAsCachedAsyncTask(ic, holder.image, host, PROFILE_PICTURE_SMALL_SIZE);
 
         return rowView;
     }

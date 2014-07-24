@@ -9,13 +9,13 @@ import java.util.List;
  */
 public class LocationList {
 
-    private List<LatLng> locations;
+    private List<Location> locations;
 
-    public List<LatLng> getLocations() {
+    public List<Location> getLocations() {
         return locations;
     }
 
-    public void setLocations(List<LatLng> locations) {
+    public void setLocations(List<Location> locations) {
         this.locations = locations;
     }
 

@@ -56,7 +56,7 @@ public class Participant extends ParseBackedModel {
     }
 
     public String getThumbnail() {
-        thumbnail = "http://lorempixel.com/300/300";
+        thumbnail = "http://lorempixel.com/200/200";
         return thumbnail;
     }
 
@@ -90,6 +90,5 @@ public class Participant extends ParseBackedModel {
         result = 31 * result + (thumbnail != null ? thumbnail.hashCode() : 0);
         return result;
     }
-
 
 }
