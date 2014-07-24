@@ -45,6 +45,7 @@ public class MainActivity extends Activity {
         mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                ((NavDrawerAdapter)mDrawerList.getAdapter()).setCurrentItem(position);
                 getFragmentManager().beginTransaction().replace(R.id.content_frame,
                         ((NavDrawerItem)view.getTag()).getFragment(),
                         ((NavDrawerItem)view.getTag()).toString()).commit();
