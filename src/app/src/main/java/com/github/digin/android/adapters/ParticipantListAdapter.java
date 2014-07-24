@@ -52,7 +52,9 @@ public class ParticipantListAdapter extends ArrayAdapter<Participant> {
 
             // configure view holder
             ViewHolder viewHolder = new ViewHolder();
-            viewHolder.text = (TextView) rowView.findViewById(R.id.textView);
+            viewHolder.title = (TextView) rowView.findViewById(R.id.titleView);
+            viewHolder.dish = (TextView) rowView.findViewById(R.id.dishText);
+            viewHolder.farm = (TextView) rowView.findViewById(R.id.farmText);
             viewHolder.image = (ImageView) rowView
                     .findViewById(R.id.imageView);
             rowView.setTag(viewHolder);
@@ -61,21 +63,24 @@ public class ParticipantListAdapter extends ArrayAdapter<Participant> {
         // fill data
         ViewHolder holder = (ViewHolder) rowView.getTag();
 
-        holder.image.setImageBitmap(null);
+        //holder.image.setImageBitmap(null);
 
-        holder.text.setText(getItem(position).toString());
+        //holder.text.setText(getItem(position).toString());
 
 
         Participant p = getItem(position);
         ImageCacheEntry ic = new ImageCacheEntry(p.getThumbnail(), Integer.toString(p.hashCode()));
 
-        CachedAsyncBitmapLoader.loadBitmapAsCachedAsyncTask(ic, holder.image, host, PROFILE_PICTURE_SMALL_SIZE);
+        //CachedAsyncBitmapLoader.loadBitmapAsCachedAsyncTask(ic, holder.image, host, PROFILE_PICTURE_SMALL_SIZE);
 
         return rowView;
     }
 
     static class ViewHolder {
-        public TextView text;
+        public TextView title;
+        public TextView dish;
+        public TextView farm;
+
         public ImageView image;
     }
 }
