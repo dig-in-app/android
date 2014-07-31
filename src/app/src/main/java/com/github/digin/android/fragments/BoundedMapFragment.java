@@ -4,7 +4,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 
 import com.github.digin.android.constants.MapOverlayData;
-import com.github.digin.android.repositories.MapLocationStore;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
