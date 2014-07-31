@@ -1,7 +1,11 @@
 package com.github.digin.android.repositories;
 
+import android.content.Context;
+
 import com.github.digin.android.listeners.OnChefQueryListener;
+import com.github.digin.android.logging.Logger;
 import com.github.digin.android.models.Chef;
+import com.github.digin.android.tasks.ParseAllChefsTask;
 
 import java.util.List;
 
@@ -14,28 +18,30 @@ import java.util.List;
  *
  *  Created by mike on 7/11/14.
  */
-public class ChefsStore {
-
-    /** The last time our local cache was updated */
-    private long cacheUpdateTime = 0;
+public abstract class ChefsStore {
 
     /** The local cache */
-    private List<Chef> chefCache;
+    private static List<Chef> chefCache;
 
-    /** An asynchronous call which on completion returns a list of every chef.
-     *  Pass in a listener to receive a list of chefs when the call is complete. */
-    public void queryChefs(OnChefQueryListener listener) {
+    /** Gets a list of all the chefs. This call always returns through the listener
+     *  provided. If a copy of the chefs is available locally (in memory) it is used.
+     *  Otherwise, this call reaches out to parse asynchronously, returns immediately,
+     *  and the list of chefs is provided to the listener on the UI thread. */
+    public static void getChefs(Context context, final OnChefQueryListener listener) {
 
-        // Do a cache check to see if we need to update the local list.
-        boolean invalid = isCacheInvalid();
+        // Return the local list if it is available
+        if (chefCache != null) {
+            if (listener != null) {
+                listener.onComplete(chefCache);
+            }
+            return;
+        }
 
+        // Query parse
+        Logger.log(ChefsStore.class, "Updating local chefs list from Parse");
+        ParseAllChefsTask task = new ParseAllChefsTask(context, listener);
+        task.execute();
 
-
-    }
-
-    /** Checks the status of the local cache to see if anything has changed up on Parse */
-    private boolean isCacheInvalid() {
-        return false;
     }
 
 }
