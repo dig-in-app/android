@@ -28,6 +28,11 @@ public class Chef extends Participant {
     }
 
     @Override
+    public String toString() {
+        return getName() + " (" + getId() + ") Dish: " + getDish();
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;

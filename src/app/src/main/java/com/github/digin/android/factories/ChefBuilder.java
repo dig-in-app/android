@@ -57,9 +57,4 @@ public class ChefBuilder {
         return this;
     }
 
-    public ChefBuilder category(String category) {
-        chef.setCategory(category);
-        return this;
-    }
-
 }
