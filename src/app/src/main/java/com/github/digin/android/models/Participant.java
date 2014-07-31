@@ -1,18 +1,9 @@
 package com.github.digin.android.models;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-
-import com.github.digin.android.ImageHelper;
-import com.github.digin.android.bitmap.ImageRenderer;
-
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
-
 /**
  *  The Participant class contains fields generic to every participant
  *  of the event. Chefs, breweries, etc.
+ *
  *  Created by mike on 7/11/14.
  */
 public class Participant extends ParseBackedModel {
