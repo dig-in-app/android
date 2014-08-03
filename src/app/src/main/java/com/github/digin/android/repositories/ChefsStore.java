@@ -13,9 +13,6 @@ import java.util.List;
  *  Class which handles downloading Chef data from parse, storing this
  *  data locally, querying for cache information, etc.
  *
- *  This is the central place for the presentation layer to get a list of chefs.
- *  That's all you need to know.
- *
  *  Created by mike on 7/11/14.
  */
 public abstract class ChefsStore {
@@ -39,9 +36,26 @@ public abstract class ChefsStore {
 
         // Query parse
         Logger.log(ChefsStore.class, "Updating local chefs list from Parse");
-        ParseAllChefsTask task = new ParseAllChefsTask(context, listener);
+        ParseAllChefsTask task = new ParseAllChefsTask(context, new OnChefQueryListener() {
+            @Override
+            public void onComplete(List<Chef> chefs) {
+                // Store the returned list locally
+                chefCache = chefs;
+
+                // Alert the listener passed in to the storage framework
+                if (listener != null) {
+                    listener.onComplete(chefs);
+                }
+            }
+        });
         task.execute();
 
+    }
+
+    /** Forces this class to reach out to parse to update instead of getting from the local cache */
+    public static void getChefsNoCache(Context context, final OnChefQueryListener listener) {
+        chefCache = null;
+        getChefs(context, listener);
     }
 
 }
