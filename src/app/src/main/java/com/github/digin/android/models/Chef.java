@@ -10,6 +10,7 @@ package com.github.digin.android.models;
 public class Chef extends Participant {
 
     private String ingredient, dish;
+    private String category, tent;
 
     public String getIngredient() {
         return ingredient;
@@ -27,6 +28,22 @@ public class Chef extends Participant {
         this.dish = dish;
     }
 
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getTent() {
+        return tent;
+    }
+
+    public void setTent(String tent) {
+        this.tent = tent;
+    }
+
     @Override
     public String toString() {
         return getName() + " (" + getId() + ") Dish: " + getDish();
@@ -40,9 +57,12 @@ public class Chef extends Participant {
 
         Chef chef = (Chef) o;
 
+        if (category != null ? !category.equals(chef.category) : chef.category != null)
+            return false;
         if (dish != null ? !dish.equals(chef.dish) : chef.dish != null) return false;
         if (ingredient != null ? !ingredient.equals(chef.ingredient) : chef.ingredient != null)
             return false;
+        if (tent != null ? !tent.equals(chef.tent) : chef.tent != null) return false;
 
         return true;
     }
@@ -52,6 +72,8 @@ public class Chef extends Participant {
         int result = super.hashCode();
         result = 31 * result + (ingredient != null ? ingredient.hashCode() : 0);
         result = 31 * result + (dish != null ? dish.hashCode() : 0);
+        result = 31 * result + (category != null ? category.hashCode() : 0);
+        result = 31 * result + (tent != null ? tent.hashCode() : 0);
         return result;
     }
 

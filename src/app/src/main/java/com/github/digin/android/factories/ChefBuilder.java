@@ -57,4 +57,24 @@ public class ChefBuilder {
         return this;
     }
 
+    public ChefBuilder category(String category) {
+        chef.setCategory(category);
+        return this;
+    }
+
+    public ChefBuilder ingredient(String ingredient) {
+        chef.setIngredient(ingredient);
+        return this;
+    }
+
+    public ChefBuilder dish(String dish) {
+        chef.setDish(dish);
+        return this;
+    }
+
+    public ChefBuilder tent(String tent) {
+        chef.setTent(tent);
+        return this;
+    }
+
 }

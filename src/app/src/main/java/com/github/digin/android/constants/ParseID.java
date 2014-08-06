@@ -25,5 +25,8 @@ public class ParseID {
     /** Fields on in Chef object */
 
     public static final String CHEF_CATEGORY = "category";
+    public static final String CHEF_INGREDIENT = "mainIngredient";
+    public static final String CHEF_DISH = "dishTitle";
+    public static final String CHEF_TENT = "tent";
 
 }

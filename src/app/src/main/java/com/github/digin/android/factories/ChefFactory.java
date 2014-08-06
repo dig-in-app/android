@@ -35,6 +35,10 @@ public abstract class ChefFactory {
                 .thumbnail(parseObject.getString(ParseID.FIELD_THUMBNAIL))
                 .website(parseObject.getString(ParseID.FIELD_WEBSITE))
                 .yelp(parseObject.getString(ParseID.FIELD_YELP))
+                .category(parseObject.getString(ParseID.CHEF_CATEGORY))
+                .ingredient(parseObject.getString(ParseID.CHEF_INGREDIENT))
+                .dish(parseObject.getString(ParseID.CHEF_DISH))
+                .tent(parseObject.getString(ParseID.CHEF_TENT))
                 .build();
 
     }
