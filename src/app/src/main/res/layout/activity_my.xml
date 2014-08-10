@@ -12,7 +12,6 @@
 
     <!-- The navigation drawer -->
 
-
     <ListView
         android:layout_marginTop="?android:attr/actionBarSize"
         android:layout_width="240dp"
@@ -22,7 +21,5 @@
         android:choiceMode="singleChoice"
         android:divider="?android:attr/listDivider"
         android:background="@android:color/white" />
-
-
 
 </android.support.v4.widget.DrawerLayout>

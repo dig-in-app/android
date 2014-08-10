@@ -1,7 +1,10 @@
 package com.github.digin.android.fragments;
 
+import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.View;
+import android.view.ViewGroup;
 
 import com.github.digin.android.constants.MapOverlayData;
 import com.google.android.gms.maps.CameraUpdate;
@@ -50,6 +53,24 @@ public class BoundedMapFragment extends MapFragment {
 
         MapOverlayData.addTents(mMap);
         MapOverlayData.addGate(mMap);
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        final TypedArray styledAttributes = getActivity().obtainStyledAttributes(
+                new int[]{android.R.attr.actionBarSize});
+        int actionBarSize = (int) styledAttributes.getDimension(0, 0);
+        styledAttributes.recycle();
+
+
+        if (view.getLayoutParams() instanceof ViewGroup.MarginLayoutParams) {
+            ViewGroup.MarginLayoutParams p = (ViewGroup.MarginLayoutParams) view.getLayoutParams();
+            p.setMargins(p.leftMargin, actionBarSize, p.rightMargin, p.bottomMargin);
+            view.requestLayout();
+        }
+
     }
 
     /**
