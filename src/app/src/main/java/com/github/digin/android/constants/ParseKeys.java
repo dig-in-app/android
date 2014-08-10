@@ -5,10 +5,14 @@ import android.content.Context;
 import com.github.digin.android.R;
 
 /**
- *  Fakse ParseKeys.java file.
+ *  Contains parse's application and secret keys
  *
- *  DO NOT ADD ANYTHING TO THIS FILE. IT WILL BE OVERWRITTEN DURING COMPILE TIME.
- *  It is just here to provide method signatures to the rest of the application.
+ *  These are read in from a string resources file which is gitignored due to the
+ *  open source nature of our application. If you'd like to compile this app, you'll
+ *  either need these parse keys or a duplicate parse database with all the information
+ *  pertaining to the digin event.
+ *
+ *  Contact David or Michael on github for help with either of these.
  *
  *  Created by mike on 7/11/14.
  */
