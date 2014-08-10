@@ -11,12 +11,18 @@
         android:layout_height="match_parent" />
 
     <!-- The navigation drawer -->
-    <ListView android:id="@+id/left_drawer"
+
+
+    <ListView
+        android:layout_marginTop="?android:attr/actionBarSize"
         android:layout_width="240dp"
         android:layout_height="match_parent"
+        android:id="@+id/left_drawer"
         android:layout_gravity="start"
         android:choiceMode="singleChoice"
         android:divider="?android:attr/listDivider"
         android:background="@android:color/white" />
+
+
 
 </android.support.v4.widget.DrawerLayout>

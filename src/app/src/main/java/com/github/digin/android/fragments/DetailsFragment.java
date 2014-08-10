@@ -37,7 +37,6 @@ public class DetailsFragment extends Fragment {
     public void onAttach(Activity activity) {
         super.onAttach(activity);
 
-
         mFadingHelper = new FadingActionBarHelper()
                 .actionBarBackground(android.R.color.holo_red_dark)
                 .headerLayout(R.layout.details_header_image)
