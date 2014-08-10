@@ -29,12 +29,13 @@ public abstract class BreweryStore {
             return;
         }
 
-        Logger.log(BreweryStore.class, "Querying parse for brewery information.");
         ParseAllBreweriesTask task = new ParseAllBreweriesTask(context, new OnBreweryQueryListener() {
             @Override
             public void onComplete(List<Brewery> breweries) {
                 breweriesCache = breweries;
-                listener.onComplete(breweries);
+                if (listener != null) {
+                    listener.onComplete(breweries);
+                }
             }
         });
         task.execute();
