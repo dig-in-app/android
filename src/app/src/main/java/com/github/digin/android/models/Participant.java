@@ -1,18 +1,9 @@
 package com.github.digin.android.models;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-
-import com.github.digin.android.ImageHelper;
-import com.github.digin.android.bitmap.ImageRenderer;
-
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
-
 /**
  *  The Participant class contains fields generic to every participant
  *  of the event. Chefs, breweries, etc.
+ *
  *  Created by mike on 7/11/14.
  */
 public class Participant extends ParseBackedModel {
@@ -22,6 +13,7 @@ public class Participant extends ParseBackedModel {
     private String website;
     private String yelpURL;
     private String thumbnail;
+    private String tent;
 
     public String getName() {
         return name;
@@ -64,15 +56,25 @@ public class Participant extends ParseBackedModel {
         this.thumbnail = thumbnail;
     }
 
+    public String getTent() {
+        return tent;
+    }
+
+    public void setTent(String tent) {
+        this.tent = tent;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
 
         Participant that = (Participant) o;
 
         if (city != null ? !city.equals(that.city) : that.city != null) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
+        if (tent != null ? !tent.equals(that.tent) : that.tent != null) return false;
         if (thumbnail != null ? !thumbnail.equals(that.thumbnail) : that.thumbnail != null)
             return false;
         if (website != null ? !website.equals(that.website) : that.website != null) return false;
@@ -83,12 +85,13 @@ public class Participant extends ParseBackedModel {
 
     @Override
     public int hashCode() {
-        int result = name != null ? name.hashCode() : 0;
+        int result = super.hashCode();
+        result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (city != null ? city.hashCode() : 0);
         result = 31 * result + (website != null ? website.hashCode() : 0);
         result = 31 * result + (yelpURL != null ? yelpURL.hashCode() : 0);
         result = 31 * result + (thumbnail != null ? thumbnail.hashCode() : 0);
+        result = 31 * result + (tent != null ? tent.hashCode() : 0);
         return result;
     }
-
 }

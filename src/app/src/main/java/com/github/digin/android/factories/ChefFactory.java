@@ -12,11 +12,11 @@ import com.parse.ParseObject;
  */
 public abstract class ChefFactory {
 
-    public static ChefBuilder create() {
-        return new ChefBuilder();
+    public static Chef create() {
+        return new Chef();
     }
 
-    public static Chef createFrom(ParseObject parseObject) throws InvalidClassException {
+    public static Chef createFrom(ParseObject parseObject) {
 
         // Make sure the object passed in is of Parse type Chef
         if (!parseObject.getClassName().equals(ParseID.CLASS_CHEF)) {
@@ -26,16 +26,23 @@ public abstract class ChefFactory {
             throw exception;
         }
 
-        return create()
-                .id(parseObject.getObjectId())
-                .created(parseObject.getCreatedAt().getTime())
-                .modified(parseObject.getUpdatedAt().getTime())
-                .name(parseObject.getString(ParseID.FIELD_NAME))
-                .city(parseObject.getString(ParseID.FIELD_CITY))
-                .thumbnail(parseObject.getString(ParseID.FIELD_THUMBNAIL))
-                .website(parseObject.getString(ParseID.FIELD_WEBSITE))
-                .yelp(parseObject.getString(ParseID.FIELD_YELP))
-                .build();
+        Chef chef = create();
+
+        chef.setId(parseObject.getObjectId());
+        chef.setCreated(parseObject.getCreatedAt().getTime());
+        chef.setUpdated(parseObject.getUpdatedAt().getTime());
+
+        chef.setName(parseObject.getString(ParseID.F_CHEF_RESTAURANT));
+        chef.setThumbnail(parseObject.getString(ParseID.F_CHEF_THUMB));
+        chef.setWebsite(parseObject.getString(ParseID.F_CHEF_WEB));
+        chef.setYelpURL(parseObject.getString(ParseID.F_CHEF_YELP));
+        chef.setCity(parseObject.getString(ParseID.F_CHEF_CITY));
+        chef.setDish(parseObject.getString(ParseID.F_CHEF_DISH));
+        chef.setCook(parseObject.getString(ParseID.F_CHEF_CHEFNAME));
+        chef.setFarm(parseObject.getString(ParseID.F_CHEF_FARM));
+        chef.setTent(parseObject.getString(ParseID.F_CHEF_TENT));
+
+        return chef;
 
     }
 

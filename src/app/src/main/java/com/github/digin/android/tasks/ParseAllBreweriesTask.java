@@ -6,9 +6,11 @@ import android.os.Handler;
 
 import com.github.digin.android.constants.ParseID;
 import com.github.digin.android.exceptions.InvalidClassException;
+import com.github.digin.android.factories.BreweryFactory;
 import com.github.digin.android.factories.ChefFactory;
-import com.github.digin.android.listeners.OnChefQueryListener;
+import com.github.digin.android.listeners.OnBreweryQueryListener;
 import com.github.digin.android.logging.Logger;
+import com.github.digin.android.models.Brewery;
 import com.github.digin.android.models.Chef;
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -18,28 +20,24 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- *  Task which queries parse for a list of all the chefs we are currently
- *  storing.
- *
- *  This shouldn't be called by the presentation layer. Its best if
- *  Created by mike on 7/11/14.
+ * Created by mike on 8/3/14.
  */
-public class ParseAllChefsTask extends AsyncTask<Void, Void, Void> {
+public class ParseAllBreweriesTask extends AsyncTask<Void, Void, Void> {
 
     private Context context;
-    private OnChefQueryListener listener;
+    private OnBreweryQueryListener listener;
 
-    public ParseAllChefsTask(Context context, OnChefQueryListener listener) {
+    public ParseAllBreweriesTask(Context context, OnBreweryQueryListener listener) {
         this.context = context;
         this.listener = listener;
     }
 
     @Override
     protected Void doInBackground(Void... params) {
-        Logger.log(ParseAllChefsTask.class, "Starting background download of all chefs from Parse");
+        Logger.log(ParseAllBreweriesTask.class, "Starting parse sync for brewery data.");
 
         // Create a parse query for the entire chefs table
-        ParseQuery<ParseObject> query = ParseQuery.getQuery(ParseID.CLASS_CHEF);
+        ParseQuery<ParseObject> query = ParseQuery.getQuery(ParseID.CLASS_BREWERY);
 
         // Execute the query
         List<ParseObject> queryResult = null;
@@ -47,36 +45,37 @@ public class ParseAllChefsTask extends AsyncTask<Void, Void, Void> {
             queryResult = query.find();
 
         } catch (ParseException e) {
-            Logger.err(ParseAllChefsTask.class, "An error was thrown during a Parse query for all chefs", e);
+            Logger.err(ParseAllBreweriesTask.class, "An error was thrown during a Parse query for all breweries", e);
 
             if (listener != null) {
                 listener.onComplete(null);
             }
-            return null;
+
+            throw new RuntimeException();
         }
 
-        // Convert each parse object into our own Chef data model
-        List<Chef> chefs = new LinkedList<Chef>();
+        // Convert each parse object into our own Brewery data model
+        List<Brewery> breweries = new LinkedList<Brewery>();
         for (ParseObject pObject : queryResult) {
-            chefs.add(ChefFactory.createFrom(pObject));
+            breweries.add(BreweryFactory.createFrom(pObject));
         }
 
         // Alert the listener
         if (listener != null) {
-            alert(chefs);
+            alert(breweries);
         }
 
         return null;
     }
 
     /** Alerts the listener on the UI thread that execution has completed */
-    private void alert(final List<Chef> chefs) {
+    private void alert(final List<Brewery> breweries) {
         if (listener == null) { return; }
 
         Handler handler = new Handler(context.getMainLooper());
         handler.post(new Runnable() {
             public void run() {
-                listener.onComplete(chefs);
+                listener.onComplete(breweries);
             }
         });
 

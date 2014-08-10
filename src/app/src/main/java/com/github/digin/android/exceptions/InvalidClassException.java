@@ -6,7 +6,7 @@ package com.github.digin.android.exceptions;
  *
  *  Created by mike on 7/11/14.
  */
-public class InvalidClassException extends Exception {
+public class InvalidClassException extends RuntimeException {
 
     public InvalidClassException() {
         super();
