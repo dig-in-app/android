@@ -24,7 +24,7 @@ import java.util.List;
  *  This shouldn't be called by the presentation layer. Its best if
  *  Created by mike on 7/11/14.
  */
-public class ParseAllChefsTask extends AsyncTask<Void, Void, List<Chef>> {
+public class ParseAllChefsTask extends AsyncTask<Void, Void, Void> {
 
     private Context context;
     private OnChefQueryListener listener;
@@ -35,7 +35,7 @@ public class ParseAllChefsTask extends AsyncTask<Void, Void, List<Chef>> {
     }
 
     @Override
-    protected List<Chef> doInBackground(Void... params) {
+    protected Void doInBackground(Void... params) {
         Logger.log(ParseAllChefsTask.class, "Starting background download of all chefs from Parse");
 
         // Create a parse query for the entire chefs table
@@ -48,6 +48,10 @@ public class ParseAllChefsTask extends AsyncTask<Void, Void, List<Chef>> {
 
         } catch (ParseException e) {
             Logger.err(ParseAllChefsTask.class, "An error was thrown during a Parse query for all chefs", e);
+
+            if (listener != null) {
+                listener.onComplete(null);
+            }
             return null;
         }
 
@@ -64,7 +68,7 @@ public class ParseAllChefsTask extends AsyncTask<Void, Void, List<Chef>> {
             alert(chefs);
         }
 
-        return chefs;
+        return null;
     }
 
     /** Alerts the listener on the UI thread that execution has completed */

@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.github.digin.android.listeners.OnBreweryQueryListener;
 import com.github.digin.android.logging.Logger;
+import com.github.digin.android.models.Brewery;
 import com.github.digin.android.models.Participant;
 import com.github.digin.android.tasks.ParseAllBreweriesTask;
 
@@ -17,7 +18,7 @@ import java.util.List;
  */
 public abstract class BreweryStore {
 
-    private static List<Participant> breweriesCache;
+    private static List<Brewery> breweriesCache;
 
     public static void getBreweries(Context context, final OnBreweryQueryListener listener) {
 
@@ -31,7 +32,7 @@ public abstract class BreweryStore {
         Logger.log(BreweryStore.class, "Querying parse for brewery information.");
         ParseAllBreweriesTask task = new ParseAllBreweriesTask(context, new OnBreweryQueryListener() {
             @Override
-            public void onComplete(List<Participant> breweries) {
+            public void onComplete(List<Brewery> breweries) {
                 breweriesCache = breweries;
                 listener.onComplete(breweries);
             }

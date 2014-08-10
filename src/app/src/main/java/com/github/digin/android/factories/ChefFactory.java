@@ -16,7 +16,7 @@ public abstract class ChefFactory {
         return new Chef();
     }
 
-    public static Chef createFrom(ParseObject parseObject) throws InvalidClassException {
+    public static Chef createFrom(ParseObject parseObject) {
 
         // Make sure the object passed in is of Parse type Chef
         if (!parseObject.getClassName().equals(ParseID.CLASS_CHEF)) {
