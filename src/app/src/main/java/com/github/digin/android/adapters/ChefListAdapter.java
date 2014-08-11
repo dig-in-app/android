@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,6 +15,7 @@ import com.github.digin.android.ImageCacheEntry;
 import com.github.digin.android.R;
 import com.github.digin.android.bitmap.BitmapCacheHost;
 import com.github.digin.android.bitmap.CachedAsyncBitmapLoader;
+import com.github.digin.android.models.Chef;
 import com.github.digin.android.models.Participant;
 
 import java.util.List;
@@ -21,18 +23,17 @@ import java.util.List;
 /**
  * Created by david on 7/16/14.
  */
-public class ParticipantListAdapter extends ArrayAdapter<Participant> {
-
-    public static int PROFILE_PICTURE_SMALL_SIZE;
-    private final BitmapCacheHost host;
+public class ChefListAdapter extends BaseAdapter {
 
     LayoutInflater inflater;
 
     Context context;
-    public ParticipantListAdapter(Activity context, int resource, int textViewResourceId, List<Participant> objects, BitmapCacheHost host) {
-        super(context, resource, textViewResourceId, objects);
+
+    List<Chef> mChefs;
+
+    public ChefListAdapter(Context context, List<Chef> chefs) {
+        mChefs = chefs;
         this.context = context;
-        this.host = host;
     }
 
     private LayoutInflater getLayoutInflater() {
@@ -43,12 +44,27 @@ public class ParticipantListAdapter extends ArrayAdapter<Participant> {
     }
 
     @Override
+    public int getCount() {
+        return mChefs.size();
+    }
+
+    @Override
+    public Chef getItem(int position) {
+        return mChefs.get(position);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return getItem(position).hashCode();
+    }
+
+    @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
         View rowView = convertView;
         // reuse views
-        if (rowView == null || (rowView.getId() == ((position%2 == 1) ? R.id.listItemRight : R.id.listItemLeft))) {
-            rowView = getLayoutInflater().inflate((position % 2 == 1) ? R.layout.list_item_l : R.layout.list_item_r, parent, false);
+        if (rowView == null) {
+            rowView = getLayoutInflater().inflate(R.layout.list_item_l, parent, false);
 
             // configure view holder
             ViewHolder viewHolder = new ViewHolder();
@@ -63,15 +79,10 @@ public class ParticipantListAdapter extends ArrayAdapter<Participant> {
         // fill data
         ViewHolder holder = (ViewHolder) rowView.getTag();
 
-        //holder.image.setImageBitmap(null);
-
-        //holder.text.setText(getItem(position).toString());
-
-
-        Participant p = getItem(position);
-        ImageCacheEntry ic = new ImageCacheEntry(p.getThumbnail(), Integer.toString(p.hashCode()));
-
-        //CachedAsyncBitmapLoader.loadBitmapAsCachedAsyncTask(ic, holder.image, host, PROFILE_PICTURE_SMALL_SIZE);
+        Chef chef = getItem(position);
+        holder.title.setText(chef.getName() + ": " + chef.getCook());
+        holder.dish.setText(chef.getDish());
+        holder.farm.setText(chef.getFarm());
 
         return rowView;
     }
