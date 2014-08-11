@@ -16,6 +16,7 @@ import com.github.digin.android.ImageCacheEntry;
 import com.github.digin.android.R;
 import com.github.digin.android.bitmap.BitmapCacheHost;
 import com.github.digin.android.bitmap.CachedAsyncBitmapLoader;
+import com.github.digin.android.logging.Logger;
 import com.github.digin.android.models.Chef;
 import com.github.digin.android.models.Participant;
 
@@ -73,8 +74,8 @@ public class ChefListAdapter extends BaseAdapter {
             viewHolder.dish = (TextView) rowView.findViewById(R.id.dishText);
             viewHolder.farm = (TextView) rowView.findViewById(R.id.farmText);
             viewHolder.chef = (TextView) rowView.findViewById(R.id.chefView);
-            viewHolder.image = (ImageView) rowView
-                    .findViewById(R.id.imageView);
+            viewHolder.tentBadge = (ImageView) rowView
+                    .findViewById(R.id.tentBadge);
             rowView.setTag(viewHolder);
         }
 
@@ -87,7 +88,36 @@ public class ChefListAdapter extends BaseAdapter {
         holder.dish.setText(Html.fromHtml("<b>Dish:</b> " + chef.getDish()));
         holder.farm.setText(Html.fromHtml("<b>Farm:</b> " + chef.getFarm()));
 
+        holder.tentBadge.setImageResource(getBadgeForChef(chef));
+
         return rowView;
+    }
+
+    private int getBadgeForChef(Chef chef) {
+        if(chef.getTent().contains("Tent")) {
+            char tentNum = chef.getTent().charAt( chef.getTent().length() - 1);
+            if(tentNum == '1') {
+                return R.drawable.tent_one;
+            } else if(tentNum == '2') {
+                return R.drawable.tent_two;
+            } else if(tentNum == '3') {
+                return R.drawable.tent_badge; //TODO: Get image for tent 3.
+            } else if(tentNum == '4') {
+                return R.drawable.tent_four;
+            } else if(tentNum == '5') {
+                return R.drawable.tent_five;
+            } else if(tentNum == '6') {
+                return R.drawable.tent_six;
+            } else {
+                return R.drawable.tent_badge; //TODO: This image is too large.
+            }
+        } else if(chef.getTent().equals("Food Trucks")) {
+            return R.drawable.truck_badge;
+        } else {
+            Logger.log(getClass(), "Chef has no tent: " + chef.getName() + " | " + chef.getTent());
+            return R.drawable.tent_badge; //TODO: This image is too large.
+        }
+
     }
 
     static class ViewHolder {
@@ -96,6 +126,6 @@ public class ChefListAdapter extends BaseAdapter {
         public TextView farm;
         public TextView chef;
 
-        public ImageView image;
+        public ImageView tentBadge;
     }
 }
