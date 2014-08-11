@@ -3,6 +3,7 @@ package com.github.digin.android.adapters;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.BitmapFactory;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -71,6 +72,7 @@ public class ChefListAdapter extends BaseAdapter {
             viewHolder.title = (TextView) rowView.findViewById(R.id.titleView);
             viewHolder.dish = (TextView) rowView.findViewById(R.id.dishText);
             viewHolder.farm = (TextView) rowView.findViewById(R.id.farmText);
+            viewHolder.chef = (TextView) rowView.findViewById(R.id.chefView);
             viewHolder.image = (ImageView) rowView
                     .findViewById(R.id.imageView);
             rowView.setTag(viewHolder);
@@ -80,9 +82,10 @@ public class ChefListAdapter extends BaseAdapter {
         ViewHolder holder = (ViewHolder) rowView.getTag();
 
         Chef chef = getItem(position);
-        holder.title.setText(chef.getName() + ": " + chef.getCook());
-        holder.dish.setText(chef.getDish());
-        holder.farm.setText(chef.getFarm());
+        holder.title.setText(chef.getName());
+        holder.chef.setText(Html.fromHtml("<b>Chef:</b> " + chef.getCook()));
+        holder.dish.setText(Html.fromHtml("<b>Dish:</b> " + chef.getDish()));
+        holder.farm.setText(Html.fromHtml("<b>Farm:</b> " + chef.getFarm()));
 
         return rowView;
     }
@@ -91,6 +94,7 @@ public class ChefListAdapter extends BaseAdapter {
         public TextView title;
         public TextView dish;
         public TextView farm;
+        public TextView chef;
 
         public ImageView image;
     }
