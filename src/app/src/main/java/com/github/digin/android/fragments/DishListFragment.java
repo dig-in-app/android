@@ -3,7 +3,9 @@ package com.github.digin.android.fragments;
 import android.app.Activity;
 import android.app.ListFragment;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.github.digin.android.R;
@@ -27,11 +29,13 @@ import com.github.digin.android.repositories.ChefsStore;
  */
 public class DishListFragment extends ListFragment {
 
-
-
     public DishListFragment() {
     }
 
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.chef_list_layout, container, false);
+    }
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
@@ -56,8 +60,6 @@ public class DishListFragment extends ListFragment {
                 setListAdapter(new ChefListAdapter(getActivity(), chefs));
             }
         });
-
-
     }
 
     @Override
