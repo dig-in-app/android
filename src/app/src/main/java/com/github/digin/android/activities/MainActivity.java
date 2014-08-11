@@ -49,9 +49,13 @@ public class MainActivity extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 ((NavDrawerAdapter)mDrawerList.getAdapter()).setCurrentItem(position);
+
+                getActionBar().setTitle(getString(R.string.app_name));
+                getActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.ab_solid_diginpassport));
+
                 getFragmentManager().beginTransaction().replace(R.id.content_frame,
-                        ((NavDrawerItem)view.getTag()).getFragment(),
-                        ((NavDrawerItem)view.getTag()).toString()).commit();
+                        ((NavDrawerItem) view.getTag()).getFragment(),
+                        ((NavDrawerItem) view.getTag()).toString()).commit();
                 mDrawerLayout.closeDrawers();
             }
         });
@@ -64,14 +68,20 @@ public class MainActivity extends Activity {
                 R.string.action_open_drawer  /* "close drawer" description */
         ) {
 
+            String oldTitle;
+
             /** Called when a drawer has settled in a completely closed state. */
             public void onDrawerClosed(View view) {
                 super.onDrawerClosed(view);
+                getActionBar().setTitle(oldTitle);
             }
 
             /** Called when a drawer has settled in a completely open state. */
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
+
+                oldTitle = getActionBar().getTitle().toString();
+
                 getActionBar().setTitle(getString(R.string.app_name));
             }
         };
@@ -108,4 +118,12 @@ public class MainActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+
+        getActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.ab_solid_diginpassport));
+        getActionBar().setTitle(getString(R.string.app_name));
+    }
 }

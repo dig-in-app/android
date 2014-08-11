@@ -3,8 +3,7 @@ package com.github.digin.android;
 import android.app.Fragment;
 
 import com.github.digin.android.fragments.BoundedMapFragment;
-import com.github.digin.android.fragments.DetailsFragment;
-import com.github.digin.android.fragments.ParticipantListFragment;
+import com.github.digin.android.fragments.DishListFragment;
 
 import java.util.Arrays;
 import java.util.List;
@@ -13,8 +12,7 @@ public class NavDrawerItem {
 
     static NavDrawerItem[] items = new NavDrawerItem[] {
             new NavDrawerItem(BoundedMapFragment.class, "Map"),
-            new NavDrawerItem(ParticipantListFragment.class, "List"),
-            new NavDrawerItem(DetailsFragment.class, "Details")
+            new NavDrawerItem(DishListFragment.class, "Dishes")
     };
 
     public static List<NavDrawerItem> getItems() {

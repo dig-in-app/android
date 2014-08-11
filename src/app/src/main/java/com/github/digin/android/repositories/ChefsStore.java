@@ -3,6 +3,7 @@ package com.github.digin.android.repositories;
 import android.content.Context;
 
 import com.github.digin.android.listeners.OnChefQueryListener;
+import com.github.digin.android.listeners.OnSingleChefQuery;
 import com.github.digin.android.logging.Logger;
 import com.github.digin.android.models.Chef;
 import com.github.digin.android.tasks.ParseAllChefsTask;
@@ -56,6 +57,25 @@ public abstract class ChefsStore {
     public static void getChefsNoCache(Context context, final OnChefQueryListener listener) {
         chefCache = null;
         getChefs(context, listener);
+    }
+
+    public static void getChefById(Context context, final String id, final OnSingleChefQuery listener) {
+        Logger.log(ChefsStore.class, "Getting chef for ID");
+        getChefs(context, new OnChefQueryListener() {
+            @Override
+            public void onComplete(List<Chef> chefs) {
+
+                for (Chef chef : chefs) {
+                    if (chef.getId().equals(id)) {
+                        listener.onComplete(chef);
+                        return;
+                    }
+
+                }
+                Logger.log(ChefsStore.class, "Found no chef matching given ID");
+                listener.onComplete(null);
+            }
+        });
     }
 
 }

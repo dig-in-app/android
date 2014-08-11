@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="#000"
+        android:textColor="#FFF"
         android:text="Text"
         android:padding="10dp"/>
 

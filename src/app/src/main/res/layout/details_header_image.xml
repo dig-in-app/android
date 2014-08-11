@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ImageView xmlns:android="http://schemas.android.com/apk/res/android"
 
-
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:adjustViewBounds="true"
-    android:scaleType="centerCrop"
-    android:background="@drawable/fresh_food">
+    android:layout_height="wrap_content" >
 
-</ImageView>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        android:id="@+id/header"
+        android:src="@drawable/fresh_food">
+    </ImageView>
+
+</FrameLayout>
