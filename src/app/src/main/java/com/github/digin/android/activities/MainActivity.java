@@ -40,7 +40,7 @@ public class MainActivity extends Activity {
 
     private void initDrawer() {
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mDrawerList = (ListView) findViewById(R.id.left_drawer);
+        mDrawerList = (ListView) findViewById(R.id.navlist);
 
         // Set the adapter for the list view
         mDrawerList.setAdapter(new NavDrawerAdapter(this, R.layout.drawer_item, NavDrawerItem.getItems()));

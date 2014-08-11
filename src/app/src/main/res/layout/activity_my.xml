@@ -12,14 +12,55 @@
 
     <!-- The navigation drawer -->
 
-    <ListView
+    <RelativeLayout
         android:paddingTop="?android:attr/actionBarSize"
         android:layout_width="240dp"
         android:layout_height="match_parent"
+        android:background="#3A3A3C"
+        android:clickable="true"
         android:id="@+id/left_drawer"
-        android:layout_gravity="start"
-        android:choiceMode="singleChoice"
-        android:divider="?android:attr/listDivider"
-        android:background="#3A3A3C" />
+        android:layout_gravity="start">
+
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:choiceMode="singleChoice"
+            android:id="@+id/navlist"
+            android:divider="?android:attr/listDivider"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="vertical" >
+
+
+            <IconTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="#FFF"
+                android:text="{fa-info-circle} About Dig Indiana"
+                android:gravity="center"
+                android:padding="10dp" />
+
+            <IconTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="#FFF"
+                android:text="{fa-code} About the developers"
+                android:gravity="center"
+                android:padding="10dp" />
+
+        </LinearLayout>
+
+
+
+
+    </RelativeLayout>
+
 
 </android.support.v4.widget.DrawerLayout>

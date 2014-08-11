@@ -34,6 +34,7 @@ dependencies {
     compile 'com.fasterxml.jackson.core:jackson-core:2.4.0'
     compile 'com.fasterxml.jackson.core:jackson-databind:2.3.3'
     compile 'com.github.manuelpeinado.fadingactionbar:fadingactionbar:3.1.2'
+    compile 'com.joanzapata.android:android-iconify:1.0.6'
     compile files('libs/Parse-1.5.1.jar')
     compile project(':ParallaxScroll')
 }
