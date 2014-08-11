@@ -2,7 +2,11 @@ package com.github.digin.android.constants;
 
 import android.graphics.Color;
 
+import com.github.digin.android.R;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.GroundOverlayOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Polygon;
 import com.google.android.gms.maps.model.PolygonOptions;
@@ -137,6 +141,8 @@ public class MapOverlayData {
                 .strokeColor(Color.BLACK)
                 .fillColor(Color.WHITE));
         }
+
+        map.addGroundOverlay(new GroundOverlayOptions().position(new LatLng(39.767601, -86.172413), 19).image(BitmapDescriptorFactory.fromResource(R.drawable.tent_overlay_four)));
     }
 
 }

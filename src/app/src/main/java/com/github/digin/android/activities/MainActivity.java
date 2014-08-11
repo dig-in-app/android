@@ -53,10 +53,13 @@ public class MainActivity extends Activity {
                 getActionBar().setTitle(getString(R.string.app_name));
                 getActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.ab_solid_diginpassport));
 
-                getFragmentManager().beginTransaction().replace(R.id.content_frame,
-                        ((NavDrawerItem) view.getTag()).getFragment(),
-                        ((NavDrawerItem) view.getTag()).toString()).commit();
-                mDrawerLayout.closeDrawers();
+
+                if(((NavDrawerItem) view.getTag()).getFragment() != null) {
+                    getFragmentManager().beginTransaction().replace(R.id.content_frame,
+                            ((NavDrawerItem) view.getTag()).getFragment(),
+                            ((NavDrawerItem) view.getTag()).toString()).commit();
+                    mDrawerLayout.closeDrawers();
+                }
             }
         });
 

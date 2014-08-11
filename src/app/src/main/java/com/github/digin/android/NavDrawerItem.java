@@ -12,7 +12,8 @@ public class NavDrawerItem {
 
     static NavDrawerItem[] items = new NavDrawerItem[] {
             new NavDrawerItem(BoundedMapFragment.class, "Map"),
-            new NavDrawerItem(DishListFragment.class, "Dishes")
+            new NavDrawerItem(null, "Lineup"),
+            new NavDrawerItem(DishListFragment.class, " Dishes")
     };
 
     public static List<NavDrawerItem> getItems() {
