@@ -27,9 +27,9 @@ import com.github.digin.android.repositories.ChefsStore;
 /**
  * Created by david on 7/15/14.
  */
-public class DishListFragment extends ListFragment {
+public class LineupListFragment extends ListFragment {
 
-    public DishListFragment() {
+    public LineupListFragment() {
     }
 
     @Override
