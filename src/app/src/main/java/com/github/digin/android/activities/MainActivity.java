@@ -32,7 +32,7 @@ public class MainActivity extends Activity {
 
         getFragmentManager().beginTransaction().add(R.id.content_frame, new BoundedMapFragment(), BoundedMapFragment.class.getName()).commit();
 
-        getActionBar().setLogo(R.drawable.white_logo_web);
+        getActionBar().setLogo(R.drawable.white_logo_small);
 
         initDrawer();
     }

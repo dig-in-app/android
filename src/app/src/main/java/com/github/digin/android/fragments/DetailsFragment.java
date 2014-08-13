@@ -2,6 +2,7 @@ package com.github.digin.android.fragments;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -17,7 +18,10 @@ import com.github.digin.android.listeners.OnSingleChefQuery;
 import com.github.digin.android.logging.Logger;
 import com.github.digin.android.models.Chef;
 import com.github.digin.android.repositories.ChefsStore;
+import com.loopj.android.image.SmartImageView;
 import com.manuelpeinado.fadingactionbar.FadingActionBarHelper;
+
+import java.util.Random;
 
 /**
  * Created by david on 7/27/14.
@@ -39,9 +43,35 @@ public class DetailsFragment extends Fragment {
         return details;
     }
 
+    static int[] images = new int[] {
+            R.drawable.corn,
+            R.drawable.wheel,
+            R.drawable.paint,
+            R.drawable.pigtattoo,
+            R.drawable.img1,
+            R.drawable.img2,
+            R.drawable.img3,
+            R.drawable.img4,
+            R.drawable.img5,
+            R.drawable.img6,
+            R.drawable.img7,
+            R.drawable.img8,
+            R.drawable.img9,
+            R.drawable.img10,
+            R.drawable.img11,
+            R.drawable.img12,
+            R.drawable.img13,
+            R.drawable.img14,
+            R.drawable.img15
+    };
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+
+
         mFadingHelper = new FadingActionBarHelper()
                 .actionBarBackground(R.drawable.ab_solid_diginpassport)
                 .headerLayout(R.layout.details_header_image)
@@ -51,6 +81,9 @@ public class DetailsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = mFadingHelper.createView(inflater);
+
+        Random r = new Random();
+        ((ImageView)view.findViewById(R.id.header)).setImageResource(images[r.nextInt(images.length)]);
 
         return view;
     }
@@ -76,6 +109,23 @@ public class DetailsFragment extends Fragment {
             mOldTitle = getActivity().getActionBar().getTitle();
 
             getActivity().getActionBar().setTitle(mChef.getName());
+
+            SmartImageView siv = (SmartImageView) getView().findViewById(R.id.logo);
+            if(mChef.getThumbnail() == null)
+                siv.setImageResource(R.drawable.logo);
+            else {
+                Logger.log(getClass(), mChef.getThumbnail());
+                siv.setImageUrl(mChef.getThumbnail());
+            }
+
+            TextView farmText = (TextView) getView().findViewById(R.id.farmText);
+            TextView dishText = (TextView) getView().findViewById(R.id.dishText);
+            TextView chefText = (TextView) getView().findViewById(R.id.chefText);
+
+            farmText.setText( mChef.getFarm() );
+            dishText.setText( mChef.getDish() );
+            chefText.setText( mChef.getCook() );
+
         }
     }
 
@@ -94,6 +144,8 @@ public class DetailsFragment extends Fragment {
                 tryFillData();
             }
         });
+
+
 
 
 

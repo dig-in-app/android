@@ -48,7 +48,6 @@ public class Participant extends ParseBackedModel {
     }
 
     public String getThumbnail() {
-        thumbnail = "http://lorempixel.com/200/200";
         return thumbnail;
     }
 

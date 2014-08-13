@@ -33,6 +33,8 @@ public class BoundedMapFragment extends MapFragment {
         CameraUpdate upd = CameraUpdateFactory.newLatLngZoom(new LatLng(39.766862, -86.172005), 17);
         mMap.moveCamera(upd);
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+        mMap.setBuildingsEnabled(false);
+        mMap.setIndoorEnabled(false);
 
         mMap.setOnCameraChangeListener(new GoogleMap.OnCameraChangeListener() {
             @Override

@@ -18,10 +18,12 @@
             android:paddingBottom="7dp"
             >
 
-            <ImageView
+            <com.loopj.android.image.SmartImageView
+                android:id="@+id/logo"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:src="@drawable/sun_king"/>
+                android:layout_height="120dp"
+                android:padding="10dp"
+                android:src="@drawable/logo"/>
 
         </FrameLayout>
 
@@ -53,67 +55,37 @@
                 android:background="@drawable/edge_dot_border" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:text="Hello"/>
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/digin_brown"
+                android:id="@+id/farmText"
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
+                android:text="Farm"/>
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:text="Hello"/>
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/digin_brown"
+                android:id="@+id/dishText"
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
+                android:text="Dish"/>
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:text="Hello"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:text="Hello"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:text="Hello"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:text="Hello"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:text="Hello"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:text="Hello"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:text="Hello"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:text="Hello"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:text="Hello"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:text="Hello"/>
-
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/digin_brown"
+                android:id="@+id/chefText"
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
+                android:text="Chef"/>
 
             <View
+                android:layout_marginTop="30dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/footer_background" />
