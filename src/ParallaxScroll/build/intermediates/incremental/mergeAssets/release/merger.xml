@@ -2,11 +2,11 @@
 <merger version="2" >
 
     <dataSet config="main" >
-        <source path="/Users/david/git/digin/src/ParallaxScroll/src/main/assets" />
-        <source path="/Users/david/git/digin/src/ParallaxScroll/assets" />
+        <source path="/Users/mike/src/digin-android/src/ParallaxScroll/src/main/assets" />
+        <source path="/Users/mike/src/digin-android/src/ParallaxScroll/assets" />
     </dataSet>
     <dataSet config="release" >
-        <source path="/Users/david/git/digin/src/ParallaxScroll/src/release/assets" />
+        <source path="/Users/mike/src/digin-android/src/ParallaxScroll/src/release/assets" />
     </dataSet>
 
 </merger>

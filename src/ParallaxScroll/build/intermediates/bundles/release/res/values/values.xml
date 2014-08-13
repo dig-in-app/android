@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- From: file:/Users/david/git/digin/src/ParallaxScroll/res/values/attrs.xml -->
+    <!-- From: file:/Users/mike/src/digin-android/src/ParallaxScroll/res/values/attrs.xml -->
     <eat-comment />
 
     <declare-styleable name="ParallaxScroll">

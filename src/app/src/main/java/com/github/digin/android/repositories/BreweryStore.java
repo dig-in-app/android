@@ -8,6 +8,8 @@ import com.github.digin.android.models.Brewery;
 import com.github.digin.android.models.Participant;
 import com.github.digin.android.tasks.ParseAllBreweriesTask;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -32,6 +34,14 @@ public abstract class BreweryStore {
         ParseAllBreweriesTask task = new ParseAllBreweriesTask(context, new OnBreweryQueryListener() {
             @Override
             public void onComplete(List<Brewery> breweries) {
+
+                // Sort
+                Collections.sort(breweries, new Comparator<Brewery>() {
+                    public int compare(Brewery lhs, Brewery rhs) {
+                        return lhs.getName().compareTo(rhs.getName());
+                    }
+                });
+
                 breweriesCache = breweries;
                 if (listener != null) {
                     listener.onComplete(breweries);

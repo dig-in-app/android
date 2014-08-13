@@ -35,6 +35,7 @@ public class BoundedMapFragment extends MapFragment {
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         mMap.setBuildingsEnabled(false);
         mMap.setIndoorEnabled(false);
+        mMap.setMyLocationEnabled(true);
 
         mMap.setOnCameraChangeListener(new GoogleMap.OnCameraChangeListener() {
             @Override
@@ -61,7 +62,6 @@ public class BoundedMapFragment extends MapFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         Utils.fixForActionBarHeight(getActivity(), view);
     }
 

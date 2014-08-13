@@ -2,10 +2,10 @@
 <merger version="2" >
 
     <dataSet config="main" >
-        <source path="/Users/david/git/digin/src/ParallaxScroll/src/main/res" />
-        <source path="/Users/david/git/digin/src/ParallaxScroll/res" >
+        <source path="/Users/mike/src/digin-android/src/ParallaxScroll/src/main/res" />
+        <source path="/Users/mike/src/digin-android/src/ParallaxScroll/res" >
             <file
-                path="/Users/david/git/digin/src/ParallaxScroll/res/values/attrs.xml"
+                path="/Users/mike/src/digin-android/src/ParallaxScroll/res/values/attrs.xml"
                 qualifiers="" >
                 <declare-styleable name="ParallaxScroll" >
                     <attr
@@ -26,11 +26,11 @@
                 </declare-styleable>
             </file>
         </source>
-        <source path="/Users/david/git/digin/src/ParallaxScroll/build/generated/res/rs/release" />
-        <source path="/Users/david/git/digin/src/ParallaxScroll/build/generated/res/generated/release" />
+        <source path="/Users/mike/src/digin-android/src/ParallaxScroll/build/generated/res/rs/release" />
+        <source path="/Users/mike/src/digin-android/src/ParallaxScroll/build/generated/res/generated/release" />
     </dataSet>
     <dataSet config="release" >
-        <source path="/Users/david/git/digin/src/ParallaxScroll/src/release/res" />
+        <source path="/Users/mike/src/digin-android/src/ParallaxScroll/src/release/res" />
     </dataSet>
 
 </merger>
