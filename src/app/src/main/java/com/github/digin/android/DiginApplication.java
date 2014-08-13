@@ -1,6 +1,8 @@
 package com.github.digin.android;
 
 import android.app.Application;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.util.Log;
 import android.util.LruCache;
@@ -27,7 +29,7 @@ import java.util.List;
 @ReportsCrashes(
         formKey = "", // will not be used
         mailTo = "dmtschida2@gmail.com",
-        customReportContent = { ReportField.APP_VERSION_CODE, ReportField.APP_VERSION_NAME, ReportField.ANDROID_VERSION, ReportField.PHONE_MODEL, ReportField.CUSTOM_DATA, ReportField.STACK_TRACE, ReportField.LOGCAT },
+        customReportContent = { ReportField.APP_VERSION_CODE, ReportField.APP_VERSION_NAME, ReportField.ANDROID_VERSION, ReportField.PHONE_MODEL, ReportField.STACK_TRACE, ReportField.LOGCAT },
         mode = ReportingInteractionMode.TOAST,
         resToastText = R.string.crash_toast_text
 )
@@ -40,6 +42,19 @@ public class DiginApplication extends Application implements BitmapCacheHost {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        PackageInfo pInfo = null;
+        try {
+            pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        String version = pInfo.versionName;
+        int versionCode = pInfo.versionCode;
+
+        Log.i("Digin", "Starting applicaton " + version + " | " + versionCode);
+
+
         Parse.initialize(this, ParseKeys.getAppId(this), ParseKeys.getClientKey(this));
         initMemoryCache();
 
