@@ -8,6 +8,8 @@ import com.github.digin.android.logging.Logger;
 import com.github.digin.android.models.Chef;
 import com.github.digin.android.tasks.ParseAllChefsTask;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -40,6 +42,14 @@ public abstract class ChefsStore {
         ParseAllChefsTask task = new ParseAllChefsTask(context, new OnChefQueryListener() {
             @Override
             public void onComplete(List<Chef> chefs) {
+
+                // Sort the list
+                Collections.sort(chefs, new Comparator<Chef>() {
+                    public int compare(Chef lhs, Chef rhs) {
+                        return lhs.getName().compareTo(rhs.getName());
+                    }
+                });
+
                 // Store the returned list locally
                 chefCache = chefs;
 
@@ -47,6 +57,7 @@ public abstract class ChefsStore {
                 if (listener != null) {
                     listener.onComplete(chefs);
                 }
+
             }
         });
         task.execute();

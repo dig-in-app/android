@@ -6,6 +6,8 @@ import com.github.digin.android.listeners.OnWineryQueryListener;
 import com.github.digin.android.models.Winery;
 import com.github.digin.android.tasks.ParseAllWineriesTask;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -28,6 +30,14 @@ public abstract class WineryStore {
 
             @Override
             public void onComplete(List<Winery> wineries) {
+
+                // Sort
+                Collections.sort(wineries, new Comparator<Winery>() {
+                    public int compare(Winery lhs, Winery rhs) {
+                        return lhs.getName().compareTo(rhs.getName());
+                    }
+                });
+
                 wineryCache = wineries;
                 if (listener != null) {
                     listener.onComplete(wineries);

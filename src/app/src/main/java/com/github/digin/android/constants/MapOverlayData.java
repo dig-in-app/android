@@ -191,9 +191,9 @@ public class MapOverlayData {
                 .bearing(8)
                 .image(BitmapDescriptorFactory.fromResource(R.drawable.bathroom_overlay_a)));
 
-//        map.addGroundOverlay(new GroundOverlayOptions()
-//                .position(new LatLng(39.767098, -86.170830), 8)
-//                .image(BitmapDescriptorFactory.fromResource(R.drawable.health)));
+        map.addGroundOverlay(new GroundOverlayOptions()
+                .position(new LatLng(39.767098, -86.170830), 8)
+                .image(BitmapDescriptorFactory.fromResource(R.drawable.health)));
 
 
         BitmapDescriptor bitmapDescriptor = BitmapDescriptorFactory.fromResource(R.drawable.food_truck_overlay);
