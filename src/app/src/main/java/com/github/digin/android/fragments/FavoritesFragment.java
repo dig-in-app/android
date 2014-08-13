@@ -50,7 +50,12 @@ public class FavoritesFragment extends ListFragment {
     public void onAttach(Activity activity) {
         super.onAttach(activity);
 
-        setListAdapter(new ChefListAdapter(getActivity(), FavoritesStore.getFavorites(getActivity())));
+        FavoritesStore.getFavorites(getActivity(), new OnChefQueryListener() {
+            @Override
+            public void onComplete(List<Chef> chefs) {
+                setListAdapter(new ChefListAdapter(getActivity(), chefs));
+            }
+        });
 
     }
 

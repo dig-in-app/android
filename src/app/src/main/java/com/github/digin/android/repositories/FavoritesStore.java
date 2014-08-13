@@ -3,6 +3,7 @@ package com.github.digin.android.repositories;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.github.digin.android.listeners.OnChefQueryListener;
 import com.github.digin.android.listeners.OnSingleChefQuery;
 import com.github.digin.android.models.Chef;
 
@@ -76,30 +77,18 @@ public abstract class FavoritesStore {
 
     }
 
-    public static List<Chef> getFavorites(Context context) {
+    public static void getFavorites(final Context context, final OnChefQueryListener listener) {
 
         SharedPreferences prefs = context.getSharedPreferences(prefsName, 0);
 
-        Set<String> favorites = prefs.getStringSet(chefSetPrefId, null);
+        final Set<String> favorites = prefs.getStringSet(chefSetPrefId, null);
         if (favorites == null) {
-            return new LinkedList<Chef>();
+            if (listener != null) {
+                listener.onComplete(new LinkedList<Chef>());
+            }
         }
 
-        final List<Chef> chefs = new LinkedList<Chef>();
-
-        // I dont even want to think about the implications of this method if the chefs list isn't
-        // already cached in the ChefsStore, which is should be most times this is called.
-        // Jesus take the wheel.
-
-        for (String cID : favorites) {
-            ChefsStore.getChefById(context, cID, new OnSingleChefQuery() {
-                public void onComplete(Chef chef) {
-                    chefs.add(chef);
-                }
-            });
-        }
-
-        return chefs;
+        ChefsStore.batchGetChefById(context, favorites, listener);
 
     }
 
