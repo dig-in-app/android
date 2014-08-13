@@ -13,7 +13,7 @@ public class NavDrawerItem {
 
     static NavDrawerItem[] items = new NavDrawerItem[] {
             new NavDrawerItem(BoundedMapFragment.class, "Map"),
-            new NavDrawerItem(LineupListFragment.class, "Lineup"),
+            new NavDrawerItem(LineupListFragment.class, "Chefs"),
             new NavDrawerItem(FavoritesFragment.class, "Favorites")
     };
 
