@@ -47,7 +47,7 @@ public class FavoritesFragment extends ListFragment {
     }
 
     @Override
-    public void onAttach(Activity activity) {
+    public void onAttach(final Activity activity) {
         super.onAttach(activity);
 
         FavoritesStore.getFavorites(getActivity(), new OnChefQueryListener() {

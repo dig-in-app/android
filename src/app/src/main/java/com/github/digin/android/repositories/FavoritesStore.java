@@ -86,6 +86,7 @@ public abstract class FavoritesStore {
             if (listener != null) {
                 listener.onComplete(new LinkedList<Chef>());
             }
+            return;
         }
 
         ChefsStore.batchGetChefById(context, favorites, listener);
