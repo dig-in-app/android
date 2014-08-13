@@ -2,6 +2,7 @@ package com.github.digin.android;
 
 import android.app.Application;
 import android.graphics.Bitmap;
+import android.util.Log;
 import android.util.LruCache;
 
 import com.github.digin.android.bitmap.BitmapCacheHost;
@@ -13,11 +14,23 @@ import com.github.digin.android.repositories.ChefsStore;
 import com.google.android.gms.cast.Cast;
 import com.parse.Parse;
 
+import org.acra.ACRA;
+import org.acra.ReportField;
+import org.acra.ReportingInteractionMode;
+import org.acra.annotation.ReportsCrashes;
+
 import java.util.List;
 
 /**
  * Created by david on 7/16/14.
  */
+@ReportsCrashes(
+        formKey = "", // will not be used
+        mailTo = "dmtschida2@gmail.com",
+        customReportContent = { ReportField.APP_VERSION_CODE, ReportField.APP_VERSION_NAME, ReportField.ANDROID_VERSION, ReportField.PHONE_MODEL, ReportField.CUSTOM_DATA, ReportField.STACK_TRACE, ReportField.LOGCAT },
+        mode = ReportingInteractionMode.TOAST,
+        resToastText = R.string.crash_toast_text
+)
 public class DiginApplication extends Application implements BitmapCacheHost {
 
 
@@ -29,6 +42,8 @@ public class DiginApplication extends Application implements BitmapCacheHost {
         super.onCreate();
         Parse.initialize(this, ParseKeys.getAppId(this), ParseKeys.getClientKey(this));
         initMemoryCache();
+
+        ACRA.init(this);
     }
 
     @Override
