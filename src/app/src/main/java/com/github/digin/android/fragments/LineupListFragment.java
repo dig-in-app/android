@@ -10,23 +10,18 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ListView;
 
 import com.github.digin.android.R;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
 import com.github.digin.android.Utils;
 import com.github.digin.android.adapters.*;
-import com.github.digin.android.bitmap.BitmapCacheHost;
 import com.github.digin.android.listeners.OnChefQueryListener;
+import com.github.digin.android.logging.AnalyticsHelper;
 import com.github.digin.android.logging.Logger;
 import com.github.digin.android.models.Chef;
-import com.github.digin.android.models.Participant;
-import com.github.digin.android.models.TemporaryParticipantPlaceholder;
 import com.github.digin.android.repositories.ChefsStore;
 
 /**
@@ -61,7 +56,7 @@ public class LineupListFragment extends ListFragment {
     }
 
     public static final String SORTTEXT = "Sort by %s";
-    Sorting currentSorting = Sorting.NAME;
+    Sorting otherSorting = Sorting.LOCATION;
 
 
     public LineupListFragment() {
@@ -85,8 +80,10 @@ public class LineupListFragment extends ListFragment {
         getListView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
                 Chef chef = ((ChefListAdapter) getListAdapter()).getItem(position);
+
+                AnalyticsHelper.sendEvent(getActivity(), "List_Click", LineupListFragment.this.getClass().getName(), chef.getName());
+
                 Logger.log(LineupListFragment.this.getClass(), "onItemClick(): " + chef.getName() );
                 DetailsFragment details = DetailsFragment.newInstance(chef);
                 getFragmentManager().beginTransaction().addToBackStack(DetailsFragment.class.getName()).replace(R.id.content_frame, details, DetailsFragment.class.getName()).commit();
@@ -106,6 +103,7 @@ public class LineupListFragment extends ListFragment {
                 getActivity().invalidateOptionsMenu();
             }
         });
+        AnalyticsHelper.sendScreenView(getActivity(), getClass(), "Main List");
     }
 
     @Override
@@ -121,7 +119,7 @@ public class LineupListFragment extends ListFragment {
         if(mChefsLoaded) {
             inflater.inflate(R.menu.list, menu);
             MenuItem item = menu.findItem(R.id.action_sort);
-            item.setTitle(String.format(SORTTEXT, currentSorting.name().toLowerCase()));
+            item.setTitle(String.format(SORTTEXT, otherSorting.name().toLowerCase()));
         }
 
     }
@@ -130,9 +128,9 @@ public class LineupListFragment extends ListFragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()) {
             case R.id.action_sort:
-                currentSorting = ((currentSorting == Sorting.NAME) ? Sorting.LOCATION : Sorting.NAME);
-                item.setTitle( String.format( SORTTEXT, currentSorting.name().toLowerCase() ));
-                ((ChefListAdapter) getListAdapter()).sort(currentSorting);
+                ((ChefListAdapter) getListAdapter()).sort(otherSorting);
+                otherSorting = ((otherSorting == Sorting.NAME) ? Sorting.LOCATION : Sorting.NAME);
+                item.setTitle(String.format(SORTTEXT, otherSorting.name().toLowerCase()));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

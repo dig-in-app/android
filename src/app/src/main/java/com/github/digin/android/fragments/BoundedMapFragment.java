@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import com.github.digin.android.Utils;
 import com.github.digin.android.constants.MapOverlayData;
+import com.github.digin.android.logging.AnalyticsHelper;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -35,9 +36,8 @@ public class BoundedMapFragment extends MapFragment {
         CameraUpdate upd = CameraUpdateFactory.newLatLngZoom(new LatLng(39.766862, -86.172005), 17);
         mMap.moveCamera(upd);
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-        mMap.setBuildingsEnabled(false);
         mMap.setIndoorEnabled(false);
-        mMap.setMyLocationEnabled(true);
+        mMap.setMyLocationEnabled(false);
 
         mMap.setOnCameraChangeListener(new GoogleMap.OnCameraChangeListener() {
             @Override
@@ -69,6 +69,8 @@ public class BoundedMapFragment extends MapFragment {
 
             }
         });
+
+        AnalyticsHelper.sendScreenView(getActivity(), getClass(), "Map");
     }
 
     private void initMap() {

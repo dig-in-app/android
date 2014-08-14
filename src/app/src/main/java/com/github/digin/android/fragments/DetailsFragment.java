@@ -1,10 +1,8 @@
 package com.github.digin.android.fragments;
 
 import android.app.Activity;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -21,6 +19,7 @@ import android.widget.Toast;
 import com.github.digin.android.R;
 import com.github.digin.android.bitmap.BitmapUtils;
 import com.github.digin.android.listeners.OnSingleChefQuery;
+import com.github.digin.android.logging.AnalyticsHelper;
 import com.github.digin.android.logging.Logger;
 import com.github.digin.android.models.Chef;
 import com.github.digin.android.repositories.ChefsStore;
@@ -66,10 +65,7 @@ public class DetailsFragment extends Fragment implements View.OnClickListener {
             R.drawable.img8,
             R.drawable.img9,
             R.drawable.img10,
-            R.drawable.img11,
             R.drawable.img12,
-            R.drawable.img13,
-            R.drawable.img14,
             R.drawable.img15
     };
 
@@ -179,10 +175,7 @@ public class DetailsFragment extends Fragment implements View.OnClickListener {
                 tryFillData();
             }
         });
-
-
-
-
+        AnalyticsHelper.sendScreenView(getActivity(), getClass());
 
     }
 
@@ -231,9 +224,11 @@ public class DetailsFragment extends Fragment implements View.OnClickListener {
         if (isFavorited) {
             FavoritesStore.removeFavorite(getActivity(), mChef);
             favoriteButton.setText("Add to favorites");
+            AnalyticsHelper.sendEvent(getActivity(), "Details_Item_Click", "Unfavorite", mChef.getName());
         } else {
             FavoritesStore.storeFavorite(getActivity(), mChef);
             favoriteButton.setText("Unfavorite");
+            AnalyticsHelper.sendEvent(getActivity(), "Details_Item_Click", "Favorite", mChef.getName());
         }
     }
 
@@ -243,6 +238,7 @@ public class DetailsFragment extends Fragment implements View.OnClickListener {
             return;
         }
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(mChef.getYelpURL()));
+        AnalyticsHelper.sendEvent(getActivity(), "Details_Item_Click", "Yelp", mChef.getName());
         startActivity(browserIntent);
     }
 

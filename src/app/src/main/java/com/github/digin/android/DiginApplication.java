@@ -13,6 +13,8 @@ import com.github.digin.android.listeners.OnChefQueryListener;
 import com.github.digin.android.logging.Logger;
 import com.github.digin.android.models.Chef;
 import com.github.digin.android.repositories.ChefsStore;
+import com.google.android.gms.analytics.GoogleAnalytics;
+import com.google.android.gms.analytics.Tracker;
 import com.google.android.gms.cast.Cast;
 import com.parse.Parse;
 
@@ -21,6 +23,7 @@ import org.acra.ReportField;
 import org.acra.ReportingInteractionMode;
 import org.acra.annotation.ReportsCrashes;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -33,11 +36,22 @@ import java.util.List;
         mode = ReportingInteractionMode.TOAST,
         resToastText = R.string.crash_toast_text
 )
-public class DiginApplication extends Application implements BitmapCacheHost {
+public class DiginApplication extends Application {
 
+    /**
+     * Enum used to identify the tracker that needs to be used for tracking.
+     *
+     * A single tracker is usually enough for most purposes. In case you do need multiple trackers,
+     * storing them all in Application object helps ensure that they are created only once per
+     * application instance.
+     */
+    public enum TrackerName {
+        APP_TRACKER, // Tracker used only in this app.
+        GLOBAL_TRACKER, // Tracker used by all the apps from a company. eg: roll-up tracking.
+        ECOMMERCE_TRACKER, // Tracker used by all ecommerce transactions from a company.
+    }
 
-    private LruCache<String, Bitmap> mMemoryCache;
-
+    HashMap<TrackerName, Tracker> mTrackers = new HashMap<TrackerName, Tracker>();
 
     @Override
     public void onCreate() {
@@ -54,49 +68,23 @@ public class DiginApplication extends Application implements BitmapCacheHost {
 
         Log.i("Digin", "Starting applicaton " + version + " | " + versionCode);
 
-
         Parse.initialize(this, ParseKeys.getAppId(this), ParseKeys.getClientKey(this));
-        initMemoryCache();
 
         ACRA.init(this);
     }
 
-    @Override
-    public void onTerminate() {
-        super.onTerminate();
-        clearCache();
-    }
+    public synchronized Tracker getTracker(TrackerName trackerId) {
+        if (!mTrackers.containsKey(trackerId)) {
 
-    public void addBitmapToMemoryCache(String key, Bitmap bitmap) {
-        assert (mMemoryCache != null);
-        if (getBitmapFromMemCache(key) == null) {
-            mMemoryCache.put(key, bitmap);
+            GoogleAnalytics analytics = GoogleAnalytics.getInstance(this);
+            Tracker t = (trackerId == TrackerName.APP_TRACKER) ? analytics.newTracker("UA-51109974-2")
+                    : analytics.newTracker(R.xml.global_tracker);
+            mTrackers.put(trackerId, t);
+
         }
+        return mTrackers.get(trackerId);
     }
 
-    public Bitmap getBitmapFromMemCache(String key) {
-        assert (mMemoryCache != null);
-        return mMemoryCache.get(key);
-    }
 
-    public void initMemoryCache() {
-        final int maxMemory = (int) (Runtime.getRuntime().maxMemory() / 1024);
-
-        // Use 1/8th of the available memory for this memory cache.
-        final int cacheSize = maxMemory / 15;
-
-        mMemoryCache = new LruCache<String, Bitmap>(cacheSize) {
-            @Override
-            protected int sizeOf(String key, Bitmap bitmap) {
-                // The cache size will be measured in kilobytes rather than
-                // number of items.
-                return (bitmap.getRowBytes() * bitmap.getHeight()) / 1024;
-            }
-        };
-    }
-
-    public void clearCache() {
-        mMemoryCache.evictAll();
-    }
 
 }
