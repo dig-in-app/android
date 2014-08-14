@@ -195,7 +195,12 @@ public class MapOverlayData {
                 .position(new LatLng(39.767098, -86.170830), 8)
                 .image(BitmapDescriptorFactory.fromResource(R.drawable.health)));
 
-        BitmapDescriptor d = BitmapDescriptorFactory.fromResource(R.drawable.health);
+        map.addGroundOverlay(new GroundOverlayOptions()
+                .position(new LatLng(39.767845, -86.173173), 8)
+                .image(BitmapDescriptorFactory.fromResource(R.drawable.music_a)));
+
+
+
 
 
         BitmapDescriptor bitmapDescriptor = BitmapDescriptorFactory.fromResource(R.drawable.food_truck_overlay);
