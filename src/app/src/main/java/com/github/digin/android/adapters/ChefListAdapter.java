@@ -16,6 +16,7 @@ import com.github.digin.android.ImageCacheEntry;
 import com.github.digin.android.R;
 import com.github.digin.android.bitmap.BitmapCacheHost;
 import com.github.digin.android.bitmap.CachedAsyncBitmapLoader;
+import com.github.digin.android.fragments.LineupListFragment;
 import com.github.digin.android.logging.Logger;
 import com.github.digin.android.models.Chef;
 import com.github.digin.android.models.Participant;
@@ -25,34 +26,20 @@ import java.util.List;
 /**
  * Created by david on 7/16/14.
  */
-public class ChefListAdapter extends BaseAdapter {
+public class ChefListAdapter extends ArrayAdapter<Chef> {
 
     LayoutInflater inflater;
 
-    Context context;
-
-    List<Chef> mChefs;
-
     public ChefListAdapter(Context context, List<Chef> chefs) {
-        mChefs = chefs;
-        this.context = context;
+        super(context, 0, chefs);
+
     }
 
     private LayoutInflater getLayoutInflater() {
         if(inflater == null)
-            inflater = (LayoutInflater) context
+            inflater = (LayoutInflater) getContext()
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         return inflater;
-    }
-
-    @Override
-    public int getCount() {
-        return mChefs.size();
-    }
-
-    @Override
-    public Chef getItem(int position) {
-        return mChefs.get(position);
     }
 
     @Override
@@ -118,6 +105,11 @@ public class ChefListAdapter extends BaseAdapter {
             return R.drawable.tent_badge; //TODO: This image is too large.
         }
 
+    }
+
+    public void sort(LineupListFragment.Sorting sorting) {
+        super.sort(sorting.getComparator());
+        notifyDataSetChanged();
     }
 
     static class ViewHolder {

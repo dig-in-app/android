@@ -4,6 +4,9 @@ import android.app.Activity;
 import android.app.ListFragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -13,6 +16,7 @@ import com.github.digin.android.R;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 import com.github.digin.android.Utils;
@@ -30,7 +34,41 @@ import com.github.digin.android.repositories.ChefsStore;
  */
 public class LineupListFragment extends ListFragment {
 
+    public enum Sorting {
+        NAME(new Comparator<Chef>() {
+            @Override
+            public int compare(Chef lhs, Chef rhs) {
+                return lhs.getName().compareTo(rhs.getName());
+            }
+        }), LOCATION(new Comparator<Chef>() {
+            @Override
+            public int compare(Chef lhs, Chef rhs) {
+                return lhs.getTent().compareTo(rhs.getTent());
+            }
+        });
+
+        Comparator<Chef> comparator;
+
+        Sorting(Comparator<Chef> comparator) {
+            this.comparator = comparator;
+        }
+
+        public Comparator<Chef> getComparator() {
+            return comparator;
+        }
+    }
+
+    public static final String SORTTEXT = "Sort by %s";
+    Sorting currentSorting = Sorting.NAME;
+
+
     public LineupListFragment() {
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -72,5 +110,26 @@ public class LineupListFragment extends ListFragment {
         view.setBackgroundColor(getResources().getColor(android.R.color.white));
 
         Utils.fixForActionBarHeight(getActivity(), view);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.list, menu);
+        MenuItem item = menu.findItem(R.id.action_sort);
+        item.setTitle( String.format( SORTTEXT, currentSorting.name().toLowerCase() ));
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()) {
+            case R.id.action_sort:
+                currentSorting = ((currentSorting == Sorting.NAME) ? Sorting.LOCATION : Sorting.NAME);
+                item.setTitle( String.format( SORTTEXT, currentSorting.name().toLowerCase() ));
+                ((ChefListAdapter) getListAdapter()).sort(currentSorting);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }
