@@ -2,7 +2,9 @@ package com.github.digin.android.fragments;
 
 import android.content.res.TypedArray;
 import android.graphics.Color;
+import android.location.Location;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -35,15 +37,27 @@ public class BoundedMapFragment extends MapFragment {
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         mMap.setBuildingsEnabled(false);
         mMap.setIndoorEnabled(false);
+        mMap.setMyLocationEnabled(true);
 
         mMap.setOnCameraChangeListener(new GoogleMap.OnCameraChangeListener() {
             @Override
             public void onCameraChange(CameraPosition position) {
 
+                float[] results = new float[1];
+                Location.distanceBetween(position.target.latitude, position.target.longitude,
+                        39.766862, -86.172005, results);
+
                 float zoom = 0;
+                LatLng correction;
+
                 if(position.zoom < MIN_ZOOM) zoom = MIN_ZOOM;
                 if(position.zoom > MAX_ZOOM) zoom = MAX_ZOOM;
-                LatLng correction = getLatLngCorrection(position.target);
+
+                if(results[0] > 600) {
+                    correction = new LatLng(39.766862, -86.172005);
+                } else {
+                    correction = getLatLngCorrection(position.target);
+                }
 
                 if(zoom != 0 || correction.latitude != 0 || correction.longitude != 0) {
                     zoom = (zoom==0)?position.zoom:zoom;
@@ -51,17 +65,20 @@ public class BoundedMapFragment extends MapFragment {
                     CameraUpdate update = CameraUpdateFactory.newCameraPosition(newPosition);
                     mMap.animateCamera(update);
                 }
+
+
             }
         });
+    }
 
+    private void initMap() {
         MapOverlayData.addTents(mMap);
-        MapOverlayData.addGate(mMap);
+        MapOverlayData.addGate(getActivity(), mMap);
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         Utils.fixForActionBarHeight(getActivity(), view);
     }
 
@@ -86,5 +103,17 @@ public class BoundedMapFragment extends MapFragment {
             lat = BOUNDS.northeast.latitude;
 
         return new LatLng(lat, lng);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mMap.clear();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        initMap();
     }
 }

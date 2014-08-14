@@ -59,30 +59,75 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:textColor="@color/digin_brown"
-                android:id="@+id/farmText"
-                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
-                android:text="Farm"/>
+                android:text="Chef"/>
 
             <TextView
-                android:layout_marginTop="20dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textColor="@color/digin_brown"
-                android:id="@+id/dishText"
-                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
-                android:text="Dish"/>
-
-            <TextView
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:textColor="@color/digin_brown"
                 android:id="@+id/chefText"
-                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
-                android:text="Chef"/>
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+                android:text="Robin Williams"/>
+
+            <TextView
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Will Be Serving"/>
+
+            <TextView
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/digin_brown"
+                android:id="@+id/dishText"
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+                android:text="Laughter"/>
+
+            <TextView
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="With Ingredients Provided By"/>
+
+            <TextView
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/digin_brown"
+                android:id="@+id/farmText"
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+                android:text="The Greatest Movies Ever Made"/>
+
+            <LinearLayout
+                android:layout_marginTop="25dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/details_button_favorite"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Favorite" />
+
+                <Button
+                    android:id="@+id/details_button_yelp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Yelp"/>
+
+            </LinearLayout>
 
             <View
                 android:layout_marginTop="30dp"
@@ -91,5 +136,7 @@
                 android:background="@drawable/footer_background" />
 
         </LinearLayout>
+
     </LinearLayout>
+
 </ScrollView>

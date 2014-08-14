@@ -1,16 +1,21 @@
 package com.github.digin.android.fragments;
 
 import android.app.Activity;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.github.digin.android.R;
 import com.github.digin.android.bitmap.BitmapUtils;
@@ -18,6 +23,7 @@ import com.github.digin.android.listeners.OnSingleChefQuery;
 import com.github.digin.android.logging.Logger;
 import com.github.digin.android.models.Chef;
 import com.github.digin.android.repositories.ChefsStore;
+import com.github.digin.android.repositories.FavoritesStore;
 import com.loopj.android.image.SmartImageView;
 import com.manuelpeinado.fadingactionbar.FadingActionBarHelper;
 
@@ -26,13 +32,14 @@ import java.util.Random;
 /**
  * Created by david on 7/27/14.
  */
-public class DetailsFragment extends Fragment {
+public class DetailsFragment extends Fragment implements View.OnClickListener {
 
     private FadingActionBarHelper mFadingHelper;
 
 
     public Chef mChef;
     private CharSequence mOldTitle;
+    private Button favoriteButton, yelpButton;
 
     public static DetailsFragment newInstance(Chef chef) {
         Bundle b = new Bundle();
@@ -69,13 +76,11 @@ public class DetailsFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
-
-
         mFadingHelper = new FadingActionBarHelper()
                 .actionBarBackground(R.drawable.ab_solid_diginpassport)
                 .headerLayout(R.layout.details_header_image)
                 .contentLayout(R.layout.details_fragment).lightActionBar(true);
+
     }
 
     @Override
@@ -84,6 +89,17 @@ public class DetailsFragment extends Fragment {
 
         Random r = new Random();
         ((ImageView)view.findViewById(R.id.header)).setImageResource(images[r.nextInt(images.length)]);
+
+        // prepare buttons
+        yelpButton = (Button) view.findViewById(R.id.details_button_yelp);
+        yelpButton.setOnClickListener(this);
+
+        favoriteButton = (Button) view.findViewById(R.id.details_button_favorite);
+        favoriteButton.setOnClickListener(this);
+
+        if (FavoritesStore.contains(getActivity(), mChef)) {
+            favoriteButton.setText("Unfavorite");
+        }
 
         return view;
     }
@@ -102,6 +118,7 @@ public class DetailsFragment extends Fragment {
     }
 
     private void tryFillData() {
+
         if(mChef != null && getView() != null) {
             Logger.log(getClass(), "Filling data");
             TextView t = (TextView) getView().findViewById(R.id.nameText);
@@ -173,4 +190,39 @@ public class DetailsFragment extends Fragment {
             getActivity().getActionBar().setTitle(mOldTitle);
         }
     }
+
+    @Override
+    public void onClick(View v) {
+
+        switch (v.getId()) {
+            case R.id.details_button_favorite:
+                setFavorite();
+                break;
+            case R.id.details_button_yelp:
+                goToYelp();
+                break;
+        }
+
+    }
+
+    private void setFavorite() {
+        boolean isFavorited = FavoritesStore.contains(getActivity(), mChef);
+        if (isFavorited) {
+            FavoritesStore.removeFavorite(getActivity(), mChef);
+            favoriteButton.setText("Favorite");
+        } else {
+            FavoritesStore.storeFavorite(getActivity(), mChef);
+            favoriteButton.setText("Unfavorite");
+        }
+    }
+
+    private void goToYelp() {
+        if (mChef.getYelpURL() == null || mChef.getYelpURL().equals("")) {
+            Toast.makeText(getActivity(), "This chef doesn't appear to have a Yelp page :(", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(mChef.getYelpURL()));
+        startActivity(browserIntent);
+    }
+
 }

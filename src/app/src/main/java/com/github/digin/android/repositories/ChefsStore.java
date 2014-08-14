@@ -1,6 +1,7 @@
 package com.github.digin.android.repositories;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.github.digin.android.listeners.OnChefQueryListener;
 import com.github.digin.android.listeners.OnSingleChefQuery;
@@ -8,7 +9,11 @@ import com.github.digin.android.logging.Logger;
 import com.github.digin.android.models.Chef;
 import com.github.digin.android.tasks.ParseAllChefsTask;
 
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 /**
  *  Class which handles downloading Chef data from parse, storing this
@@ -40,6 +45,14 @@ public abstract class ChefsStore {
         ParseAllChefsTask task = new ParseAllChefsTask(context, new OnChefQueryListener() {
             @Override
             public void onComplete(List<Chef> chefs) {
+
+                // Sort the list
+                Collections.sort(chefs, new Comparator<Chef>() {
+                    public int compare(Chef lhs, Chef rhs) {
+                        return lhs.getName().compareTo(rhs.getName());
+                    }
+                });
+
                 // Store the returned list locally
                 chefCache = chefs;
 
@@ -47,6 +60,7 @@ public abstract class ChefsStore {
                 if (listener != null) {
                     listener.onComplete(chefs);
                 }
+
             }
         });
         task.execute();
@@ -76,6 +90,28 @@ public abstract class ChefsStore {
                 listener.onComplete(null);
             }
         });
+    }
+
+    public static void batchGetChefById(Context context, final Set<String> ids, final OnChefQueryListener listener) {
+        Logger.log(ChefsStore.class, "Getting a subset of chefs by id");
+
+        getChefs(context, new OnChefQueryListener() {
+            public void onComplete(List<Chef> chefs) {
+
+                List<Chef> subset = new LinkedList<Chef>();
+                for (Chef chef : chefs) {
+                    if (ids.contains(chef.getId())) {
+                        subset.add(chef);
+                    }
+                }
+
+                if (listener != null) {
+                    listener.onComplete(subset);
+                }
+
+            }
+        });
+
     }
 
 }

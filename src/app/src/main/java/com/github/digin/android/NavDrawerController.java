@@ -1,6 +1,8 @@
 package com.github.digin.android;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.DialogFragment;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -9,6 +11,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.github.digin.android.adapters.NavDrawerAdapter;
 
@@ -21,6 +25,7 @@ public class NavDrawerController {
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
+    private TextView aboutDigin, aboutDevs;
 
     //Used to temporarily change the title when the drawer is open. This holds the previous title.
     private String oldTitle;
@@ -81,6 +86,23 @@ public class NavDrawerController {
 
         // Set the drawer toggle as the DrawerListener
         mDrawerLayout.setDrawerListener(mDrawerToggle);
+
+        // Set up about buttons on the bottom
+
+        aboutDigin = (TextView) mDrawerLayout.findViewById(R.id.drawer_about_digin);
+        aboutDigin.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                aboutDigin();
+            }
+        });
+
+        aboutDevs = (TextView) mDrawerLayout.findViewById(R.id.drawer_about_developers);
+        aboutDevs.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                aboutDevs();
+            }
+        });
+
     }
 
     public void syncState() {
@@ -94,4 +116,34 @@ public class NavDrawerController {
     public boolean onOptionsItemSelected(MenuItem item) {
         return mDrawerToggle.onOptionsItemSelected(item);
     }
+
+    private void aboutDigin() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(mActivity);
+        builder.setTitle("About Digin");
+
+        View view = mActivity.getLayoutInflater().inflate(R.layout.about_popup_window, null);
+        TextView desc = (TextView) view.findViewById(R.id.about_popup_desc);
+
+        // Yeah this is happening
+        desc.setText("Dig IN demonstrates that investment in Indiana food and agriculture, through education, experiences and conversation, benefits our community and economy. The organization provides educational resources for agricultural, culinary arts and local food sectors in Indiana. It increases awareness of Indiana’s diversity in agriculture and culinary arts, and Dig IN facilitates connections within the Indiana food community to enhance economic development opportunities.");
+
+        builder.setView(view);
+
+        builder.create().show();
+    }
+
+    private void aboutDevs() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(mActivity);
+        builder.setTitle("About the Devs");
+
+        View view = mActivity.getLayoutInflater().inflate(R.layout.about_popup_window, null);
+        TextView desc = (TextView) view.findViewById(R.id.about_popup_desc);
+
+        desc.setText("This app was developed by Purdue students David Tschida and Michael Hockerman. Repping SIG-APP on the Purdue campus. If you like what you see here... umm... well we don't really sell anything. We're doing this pro-bono. I guess just keep us in your thoughts?");
+
+        builder.setView(view);
+        builder.create().show();
+
+    }
+
 }
