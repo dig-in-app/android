@@ -195,6 +195,8 @@ public class MapOverlayData {
                 .position(new LatLng(39.767098, -86.170830), 8)
                 .image(BitmapDescriptorFactory.fromResource(R.drawable.health)));
 
+        BitmapDescriptor d = BitmapDescriptorFactory.fromResource(R.drawable.health);
+
 
         BitmapDescriptor bitmapDescriptor = BitmapDescriptorFactory.fromResource(R.drawable.food_truck_overlay);
 

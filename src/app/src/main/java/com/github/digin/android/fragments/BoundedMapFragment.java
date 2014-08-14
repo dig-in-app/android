@@ -3,6 +3,7 @@ package com.github.digin.android.fragments;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -86,5 +87,11 @@ public class BoundedMapFragment extends MapFragment {
             lat = BOUNDS.northeast.latitude;
 
         return new LatLng(lat, lng);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mMap.clear();
     }
 }
