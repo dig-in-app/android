@@ -3,11 +3,14 @@ package com.github.digin.android.fragments;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.util.Log;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +29,7 @@ import com.github.digin.android.repositories.ChefsStore;
 import com.github.digin.android.repositories.FavoritesStore;
 import com.loopj.android.image.SmartImageView;
 import com.manuelpeinado.fadingactionbar.FadingActionBarHelper;
+import com.manuelpeinado.fadingactionbar.view.ObservableScrollView;
 
 import java.util.Random;
 
@@ -127,6 +131,27 @@ public class DetailsFragment extends Fragment implements View.OnClickListener {
             }
         };
         getColorTask.execute();
+
+        //------ Scroll so image is 25% of screen
+        ObservableScrollView scrollview = (ObservableScrollView) view.findViewById(R.id.fab__scroll_view);
+
+        View serrations = view.findViewById(R.id.scrollTop);
+        int[] location = new int[2];
+        serrations.getLocationOnScreen(location);
+        int top = location[1];
+        Log.i("Scrolling", "Top of scroll:" + top);
+
+        Display display = getActivity().getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        int screenHeight = size.y;
+        Log.i("Scrolling", "Screen Height:" + screenHeight);
+
+        Log.i("Scrolling", "Scroll Y:" + scrollview.getScrollY());
+
+        scrollview.scrollBy(0, -50);
+        //-------- End scroll code
+
 
         tryFillData();
     }

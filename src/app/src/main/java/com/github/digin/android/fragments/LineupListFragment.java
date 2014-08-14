@@ -71,6 +71,9 @@ public class LineupListFragment extends ListFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.chef_list_layout, container, false);
+
+
+
         return view;
     }
 
