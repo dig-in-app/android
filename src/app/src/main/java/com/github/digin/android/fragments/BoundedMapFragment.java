@@ -57,7 +57,7 @@ public class BoundedMapFragment extends MapFragment {
         });
 
         MapOverlayData.addTents(mMap);
-        MapOverlayData.addGate(mMap);
+        MapOverlayData.addGate(getActivity(), mMap);
     }
 
     @Override
@@ -92,6 +92,5 @@ public class BoundedMapFragment extends MapFragment {
     @Override
     public void onPause() {
         super.onPause();
-        mMap.clear();
     }
 }

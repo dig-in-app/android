@@ -1,5 +1,6 @@
 package com.github.digin.android.constants;
 
+import android.content.Context;
 import android.graphics.Color;
 
 import com.github.digin.android.R;
@@ -71,77 +72,55 @@ public class MapOverlayData {
 //    };
 
     private static double[][] gate = new double[][] {
-            {-86.173437,39.767480},
-            {-86.172997,39.767472},
-            {-86.172662,39.767478},
-            {-86.172627,39.767465},
-            {-86.172606,39.767465},
-            {-86.172587,39.767465},
-            {-86.172560,39.767457},
-            {-86.172512,39.767472},
-            {-86.172493,39.767509},
-            {-86.172493,39.767552},
-            {-86.172536,39.767583},
-            {-86.172472,39.767851},
-            {-86.171841,39.767756},
-            {-86.171849,39.767727},
-            {-86.171514,39.767672},
-            {-86.171517,39.767647},
-            {-86.171278,39.767614},
-            {-86.171211,39.767595},
-            {-86.171053,39.767571},
-            {-86.171037,39.767560},
-            {-86.171029,39.767546},
-            {-86.170841,39.767511},
-            {-86.170819,39.767494},
-            {-86.170814,39.767484},
-            {-86.170280,39.767385},
-            {-86.170366,39.767140},
-            {-86.170519,39.766639},
-            {-86.171055,39.766635},
-            {-86.171088,39.766331},
-            {-86.171975,39.766360},
-            {-86.171973,39.766754},
-            {-86.172391,39.766775},
-            {-86.172346,39.766950},
-            {-86.172552,39.766993},
-            {-86.172673,39.767090},
-            {-86.172673,39.767127},
-            {-86.172673,39.767166},
-            {-86.172692,39.767201},
-            {-86.172716,39.767245},
-            {-86.172748,39.767276},
-            {-86.172777,39.767296},
-            {-86.172834,39.767311},
-            {-86.172925,39.767323},
-            {-86.173330,39.767333},
-            {-86.173437,39.767480}
+            {39.767502, -86.173003},
+            {39.767507, -86.173424},
+            {39.767356, -86.173333},
+            {39.767348, -86.172901},
+            {39.767333, -86.172874},
+            {39.767302, -86.172802},
+            {39.767237, -86.172759},
+            {39.767160, -86.172732},
+            {39.767076, -86.172622},
+            {39.766952, -86.172372},
+            {39.766775, -86.172434},
+            {39.766762, -86.171959},
+            {39.766368, -86.171954},
+            {39.766341, -86.171085},
+            {39.766657, -86.171069},
+            {39.766645, -86.170511},
+            {39.767158, -86.170371},
+            {39.767164, -86.170275},
+            {39.767394, -86.170245},
+            {39.767469, -86.170822},
+            {39.767496, -86.170854},
+            {39.767533, -86.171029},
+            {39.767558, -86.171077},
+            {39.767585, -86.171227},
+            {39.767630, -86.171216},
+            {39.767667, -86.171452},
+            {39.767700, -86.171479},
+            {39.767752, -86.171825},
+            {39.767781, -86.171820},
+            {39.767878, -86.172456},
+            {39.767818, -86.172498},
+            {39.767964, -86.173295},
+            {39.767886, -86.173400},
+            {39.767511, -86.173019},
+            {39.767502, -86.173003}
     };
 
-    public static void addGate(GoogleMap map) {
+    public static void addGate(Context c, GoogleMap map) {
         List<LatLng> gateList = new ArrayList<LatLng>();
         for(double[] coord : gate) {
-            gateList.add(new LatLng(coord[1], coord[0]));
+            gateList.add(new LatLng(coord[0], coord[1]));
         }
         map.addPolyline(new PolylineOptions()
                 .addAll(gateList)
-                .color(Color.RED));
+                .color(c.getResources().getColor(R.color.digin_orange))).setZIndex(0);
     }
 
     public static void addTents(GoogleMap map)
     {
-//        List<LatLng> tentPts;
-//        for(double[][] tent : tents) {
-//            tentPts = new ArrayList<LatLng>();
-//            for(double[] coord : tent) {
-//                tentPts.add(new LatLng(coord[1], coord[0]));
-//            }
-//            map.addPolygon(new PolygonOptions()
-//                .addAll(tentPts)
-//                .strokeColor(Color.BLACK)
-//                .fillColor(Color.WHITE));
-//        }
-
         map.addGroundOverlay(new GroundOverlayOptions()
                 .position(new LatLng(39.767381, -86.171280), 19)
                 .image(BitmapDescriptorFactory.fromResource(R.drawable.tent_overlay_one)));
@@ -199,16 +178,39 @@ public class MapOverlayData {
                 .position(new LatLng(39.767845, -86.173173), 8)
                 .image(BitmapDescriptorFactory.fromResource(R.drawable.music_a)));
 
+        map.addGroundOverlay(new GroundOverlayOptions()
+                .position(new LatLng(39.766948, -86.170426), 10).zIndex(1)
+                .image(BitmapDescriptorFactory.fromResource(R.drawable.entrance_overlay)));
+
+        map.addGroundOverlay(new GroundOverlayOptions()
+                .position(new LatLng(39.767086, -86.170301), 9)
+                .image(BitmapDescriptorFactory.fromResource(R.drawable.pp_overlay)));
+
+        map.addGroundOverlay(new GroundOverlayOptions()
+                .position(new LatLng(39.766699, -86.170518), 8).zIndex(1)
+                .image(BitmapDescriptorFactory.fromResource(R.drawable.vip_entrance_overlay)));
+
+        map.addGroundOverlay(new GroundOverlayOptions()
+                .position(new LatLng(39.766593, -86.171053), 10).zIndex(1)
+                .image(BitmapDescriptorFactory.fromResource(R.drawable.kd_overlay)));
+
+        map.addGroundOverlay(new GroundOverlayOptions()
+                .position(new LatLng(39.767111, -86.170481), 8)
+                .image(BitmapDescriptorFactory.fromResource(R.drawable.info_overlay)));
+
+        map.addGroundOverlay(new GroundOverlayOptions()
+                .position(new LatLng(39.767572, -86.171327), 15)
+                .image(BitmapDescriptorFactory.fromResource(R.drawable.music_b)));
 
 
 
 
         BitmapDescriptor bitmapDescriptor = BitmapDescriptorFactory.fromResource(R.drawable.food_truck_overlay);
 
-        float delta = .0001f;
+        float delta = .00008f;
         for(int i = 0; i < 7; i++) {
             map.addGroundOverlay(new GroundOverlayOptions()
-                    .position(new LatLng(39.767362, -86.173280 + (delta * i)), 6)
+                    .position(new LatLng(39.767382, -86.173280 + (delta * i)), 6)
                     .bearing(2)
                     .image(bitmapDescriptor));
         }
