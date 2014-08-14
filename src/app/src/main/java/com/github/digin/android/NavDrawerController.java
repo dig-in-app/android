@@ -50,7 +50,9 @@ public class NavDrawerController {
                 mActivity.getActionBar().setBackgroundDrawable(mActivity.getResources().getDrawable(R.drawable.ab_solid_diginpassport));
 
                 if(((NavDrawerItem) view.getTag()).getFragment() != null) {
-                    mActivity.getFragmentManager().popBackStackImmediate();
+                    while(mActivity.getFragmentManager().getBackStackEntryCount() > 0)
+                        mActivity.getFragmentManager().popBackStackImmediate();
+
                     mActivity.getFragmentManager().beginTransaction().replace(R.id.content_frame,
                             ((NavDrawerItem) view.getTag()).getFragment(),
                             ((NavDrawerItem) view.getTag()).toString()).commit();

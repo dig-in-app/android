@@ -189,12 +189,14 @@ public class DetailsFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onPause() {
         super.onPause();
+        getActivity().invalidateOptionsMenu();
     }
 
     @Override
     public void onResume() {
         super.onResume();
         mFadingHelper.initActionBar(getActivity());
+        getActivity().invalidateOptionsMenu();
     }
 
     @Override
@@ -208,6 +210,7 @@ public class DetailsFragment extends Fragment implements View.OnClickListener {
             getActivity().getActionBar().setTitle(mOldTitle);
         }
     }
+
 
     @Override
     public void onClick(View v) {

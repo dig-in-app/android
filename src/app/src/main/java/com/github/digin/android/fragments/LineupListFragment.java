@@ -34,6 +34,8 @@ import com.github.digin.android.repositories.ChefsStore;
  */
 public class LineupListFragment extends ListFragment {
 
+    private boolean mChefsLoaded = false;
+
     public enum Sorting {
         NAME(new Comparator<Chef>() {
             @Override
@@ -100,6 +102,8 @@ public class LineupListFragment extends ListFragment {
             @Override
             public void onComplete(List<Chef> chefs) {
                 setListAdapter(new ChefListAdapter(getActivity(), chefs));
+                mChefsLoaded = true;
+                getActivity().invalidateOptionsMenu();
             }
         });
     }
@@ -114,9 +118,11 @@ public class LineupListFragment extends ListFragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.list, menu);
-        MenuItem item = menu.findItem(R.id.action_sort);
-        item.setTitle( String.format( SORTTEXT, currentSorting.name().toLowerCase() ));
+        if(mChefsLoaded) {
+            inflater.inflate(R.menu.list, menu);
+            MenuItem item = menu.findItem(R.id.action_sort);
+            item.setTitle(String.format(SORTTEXT, currentSorting.name().toLowerCase()));
+        }
 
     }
 

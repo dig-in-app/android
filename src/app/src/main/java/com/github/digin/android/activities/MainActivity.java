@@ -30,7 +30,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my);
 
-        getFragmentManager().beginTransaction().add(R.id.content_frame, new BoundedMapFragment(), BoundedMapFragment.class.getName()).commit();
+        getFragmentManager().beginTransaction().replace(R.id.content_frame, new BoundedMapFragment(), BoundedMapFragment.class.getName()).commit();
 
         getActionBar().setLogo(R.drawable.white_logo_small);
 
