@@ -18,59 +18,6 @@ import java.util.List;
 
 public class MapOverlayData {
 
-//    private static double[][][] tents = new double[][][] {
-////            {
-////                    //tent 6
-////                    {-86.171367,39.766670},
-////                    {-86.171436,39.766620},
-////                    {-86.171369,39.766554},
-////                    {-86.171286,39.766614}
-////            },
-////            {
-////                    //tent 5
-////                    {-86.171353,39.766942},
-////                    {-86.171412,39.766894},
-////                    {-86.171345,39.766855},
-////                    {-86.171294,39.766903}
-////            },
-////            {
-////                    //tent 4
-////                    {-86.172348,39.767645},
-////                    {-86.172413,39.767601},
-////                    {-86.172327,39.767531},
-////                    {-86.172257,39.767583}
-////            },
-////            {
-////                    //tent 3
-////                    {-86.172147,39.767566},
-////                    {-86.172069,39.767515},
-////                    {-86.171978,39.767581},
-////                    {-86.172059,39.767626}
-////            },
-////            {
-////                    //tent 2
-////                    {-86.171651,39.767560},
-////                    {-86.171739,39.767500},
-////                    {-86.171643,39.767422},
-////                    {-86.171549,39.767486}
-////            },
-////            {
-////                    //tent 1
-////                    {-86.171300,39.767455},
-////                    {-86.171377,39.767401},
-////                    {-86.171289,39.767346},
-////                    {-86.171211,39.767406}
-////            },
-////            {
-////                    //tent vip
-////                    {-86.172211,39.767138},
-////                    {-86.172099,39.767142},
-////                    {-86.172112,39.766956},
-////                    {-86.172217,39.766952}
-////            }
-//
-//    };
-
     private static double[][] gate = new double[][] {
             {39.767502, -86.173003},
             {39.767507, -86.173424},
@@ -195,15 +142,12 @@ public class MapOverlayData {
                 .image(BitmapDescriptorFactory.fromResource(R.drawable.kd_overlay)));
 
         map.addGroundOverlay(new GroundOverlayOptions()
-                .position(new LatLng(39.767111, -86.170481), 8)
+                .position(new LatLng(39.767101, -86.170491), 8)
                 .image(BitmapDescriptorFactory.fromResource(R.drawable.info_overlay)));
 
         map.addGroundOverlay(new GroundOverlayOptions()
-                .position(new LatLng(39.767572, -86.171327), 15)
+                .position(new LatLng(39.767582, -86.171377), 15)
                 .image(BitmapDescriptorFactory.fromResource(R.drawable.music_b)));
-
-
-
 
         BitmapDescriptor bitmapDescriptor = BitmapDescriptorFactory.fromResource(R.drawable.food_truck_overlay);
 
