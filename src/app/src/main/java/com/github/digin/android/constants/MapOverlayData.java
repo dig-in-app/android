@@ -7,14 +7,18 @@ import com.github.digin.android.R;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.GroundOverlay;
 import com.google.android.gms.maps.model.GroundOverlayOptions;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Polygon;
 import com.google.android.gms.maps.model.PolygonOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MapOverlayData {
 
@@ -66,99 +70,112 @@ public class MapOverlayData {
                 .color(c.getResources().getColor(R.color.digin_orange))).setZIndex(0);
     }
 
+    private static Map<GroundOverlay, String> overlays = new HashMap<GroundOverlay, String>();
+
     public static void addTents(GoogleMap map)
     {
-        map.addGroundOverlay(new GroundOverlayOptions()
+        overlays.put(map.addGroundOverlay(new GroundOverlayOptions()
                 .position(new LatLng(39.767381, -86.171280), 19)
-                .image(BitmapDescriptorFactory.fromResource(R.drawable.tent_overlay_one)));
+                .image(BitmapDescriptorFactory.fromResource(R.drawable.tent_overlay_one))), "Tent 1");
 
-        map.addGroundOverlay(new GroundOverlayOptions()
+        overlays.put(map.addGroundOverlay(new GroundOverlayOptions()
                 .position(new LatLng(39.767462, -86.171643), 19)
-                .image(BitmapDescriptorFactory.fromResource(R.drawable.tent_overlay_two)));
+                .image(BitmapDescriptorFactory.fromResource(R.drawable.tent_overlay_two))), "Tent 2");
 
-        map.addGroundOverlay(new GroundOverlayOptions()
+        overlays.put(map.addGroundOverlay(new GroundOverlayOptions()
                 .position(new LatLng(39.767515, -86.172000), 19)
-                .image(BitmapDescriptorFactory.fromResource(R.drawable.tent_overlay_three)));
+                .image(BitmapDescriptorFactory.fromResource(R.drawable.tent_overlay_three))), "Tent 3");
 
-        map.addGroundOverlay(new GroundOverlayOptions()
+        overlays.put(map.addGroundOverlay(new GroundOverlayOptions()
                 .position(new LatLng(39.767601, -86.172340), 19)
-                .image(BitmapDescriptorFactory.fromResource(R.drawable.tent_overlay_four)));
+                .image(BitmapDescriptorFactory.fromResource(R.drawable.tent_overlay_four))), "Tent 4");
 
-        map.addGroundOverlay(new GroundOverlayOptions()
+        overlays.put(map.addGroundOverlay(new GroundOverlayOptions()
                 .position(new LatLng(39.766935, -86.171345), 19)
-                .image(BitmapDescriptorFactory.fromResource(R.drawable.tent_overlay_five)));
+                .image(BitmapDescriptorFactory.fromResource(R.drawable.tent_overlay_five))), "Tent 5");
 
-        map.addGroundOverlay(new GroundOverlayOptions()
+        overlays.put(map.addGroundOverlay(new GroundOverlayOptions()
                 .position(new LatLng(39.766614, -86.171369), 19)
-                .image(BitmapDescriptorFactory.fromResource(R.drawable.tent_overlay_six)));
+                .image(BitmapDescriptorFactory.fromResource(R.drawable.tent_overlay_six))), "Tent 6");
 
-        map.addGroundOverlay(new GroundOverlayOptions()
+        overlays.put(map.addGroundOverlay(new GroundOverlayOptions()
                 .position(new LatLng(39.767056, -86.172162), 13)
-                .image(BitmapDescriptorFactory.fromResource(R.drawable.tent_overlay_vip)));
+                .image(BitmapDescriptorFactory.fromResource(R.drawable.tent_overlay_vip))), "VIP Tent");
 
-        map.addGroundOverlay(new GroundOverlayOptions()
+        overlays.put(map.addGroundOverlay(new GroundOverlayOptions()
                 .position(new LatLng(39.767281, -86.171907), 42)
-                .image(BitmapDescriptorFactory.fromResource(R.drawable.alcohol_overlay_ad)));
+                .image(BitmapDescriptorFactory.fromResource(R.drawable.alcohol_overlay_ad))), "Beer A & Wine D");
 
-        map.addGroundOverlay(new GroundOverlayOptions()
+        overlays.put(map.addGroundOverlay(new GroundOverlayOptions()
                 .position(new LatLng(39.767757, -86.172191), 45)
-                .image(BitmapDescriptorFactory.fromResource(R.drawable.alcohol_overlay_be)));
+                .image(BitmapDescriptorFactory.fromResource(R.drawable.alcohol_overlay_be))), "Beer B & Wine E");
 
-        map.addGroundOverlay(new GroundOverlayOptions()
+        overlays.put(map.addGroundOverlay(new GroundOverlayOptions()
                 .position(new LatLng(39.766772, -86.171546), 15)
-                .image(BitmapDescriptorFactory.fromResource(R.drawable.alcohol_overlay_cf)));
+                .image(BitmapDescriptorFactory.fromResource(R.drawable.alcohol_overlay_cf))), "Beer C & Wine F");
 
-        map.addGroundOverlay(new GroundOverlayOptions()
+        overlays.put(map.addGroundOverlay(new GroundOverlayOptions()
                 .position(new LatLng(39.766413, -86.171485), 18)
-                .image(BitmapDescriptorFactory.fromResource(R.drawable.bathroom_overlay_a)));
+                .image(BitmapDescriptorFactory.fromResource(R.drawable.bathroom_overlay_a))), "Restrooms");
 
-        map.addGroundOverlay(new GroundOverlayOptions()
+        overlays.put(map.addGroundOverlay(new GroundOverlayOptions()
                 .position(new LatLng(39.767445, -86.171055), 10)
                 .bearing(8)
-                .image(BitmapDescriptorFactory.fromResource(R.drawable.bathroom_overlay_a)));
+                .image(BitmapDescriptorFactory.fromResource(R.drawable.bathroom_overlay_a))), "Restrooms");
 
-        map.addGroundOverlay(new GroundOverlayOptions()
+        overlays.put(map.addGroundOverlay(new GroundOverlayOptions()
                 .position(new LatLng(39.767098, -86.170830), 8)
-                .image(BitmapDescriptorFactory.fromResource(R.drawable.health)));
+                .image(BitmapDescriptorFactory.fromResource(R.drawable.health))), "First Aid");
 
-        map.addGroundOverlay(new GroundOverlayOptions()
+        overlays.put(map.addGroundOverlay(new GroundOverlayOptions()
                 .position(new LatLng(39.767845, -86.173173), 8)
-                .image(BitmapDescriptorFactory.fromResource(R.drawable.music_a)));
+                .image(BitmapDescriptorFactory.fromResource(R.drawable.music_a))), "Music");
 
-        map.addGroundOverlay(new GroundOverlayOptions()
+        overlays.put(map.addGroundOverlay(new GroundOverlayOptions()
                 .position(new LatLng(39.766948, -86.170426), 10).zIndex(1)
-                .image(BitmapDescriptorFactory.fromResource(R.drawable.entrance_overlay)));
+                .image(BitmapDescriptorFactory.fromResource(R.drawable.entrance_overlay))), "Main Entrance");
 
-        map.addGroundOverlay(new GroundOverlayOptions()
+        overlays.put(map.addGroundOverlay(new GroundOverlayOptions()
                 .position(new LatLng(39.767086, -86.170301), 9)
-                .image(BitmapDescriptorFactory.fromResource(R.drawable.pp_overlay)));
+                .image(BitmapDescriptorFactory.fromResource(R.drawable.pp_overlay))), "Pedal & Park");
 
-        map.addGroundOverlay(new GroundOverlayOptions()
+        overlays.put(map.addGroundOverlay(new GroundOverlayOptions()
                 .position(new LatLng(39.766699, -86.170518), 8).zIndex(1)
-                .image(BitmapDescriptorFactory.fromResource(R.drawable.vip_entrance_overlay)));
+                .image(BitmapDescriptorFactory.fromResource(R.drawable.vip_entrance_overlay))), "VIP Entrance");
 
-        map.addGroundOverlay(new GroundOverlayOptions()
+        overlays.put(map.addGroundOverlay(new GroundOverlayOptions()
                 .position(new LatLng(39.766593, -86.171053), 10).zIndex(1)
-                .image(BitmapDescriptorFactory.fromResource(R.drawable.kd_overlay)));
+                .image(BitmapDescriptorFactory.fromResource(R.drawable.kd_overlay))), "Kitchen Demos");
 
-        map.addGroundOverlay(new GroundOverlayOptions()
+        overlays.put(map.addGroundOverlay(new GroundOverlayOptions()
                 .position(new LatLng(39.767101, -86.170491), 8)
-                .image(BitmapDescriptorFactory.fromResource(R.drawable.info_overlay)));
+                .image(BitmapDescriptorFactory.fromResource(R.drawable.info_overlay))), "Information");
 
-        map.addGroundOverlay(new GroundOverlayOptions()
+        overlays.put(map.addGroundOverlay(new GroundOverlayOptions()
                 .position(new LatLng(39.767582, -86.171377), 15)
-                .image(BitmapDescriptorFactory.fromResource(R.drawable.music_b)));
+                .image(BitmapDescriptorFactory.fromResource(R.drawable.music_b))), "Music");
 
         BitmapDescriptor bitmapDescriptor = BitmapDescriptorFactory.fromResource(R.drawable.food_truck_overlay);
 
         float delta = .00008f;
         for(int i = 0; i < 7; i++) {
-            map.addGroundOverlay(new GroundOverlayOptions()
+            overlays.put(map.addGroundOverlay(new GroundOverlayOptions()
                     .position(new LatLng(39.767382, -86.173280 + (delta * i)), 6)
                     .bearing(2)
-                    .image(bitmapDescriptor));
+                    .image(bitmapDescriptor)), "Food Trucks");
         }
 
+    }
+
+    public static String getTitleForClick(LatLng location) {
+        for(GroundOverlay go : overlays.keySet()) {
+            LatLngBounds bounds = go.getBounds();
+
+            if(bounds.contains(location)) {
+                return overlays.get(go);
+            }
+        }
+        return null;
     }
 
 }

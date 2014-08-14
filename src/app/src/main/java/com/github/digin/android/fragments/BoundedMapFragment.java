@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.github.digin.android.Utils;
 import com.github.digin.android.constants.MapOverlayData;
@@ -67,6 +68,16 @@ public class BoundedMapFragment extends MapFragment {
                 }
 
 
+            }
+        });
+
+        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+            @Override
+            public void onMapClick(LatLng latLng) {
+                String title = MapOverlayData.getTitleForClick(latLng);
+                if(title != null) {
+                    Toast.makeText(getActivity(), title, Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
