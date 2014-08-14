@@ -88,8 +88,13 @@ public class DetailsFragment extends Fragment implements View.OnClickListener {
         View view = mFadingHelper.createView(inflater);
 
         // prepare buttons
+
         yelpButton = (Button) view.findViewById(R.id.details_button_yelp);
-        yelpButton.setOnClickListener(this);
+        if (mChef.getYelpURL() == null || mChef.getYelpURL().equals("")) {
+            yelpButton.setVisibility(View.GONE);
+        } else {
+            yelpButton.setOnClickListener(this);
+        }
 
         favoriteButton = (Button) view.findViewById(R.id.details_button_favorite);
         favoriteButton.setOnClickListener(this);
@@ -222,7 +227,7 @@ public class DetailsFragment extends Fragment implements View.OnClickListener {
         boolean isFavorited = FavoritesStore.contains(getActivity(), mChef);
         if (isFavorited) {
             FavoritesStore.removeFavorite(getActivity(), mChef);
-            favoriteButton.setText("Favorite");
+            favoriteButton.setText("Add to favorites");
         } else {
             FavoritesStore.storeFavorite(getActivity(), mChef);
             favoriteButton.setText("Unfavorite");

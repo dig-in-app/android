@@ -105,29 +105,50 @@
                 android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
                 android:text="The Greatest Movies Ever Made"/>
 
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/edge_dot_border" />
+
+
             <LinearLayout
-                android:layout_marginTop="25dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="60dp"
+                android:divider="@drawable/edge_dot_border_vertical"
+                android:showDividers="middle"
                 android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/details_button_favorite"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="Favorite" />
+                    android:padding="5dp"
+                    android:textColor="@color/digin_brown"
+                    android:background="@android:color/transparent"
+                    android:text="Add to favorites" />
 
                 <Button
                     android:id="@+id/details_button_yelp"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="Yelp"/>
+                    android:padding="5dp"
+                    android:textColor="@color/digin_brown"
+                    android:background="@android:color/transparent"
+                    android:drawableLeft="@drawable/yelp_icon"
+                    android:text="View on Yelp"/>
 
             </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edge_dot_border" />
 
             <View
                 android:layout_marginTop="30dp"

@@ -87,7 +87,7 @@ public class LineupListFragment extends ListFragment {
                 Chef chef = ((ChefListAdapter) getListAdapter()).getItem(position);
                 Logger.log(LineupListFragment.this.getClass(), "onItemClick(): " + chef.getName() );
                 DetailsFragment details = DetailsFragment.newInstance(chef);
-                getFragmentManager().beginTransaction().addToBackStack(DetailsFragment.class.getName()).add(R.id.content_frame, details, DetailsFragment.class.getName()).commit();
+                getFragmentManager().beginTransaction().addToBackStack(DetailsFragment.class.getName()).replace(R.id.content_frame, details, DetailsFragment.class.getName()).commit();
             }
         });
     }
