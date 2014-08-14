@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
@@ -80,15 +81,11 @@ public class DetailsFragment extends Fragment implements View.OnClickListener {
                 .actionBarBackground(R.drawable.ab_solid_diginpassport)
                 .headerLayout(R.layout.details_header_image)
                 .contentLayout(R.layout.details_fragment).lightActionBar(true);
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = mFadingHelper.createView(inflater);
-
-        Random r = new Random();
-        ((ImageView)view.findViewById(R.id.header)).setImageResource(images[r.nextInt(images.length)]);
 
         // prepare buttons
         yelpButton = (Button) view.findViewById(R.id.details_button_yelp);
@@ -105,14 +102,30 @@ public class DetailsFragment extends Fragment implements View.OnClickListener {
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
+    public void onViewCreated(final View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        ImageView iv = (ImageView) view.findViewById(R.id.header);
-        Bitmap b = ((BitmapDrawable)iv.getDrawable()).getBitmap();
-        int color = BitmapUtils.getAverageColor(b);
+        Random r = new Random();
+        ((ImageView)view.findViewById(R.id.header)).setImageResource(images[r.nextInt(images.length)]);
 
-        view.setBackgroundColor(color);
+        AsyncTask<Void, Void, Integer> getColorTask = new AsyncTask<Void, Void, Integer>() {
+
+            @Override
+            protected Integer doInBackground(Void... params) {
+                ImageView iv = (ImageView) view.findViewById(R.id.header);
+                Bitmap b = ((BitmapDrawable)iv.getDrawable()).getBitmap();
+                int color = BitmapUtils.getAverageColor(b);
+                return color;
+            }
+
+            @Override
+            protected void onPostExecute(Integer color) {
+                super.onPostExecute(color);
+                view.setBackgroundColor(color);
+
+            }
+        };
+        getColorTask.execute();
 
         tryFillData();
     }

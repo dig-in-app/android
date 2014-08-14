@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.github.digin.android.R;
@@ -34,20 +35,23 @@ public class LineupListFragment extends ListFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.chef_list_layout, container, false);
+        View view = inflater.inflate(R.layout.chef_list_layout, container, false);
+        return view;
     }
 
     @Override
-    public void onListItemClick(ListView l, View v, int position, long id) {
-        super.onListItemClick(l, v, position, id);
+    public void onResume() {
+        super.onResume();
+        getListView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-
-        Chef chef = ((ChefListAdapter) getListAdapter()).getItem(position);
-
-        Logger.log(getClass(), "onItemClick(): " + chef.getName() );
-        DetailsFragment details = DetailsFragment.newInstance(chef);
-
-        getFragmentManager().beginTransaction().addToBackStack(DetailsFragment.class.getName()).add(R.id.content_frame, details, DetailsFragment.class.getName()).commit();
+                Chef chef = ((ChefListAdapter) getListAdapter()).getItem(position);
+                Logger.log(LineupListFragment.this.getClass(), "onItemClick(): " + chef.getName() );
+                DetailsFragment details = DetailsFragment.newInstance(chef);
+                getFragmentManager().beginTransaction().addToBackStack(DetailsFragment.class.getName()).add(R.id.content_frame, details, DetailsFragment.class.getName()).commit();
+            }
+        });
     }
 
     @Override
