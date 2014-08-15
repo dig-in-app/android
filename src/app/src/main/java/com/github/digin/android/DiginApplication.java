@@ -41,8 +41,7 @@ public class DiginApplication extends Application {
         if (!mTrackers.containsKey(trackerId)) {
 
             GoogleAnalytics analytics = GoogleAnalytics.getInstance(this);
-            Tracker t = (trackerId == TrackerName.APP_TRACKER) ? analytics.newTracker(getString(R.string.analytics_id))
-                    : analytics.newTracker(R.xml.global_tracker);
+            Tracker t = analytics.newTracker(getString(R.string.analytics_id));
             mTrackers.put(trackerId, t);
 
         }
