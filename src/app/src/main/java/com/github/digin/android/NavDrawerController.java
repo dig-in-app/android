@@ -43,19 +43,25 @@ public class NavDrawerController {
         mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                ((NavDrawerAdapter)mDrawerList.getAdapter()).setCurrentItem(position);
+                if(((NavDrawerAdapter)mDrawerList.getAdapter()).getCurrentItem() != position) {
 
-                mActivity.getActionBar().setTitle(mActivity.getString(R.string.app_name));
-                oldTitle = null;
-                mActivity.getActionBar().setBackgroundDrawable(mActivity.getResources().getDrawable(R.drawable.ab_solid_diginpassport));
 
-                if(((NavDrawerItem) view.getTag()).getFragment() != null) {
-                    while(mActivity.getFragmentManager().getBackStackEntryCount() > 0)
-                        mActivity.getFragmentManager().popBackStackImmediate();
+                    ((NavDrawerAdapter) mDrawerList.getAdapter()).setCurrentItem(position);
 
-                    mActivity.getFragmentManager().beginTransaction().replace(R.id.content_frame,
-                            ((NavDrawerItem) view.getTag()).getFragment(),
-                            ((NavDrawerItem) view.getTag()).toString()).commit();
+                    mActivity.getActionBar().setTitle(mActivity.getString(R.string.app_name));
+                    oldTitle = null;
+                    mActivity.getActionBar().setBackgroundDrawable(mActivity.getResources().getDrawable(R.drawable.ab_solid_diginpassport));
+
+                    if (((NavDrawerItem) view.getTag()).getFragment() != null) {
+                        while (mActivity.getFragmentManager().getBackStackEntryCount() > 0)
+                            mActivity.getFragmentManager().popBackStackImmediate();
+
+                        mActivity.getFragmentManager().beginTransaction().replace(R.id.content_frame,
+                                ((NavDrawerItem) view.getTag()).getFragment(),
+                                ((NavDrawerItem) view.getTag()).getFragment().getClass().getName()).commit();
+                        mDrawerLayout.closeDrawers();
+                    }
+                } else {
                     mDrawerLayout.closeDrawers();
                 }
             }

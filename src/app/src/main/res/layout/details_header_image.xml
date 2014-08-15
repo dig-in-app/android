@@ -8,10 +8,10 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
         android:scaleType="fitXY"
-        android:id="@+id/header"
-        android:src="@drawable/fresh_food">
+        android:adjustViewBounds="true"
+        android:src="@drawable/corn"
+        android:id="@+id/header">
     </ImageView>
 
 </FrameLayout>

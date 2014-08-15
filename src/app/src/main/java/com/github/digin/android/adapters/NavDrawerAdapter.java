@@ -14,7 +14,11 @@ import java.util.List;
 
 public class NavDrawerAdapter extends ArrayAdapter<NavDrawerItem> {
 
-    int currentItem = 0;
+    public int getCurrentItem() {
+        return currentItem;
+    }
+
+    private int currentItem = 0;
 
     public NavDrawerAdapter(Context context, int resource, List<NavDrawerItem> objects) {
         super(context, resource, R.id.text, objects);

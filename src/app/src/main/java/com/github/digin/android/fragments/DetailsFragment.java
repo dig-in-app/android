@@ -1,16 +1,25 @@
 package com.github.digin.android.fragments;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -24,8 +33,10 @@ import com.github.digin.android.logging.Logger;
 import com.github.digin.android.models.Chef;
 import com.github.digin.android.repositories.ChefsStore;
 import com.github.digin.android.repositories.FavoritesStore;
+import com.loopj.android.image.SmartImage;
 import com.loopj.android.image.SmartImageView;
 import com.manuelpeinado.fadingactionbar.FadingActionBarHelper;
+import com.manuelpeinado.fadingactionbar.view.ObservableScrollView;
 
 import java.util.Random;
 
@@ -50,24 +61,22 @@ public class DetailsFragment extends Fragment implements View.OnClickListener {
         return details;
     }
 
-    static int[] images = new int[] {
-            R.drawable.corn,
-            R.drawable.wheel,
-            R.drawable.paint,
-            R.drawable.pigtattoo,
-            R.drawable.img1,
-            R.drawable.img2,
-            R.drawable.img3,
-            R.drawable.img4,
-            R.drawable.img5,
-            R.drawable.img6,
-            R.drawable.img7,
-            R.drawable.img8,
-            R.drawable.img9,
-            R.drawable.img10,
-            R.drawable.img12,
-            R.drawable.img15
-    };
+//    static int[] images = new int[] {
+//            R.drawable.corn,
+//            R.drawable.wheel,
+//            R.drawable.pigtattoo,
+//            R.drawable.img1,
+//            R.drawable.img2,
+//            R.drawable.img3,
+//            R.drawable.img4,
+//            R.drawable.img5,
+//            R.drawable.img6,
+//            R.drawable.img7,
+//            R.drawable.img8,
+//            R.drawable.img9,
+//            R.drawable.img10,
+//            R.drawable.img12
+//    };
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -77,6 +86,7 @@ public class DetailsFragment extends Fragment implements View.OnClickListener {
                 .actionBarBackground(R.drawable.ab_solid_diginpassport)
                 .headerLayout(R.layout.details_header_image)
                 .contentLayout(R.layout.details_fragment).lightActionBar(true);
+
     }
 
     @Override
@@ -106,27 +116,27 @@ public class DetailsFragment extends Fragment implements View.OnClickListener {
     public void onViewCreated(final View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        Random r = new Random();
-        ((ImageView)view.findViewById(R.id.header)).setImageResource(images[r.nextInt(images.length)]);
+//        Random r = new Random();
+//        final int res = images[r.nextInt(images.length)];
+//        Log.e("IMAGE RES", "Res: " + res);
 
-        AsyncTask<Void, Void, Integer> getColorTask = new AsyncTask<Void, Void, Integer>() {
 
-            @Override
-            protected Integer doInBackground(Void... params) {
-                ImageView iv = (ImageView) view.findViewById(R.id.header);
-                Bitmap b = ((BitmapDrawable)iv.getDrawable()).getBitmap();
-                int color = BitmapUtils.getAverageColor(b);
-                return color;
-            }
+//        final ImageView iv = ((ImageView)view.findViewById(R.id.header));
+//        new AsyncTask<Integer, Void, Bitmap>() {
+//
+//            @Override
+//            protected Bitmap doInBackground(Integer... params) {
+//                return BitmapFactory.decodeResource(getActivity().getResources(), R.drawable.corn); //res);
+//            }
+//
+//            @Override
+//            protected void onPostExecute(Bitmap bitmap) {
+//                iv.setImageBitmap(bitmap);
+//            }
+//        }.execute(res);
 
-            @Override
-            protected void onPostExecute(Integer color) {
-                super.onPostExecute(color);
-                view.setBackgroundColor(color);
+        view.setBackgroundColor(Color.GRAY);
 
-            }
-        };
-        getColorTask.execute();
 
         tryFillData();
     }
@@ -176,7 +186,7 @@ public class DetailsFragment extends Fragment implements View.OnClickListener {
             }
         });
         AnalyticsHelper.sendScreenView(getActivity(), getClass());
-
+        getActivity().invalidateOptionsMenu();
     }
 
     @Override
@@ -203,7 +213,6 @@ public class DetailsFragment extends Fragment implements View.OnClickListener {
             getActivity().getActionBar().setTitle(mOldTitle);
         }
     }
-
 
     @Override
     public void onClick(View v) {

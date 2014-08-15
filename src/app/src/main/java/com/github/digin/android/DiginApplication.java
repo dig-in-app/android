@@ -29,13 +29,13 @@ import java.util.List;
 /**
  * Created by david on 7/16/14.
  */
-@ReportsCrashes(
-        formKey = "", // will not be used
-        mailTo = "dmtschida2@gmail.com",
-        customReportContent = { ReportField.APP_VERSION_CODE, ReportField.APP_VERSION_NAME, ReportField.ANDROID_VERSION, ReportField.PHONE_MODEL, ReportField.STACK_TRACE, ReportField.LOGCAT },
-        mode = ReportingInteractionMode.TOAST,
-        resToastText = R.string.crash_toast_text
-)
+//@ReportsCrashes(
+//        formKey = "", // will not be used
+//        mailTo = "dmtschida2@gmail.com",
+//        customReportContent = { ReportField.APP_VERSION_CODE, ReportField.APP_VERSION_NAME, ReportField.ANDROID_VERSION, ReportField.PHONE_MODEL, ReportField.STACK_TRACE, ReportField.LOGCAT },
+//        mode = ReportingInteractionMode.TOAST,
+//        resToastText = R.string.crash_toast_text
+//)
 public class DiginApplication extends Application {
 
     /**
@@ -70,21 +70,18 @@ public class DiginApplication extends Application {
 
         Parse.initialize(this, ParseKeys.getAppId(this), ParseKeys.getClientKey(this));
 
-        ACRA.init(this);
+//        ACRA.init(this);
     }
 
     public synchronized Tracker getTracker(TrackerName trackerId) {
         if (!mTrackers.containsKey(trackerId)) {
 
             GoogleAnalytics analytics = GoogleAnalytics.getInstance(this);
-            Tracker t = (trackerId == TrackerName.APP_TRACKER) ? analytics.newTracker("UA-51109974-2")
+            Tracker t = (trackerId == TrackerName.APP_TRACKER) ? analytics.newTracker(getString(R.string.analytics_id))
                     : analytics.newTracker(R.xml.global_tracker);
             mTrackers.put(trackerId, t);
 
         }
         return mTrackers.get(trackerId);
     }
-
-
-
 }

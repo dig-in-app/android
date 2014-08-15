@@ -80,7 +80,7 @@ public class BoundedMapFragment extends MapFragment {
 
                 Toast.makeText(getActivity(), title.getName(), Toast.LENGTH_SHORT).show();
 
-                
+
             }
         });
 

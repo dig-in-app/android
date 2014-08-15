@@ -1,6 +1,7 @@
 package com.github.digin.android.fragments;
 
 import android.app.Activity;
+import android.app.FragmentManager;
 import android.app.ListFragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -77,6 +78,7 @@ public class LineupListFragment extends ListFragment {
     @Override
     public void onResume() {
         super.onResume();
+        getActivity().invalidateOptionsMenu();
         getListView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -116,7 +118,8 @@ public class LineupListFragment extends ListFragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        if(mChefsLoaded) {
+
+        if (mChefsLoaded) {
             inflater.inflate(R.menu.list, menu);
             MenuItem item = menu.findItem(R.id.action_sort);
             item.setTitle(String.format(SORTTEXT, otherSorting.name().toLowerCase()));
