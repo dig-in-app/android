@@ -1,7 +1,6 @@
 package com.github.digin.android.fragments;
 
 import android.app.Activity;
-import android.app.FragmentManager;
 import android.app.ListFragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,24 +12,28 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 
 import com.github.digin.android.R;
-
-import java.util.Comparator;
-import java.util.List;
-
 import com.github.digin.android.Utils;
-import com.github.digin.android.adapters.*;
+import com.github.digin.android.adapters.ChefListAdapter;
 import com.github.digin.android.listeners.OnChefQueryListener;
 import com.github.digin.android.logging.AnalyticsHelper;
 import com.github.digin.android.logging.Logger;
 import com.github.digin.android.models.Chef;
 import com.github.digin.android.repositories.ChefsStore;
 
+import java.util.Comparator;
+import java.util.List;
+
 /**
  * Created by david on 7/15/14.
  */
 public class LineupListFragment extends ListFragment implements AdapterView.OnItemClickListener, OnChefQueryListener {
 
+    public static final String SORTTEXT = "Sort by %s";
+    Sorting otherSorting = Sorting.LOCATION;
     private boolean mChefsLoaded = false;
+
+    public LineupListFragment() {
+    }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -38,41 +41,10 @@ public class LineupListFragment extends ListFragment implements AdapterView.OnIt
 
         AnalyticsHelper.sendEvent(getActivity(), "List_Click", LineupListFragment.class.getName(), chef.getName());
 
-        Logger.log(LineupListFragment.class, "onItemClick(): " + chef.getName() );
+        Logger.log(LineupListFragment.class, "onItemClick(): " + chef.getName());
         DetailsFragment details = DetailsFragment.newInstance(chef);
         getFragmentManager().beginTransaction().addToBackStack(DetailsFragment.class.getName()).replace(R.id.content_frame, details, DetailsFragment.class.getName()).commit();
 
-    }
-
-    public enum Sorting {
-        NAME(new Comparator<Chef>() {
-            @Override
-            public int compare(Chef lhs, Chef rhs) {
-                return lhs.getName().compareTo(rhs.getName());
-            }
-        }), LOCATION(new Comparator<Chef>() {
-            @Override
-            public int compare(Chef lhs, Chef rhs) {
-                return lhs.getTent().compareTo(rhs.getTent());
-            }
-        });
-
-        Comparator<Chef> comparator;
-
-        Sorting(Comparator<Chef> comparator) {
-            this.comparator = comparator;
-        }
-
-        public Comparator<Chef> getComparator() {
-            return comparator;
-        }
-    }
-
-    public static final String SORTTEXT = "Sort by %s";
-    Sorting otherSorting = Sorting.LOCATION;
-
-
-    public LineupListFragment() {
     }
 
     @Override
@@ -130,7 +102,7 @@ public class LineupListFragment extends ListFragment implements AdapterView.OnIt
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch(item.getItemId()) {
+        switch (item.getItemId()) {
             case R.id.action_sort:
                 ((ChefListAdapter) getListAdapter()).sort(otherSorting);
                 otherSorting = ((otherSorting == Sorting.NAME) ? Sorting.LOCATION : Sorting.NAME);
@@ -138,6 +110,30 @@ public class LineupListFragment extends ListFragment implements AdapterView.OnIt
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    public enum Sorting {
+        NAME(new Comparator<Chef>() {
+            @Override
+            public int compare(Chef lhs, Chef rhs) {
+                return lhs.getName().compareTo(rhs.getName());
+            }
+        }), LOCATION(new Comparator<Chef>() {
+            @Override
+            public int compare(Chef lhs, Chef rhs) {
+                return lhs.getTent().compareTo(rhs.getTent());
+            }
+        });
+
+        Comparator<Chef> comparator;
+
+        Sorting(Comparator<Chef> comparator) {
+            this.comparator = comparator;
+        }
+
+        public Comparator<Chef> getComparator() {
+            return comparator;
         }
     }
 }

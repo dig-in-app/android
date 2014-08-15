@@ -1,9 +1,6 @@
 package com.github.digin.android;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.DialogFragment;
-import android.content.Context;
 import android.content.res.Configuration;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
@@ -12,7 +9,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.github.digin.android.adapters.NavDrawerAdapter;
 import com.github.digin.android.fragments.DeveloperFragment;
@@ -55,7 +51,7 @@ public class NavDrawerController implements AdapterView.OnItemClickListener {
             /** Called when a drawer has settled in a completely closed state. */
             public void onDrawerClosed(View view) {
                 super.onDrawerClosed(view);
-                if(oldTitle != null)
+                if (oldTitle != null)
                     mActivity.getActionBar().setTitle(oldTitle);
             }
 
@@ -129,7 +125,7 @@ public class NavDrawerController implements AdapterView.OnItemClickListener {
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        if(((NavDrawerAdapter)mDrawerList.getAdapter()).getCurrentItem() != position) {
+        if (((NavDrawerAdapter) mDrawerList.getAdapter()).getCurrentItem() != position) {
 
 
             ((NavDrawerAdapter) mDrawerList.getAdapter()).setCurrentItem(position);

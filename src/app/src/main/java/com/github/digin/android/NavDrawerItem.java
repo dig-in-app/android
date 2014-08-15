@@ -11,16 +11,11 @@ import java.util.List;
 
 public class NavDrawerItem {
 
-    static NavDrawerItem[] items = new NavDrawerItem[] {
+    static NavDrawerItem[] items = new NavDrawerItem[]{
             new NavDrawerItem(BoundedMapFragment.class, "Map"),
             new NavDrawerItem(LineupListFragment.class, "Chefs"),
             new NavDrawerItem(FavoritesFragment.class, "Favorites")
     };
-
-    public static List<NavDrawerItem> getItems() {
-        return Arrays.asList(items);
-    }
-
     String itemName;
     Class<? extends Fragment> fragmentClass;
     Fragment fragment;
@@ -29,8 +24,12 @@ public class NavDrawerItem {
         this.itemName = itemName;
     }
 
+    public static List<NavDrawerItem> getItems() {
+        return Arrays.asList(items);
+    }
+
     public Fragment getFragment() {
-        if(fragment == null) {
+        if (fragment == null) {
             try {
                 fragment = fragmentClass.newInstance();
             } catch (InstantiationException e) {

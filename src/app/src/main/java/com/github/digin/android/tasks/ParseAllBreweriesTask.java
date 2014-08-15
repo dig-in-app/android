@@ -5,13 +5,10 @@ import android.os.AsyncTask;
 import android.os.Handler;
 
 import com.github.digin.android.constants.ParseID;
-import com.github.digin.android.exceptions.InvalidClassException;
 import com.github.digin.android.factories.BreweryFactory;
-import com.github.digin.android.factories.ChefFactory;
 import com.github.digin.android.listeners.OnBreweryQueryListener;
 import com.github.digin.android.logging.Logger;
 import com.github.digin.android.models.Brewery;
-import com.github.digin.android.models.Chef;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
@@ -68,9 +65,13 @@ public class ParseAllBreweriesTask extends AsyncTask<Void, Void, Void> {
         return null;
     }
 
-    /** Alerts the listener on the UI thread that execution has completed */
+    /**
+     * Alerts the listener on the UI thread that execution has completed
+     */
     private void alert(final List<Brewery> breweries) {
-        if (listener == null) { return; }
+        if (listener == null) {
+            return;
+        }
 
         Handler handler = new Handler(context.getMainLooper());
         handler.post(new Runnable() {

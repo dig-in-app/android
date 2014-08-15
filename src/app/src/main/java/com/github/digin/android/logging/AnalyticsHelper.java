@@ -19,7 +19,7 @@ public class AnalyticsHelper {
 
 
         StringBuilder sb = new StringBuilder(fragmentClass.getSimpleName() + " : ");
-        for(String foo : data) {
+        for (String foo : data) {
             sb.append(" | ");
             sb.append(foo);
         }

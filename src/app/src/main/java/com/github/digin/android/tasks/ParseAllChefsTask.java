@@ -5,7 +5,6 @@ import android.os.AsyncTask;
 import android.os.Handler;
 
 import com.github.digin.android.constants.ParseID;
-import com.github.digin.android.exceptions.InvalidClassException;
 import com.github.digin.android.factories.ChefFactory;
 import com.github.digin.android.listeners.OnChefQueryListener;
 import com.github.digin.android.logging.Logger;
@@ -18,11 +17,11 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- *  Task which queries parse for a list of all the chefs we are currently
- *  storing.
- *
- *  This shouldn't be called by the presentation layer. Its best if
- *  Created by mike on 7/11/14.
+ * Task which queries parse for a list of all the chefs we are currently
+ * storing.
+ * <p/>
+ * This shouldn't be called by the presentation layer. Its best if
+ * Created by mike on 7/11/14.
  */
 public class ParseAllChefsTask extends AsyncTask<Void, Void, Void> {
 
@@ -69,9 +68,13 @@ public class ParseAllChefsTask extends AsyncTask<Void, Void, Void> {
         return null;
     }
 
-    /** Alerts the listener on the UI thread that execution has completed */
+    /**
+     * Alerts the listener on the UI thread that execution has completed
+     */
     private void alert(final List<Chef> chefs) {
-        if (listener == null) { return; }
+        if (listener == null) {
+            return;
+        }
 
         Handler handler = new Handler(context.getMainLooper());
         handler.post(new Runnable() {

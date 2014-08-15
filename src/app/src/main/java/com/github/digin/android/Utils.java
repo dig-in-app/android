@@ -1,6 +1,5 @@
 package com.github.digin.android;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.view.View;

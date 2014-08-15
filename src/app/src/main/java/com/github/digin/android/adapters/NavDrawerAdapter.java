@@ -14,14 +14,19 @@ import java.util.List;
 
 public class NavDrawerAdapter extends ArrayAdapter<NavDrawerItem> {
 
-    public int getCurrentItem() {
-        return currentItem;
-    }
-
     private int currentItem = 0;
 
     public NavDrawerAdapter(Context context, int resource, List<NavDrawerItem> objects) {
         super(context, resource, R.id.text, objects);
+    }
+
+    public int getCurrentItem() {
+        return currentItem;
+    }
+
+    public void setCurrentItem(int position) {
+        currentItem = position;
+        notifyDataSetChanged();
     }
 
     @Override
@@ -29,7 +34,7 @@ public class NavDrawerAdapter extends ArrayAdapter<NavDrawerItem> {
         View v = super.getView(position, convertView, parent);
         TextView tv = (TextView) v.findViewById(R.id.text);
 
-        if(position == currentItem)
+        if (position == currentItem)
             tv.setTypeface(Typeface.DEFAULT_BOLD);
         else
             tv.setTypeface(Typeface.DEFAULT);
@@ -40,10 +45,5 @@ public class NavDrawerAdapter extends ArrayAdapter<NavDrawerItem> {
         v.setTag(getItem(position));
 
         return v;
-    }
-
-    public void setCurrentItem(int position) {
-        currentItem = position;
-        notifyDataSetChanged();
     }
 }

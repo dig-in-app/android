@@ -6,5 +6,4 @@ package com.github.digin.android.models;
 public class Brewery extends Participant {
 
 
-
 }

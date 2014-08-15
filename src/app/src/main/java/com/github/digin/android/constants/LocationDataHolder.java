@@ -5,20 +5,19 @@ package com.github.digin.android.constants;
  */
 public class LocationDataHolder {
 
-    public Station[] getStations() {
-        return stations;
-    }
-
     private Station[] stations;
-
-    public String getName() {
-        return name;
-    }
-
     private String name;
 
     public LocationDataHolder(String s, Station... stations) {
         name = s;
         this.stations = stations;
+    }
+
+    public Station[] getStations() {
+        return stations;
+    }
+
+    public String getName() {
+        return name;
     }
 }

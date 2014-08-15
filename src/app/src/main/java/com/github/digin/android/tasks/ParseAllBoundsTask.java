@@ -5,10 +5,8 @@ import android.os.AsyncTask;
 import android.os.Handler;
 
 import com.github.digin.android.constants.ParseID;
-import com.github.digin.android.factories.ChefFactory;
 import com.github.digin.android.listeners.OnBoundsQueryListener;
 import com.github.digin.android.logging.Logger;
-import com.github.digin.android.models.Chef;
 import com.github.digin.android.models.map.BoundPoint;
 import com.github.digin.android.models.map.Bounds;
 import com.google.android.gms.maps.model.LatLng;
@@ -20,7 +18,6 @@ import com.parse.ParseQuery;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 

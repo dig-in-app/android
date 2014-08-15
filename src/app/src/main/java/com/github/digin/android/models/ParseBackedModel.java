@@ -1,8 +1,8 @@
 package com.github.digin.android.models;
 
 /**
- *  Common fields to every single parse backed model we are storing.
- *  Created by mike on 7/11/14.
+ * Common fields to every single parse backed model we are storing.
+ * Created by mike on 7/11/14.
  */
 public class ParseBackedModel {
 

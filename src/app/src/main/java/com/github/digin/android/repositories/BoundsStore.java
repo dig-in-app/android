@@ -14,8 +14,6 @@ import java.util.Map;
  */
 public abstract class BoundsStore {
 
-    private static Map<String, Bounds> map;
-
     public static final String EVENT = "Event";
     public static final String TENT_1 = "Tent 1";
     public static final String TENT_2 = "Tent 2";
@@ -24,6 +22,7 @@ public abstract class BoundsStore {
     public static final String TENT_5 = "Tent 5";
     public static final String TENT_6 = "Tent 6";
     public static final String TENT_VIP = "VIP Tent";
+    private static Map<String, Bounds> map;
 
     public static void getBounds(Context context, final String location, final OnBoundsRetrievalListener listener) {
 

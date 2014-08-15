@@ -1,22 +1,26 @@
 package com.github.digin.android.constants;
 
 /**
- *  IDs for objects on parse.
- *  Created by mike on 7/11/14.
+ * IDs for objects on parse.
+ * Created by mike on 7/11/14.
  */
 public class ParseID {
 
     public static final String CLASS_INSTALL = "Installation";
     public static final String CLASS_USER = "User";
 
-    /** Bounds */
+    /**
+     * Bounds
+     */
     public static final String CLASS_BOUNDS = "Bounds";
 
     public static final String F_BOUNDS_NAME = "name";
     public static final String F_BOUNDS_ORDER = "order";
     public static final String F_BOUNDS_LOC = "loc";
 
-    /** Brewery */
+    /**
+     * Brewery
+     */
     public static final String CLASS_BREWERY = "Brewery";
 
     public static final String F_BREW_NAME = "name";
@@ -26,7 +30,9 @@ public class ParseID {
     public static final String F_BREW_YELP = "yelpURL";
     public static final String F_BREW_TENT = "tent";
 
-    /** Chef */
+    /**
+     * Chef
+     */
     public static final String CLASS_CHEF = "Chef";
 
     public static final String F_CHEF_RESTAURANT = "name";
@@ -39,7 +45,9 @@ public class ParseID {
     public static final String F_CHEF_FARM = "farm";
     public static final String F_CHEF_TENT = "tent";
 
-    /** Kitchen Demos */
+    /**
+     * Kitchen Demos
+     */
     public static final String CLASS_KITCHEN_DEMOS = "KitchenDemos";
 
     public static final String F_DEMO_TITLE = "title";
@@ -48,14 +56,18 @@ public class ParseID {
     public static final String F_DEMO_STARTTIME = "startTime";
     public static final String F_DEMO_ENDTIME = "endTime";
 
-    /** Locations */
+    /**
+     * Locations
+     */
     public static final String CLASS_LOCATIONS = "Location";
 
     public static final String F_LOC_NAME = "name";
     public static final String F_LOC_DESC = "description";
     public static final String F_LOC_CENTERLOC = "centerLoc";
 
-    /** Wineries */
+    /**
+     * Wineries
+     */
     public static final String CLASS_WINERY = "Winery";
 
     public static final String F_WINE_NAME = "name";

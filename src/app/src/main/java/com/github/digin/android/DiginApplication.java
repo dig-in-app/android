@@ -3,37 +3,17 @@ package com.github.digin.android;
 import android.app.Application;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
 import android.util.Log;
-import android.util.LruCache;
 
 import com.github.digin.android.constants.ParseKeys;
-import com.github.digin.android.listeners.OnChefQueryListener;
-import com.github.digin.android.logging.Logger;
-import com.github.digin.android.models.Chef;
-import com.github.digin.android.repositories.ChefsStore;
 import com.google.android.gms.analytics.GoogleAnalytics;
 import com.google.android.gms.analytics.Tracker;
-import com.google.android.gms.cast.Cast;
 import com.parse.Parse;
 
-
 import java.util.HashMap;
-import java.util.List;
 
 
 public class DiginApplication extends Application {
-
-    /**
-     * Enum used to identify the tracker that needs to be used for tracking.
-     *
-     * A single tracker is usually enough for most purposes. In case you do need multiple trackers,
-     * storing them all in Application object helps ensure that they are created only once per
-     * application instance.
-     */
-    public enum TrackerName {
-        APP_TRACKER, // Tracker used only in this app.
-    }
 
     HashMap<TrackerName, Tracker> mTrackers = new HashMap<TrackerName, Tracker>();
 
@@ -67,5 +47,16 @@ public class DiginApplication extends Application {
 
         }
         return mTrackers.get(trackerId);
+    }
+
+    /**
+     * Enum used to identify the tracker that needs to be used for tracking.
+     * <p/>
+     * A single tracker is usually enough for most purposes. In case you do need multiple trackers,
+     * storing them all in Application object helps ensure that they are created only once per
+     * application instance.
+     */
+    public enum TrackerName {
+        APP_TRACKER, // Tracker used only in this app.
     }
 }

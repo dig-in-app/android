@@ -1,12 +1,8 @@
 package com.github.digin.android.fragments;
 
-import android.content.res.TypedArray;
-import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.github.digin.android.Utils;
@@ -20,18 +16,15 @@ import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
-import com.google.android.gms.maps.model.PolylineOptions;
 
 
 public class BoundedMapFragment extends MapFragment {
 
-    private final LatLngBounds BOUNDS = new LatLngBounds( new LatLng(39.766111, -86.173218), new LatLng(39.767892, -86.170160));
+    private static LatLng CENTER = new LatLng(39.766862, -86.171805);
+    private final LatLngBounds BOUNDS = new LatLngBounds(new LatLng(39.766111, -86.173218), new LatLng(39.767892, -86.170160));
     private final int MAX_ZOOM = 22;
     private final int MIN_ZOOM = 17;
-
     private GoogleMap mMap = getMap();
-
-    private static LatLng CENTER = new LatLng(39.766862, -86.171805);
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -54,17 +47,17 @@ public class BoundedMapFragment extends MapFragment {
                 float zoom = 0;
                 LatLng correction;
 
-                if(position.zoom < MIN_ZOOM) zoom = MIN_ZOOM;
-                if(position.zoom > MAX_ZOOM) zoom = MAX_ZOOM;
+                if (position.zoom < MIN_ZOOM) zoom = MIN_ZOOM;
+                if (position.zoom > MAX_ZOOM) zoom = MAX_ZOOM;
 
-                if(results[0] > 600) {
+                if (results[0] > 600) {
                     correction = CENTER;
                 } else {
                     correction = getLatLngCorrection(position.target);
                 }
 
-                if(zoom != 0 || correction.latitude != 0 || correction.longitude != 0) {
-                    zoom = (zoom==0)?position.zoom:zoom;
+                if (zoom != 0 || correction.latitude != 0 || correction.longitude != 0) {
+                    zoom = (zoom == 0) ? position.zoom : zoom;
                     CameraPosition newPosition = new CameraPosition(correction, zoom, position.tilt, position.bearing);
                     CameraUpdate update = CameraUpdateFactory.newCameraPosition(newPosition);
                     mMap.animateCamera(update);
@@ -99,6 +92,7 @@ public class BoundedMapFragment extends MapFragment {
 
     /**
      * Returns the correction for Lat and Lng if camera is trying to get outside of visible map
+     *
      * @param point Current camera bounds
      * @return Latitude and Longitude corrections to get back into bounds.
      */

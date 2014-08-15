@@ -3,9 +3,7 @@ package com.github.digin.android.repositories;
 import android.content.Context;
 
 import com.github.digin.android.listeners.OnBreweryQueryListener;
-import com.github.digin.android.logging.Logger;
 import com.github.digin.android.models.Brewery;
-import com.github.digin.android.models.Participant;
 import com.github.digin.android.tasks.ParseAllBreweriesTask;
 
 import java.util.Collections;
@@ -13,10 +11,10 @@ import java.util.Comparator;
 import java.util.List;
 
 /**
- *  Contains methods which return a list of breweries either stored
- *  locally or on parse.
- *
- *  Created by mike on 8/3/14.
+ * Contains methods which return a list of breweries either stored
+ * locally or on parse.
+ * <p/>
+ * Created by mike on 8/3/14.
  */
 public abstract class BreweryStore {
 

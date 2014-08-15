@@ -5,12 +5,9 @@ import android.os.AsyncTask;
 import android.os.Handler;
 
 import com.github.digin.android.constants.ParseID;
-import com.github.digin.android.exceptions.InvalidClassException;
-import com.github.digin.android.factories.ChefFactory;
 import com.github.digin.android.factories.WineryFactory;
 import com.github.digin.android.listeners.OnWineryQueryListener;
 import com.github.digin.android.logging.Logger;
-import com.github.digin.android.models.Chef;
 import com.github.digin.android.models.Winery;
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -67,9 +64,13 @@ public class ParseAllWineriesTask extends AsyncTask<Void, Void, Void> {
         return null;
     }
 
-    /** Alerts the listener on the UI thread that execution has completed */
+    /**
+     * Alerts the listener on the UI thread that execution has completed
+     */
     private void alert(final List<Winery> wineries) {
-        if (listener == null) { return; }
+        if (listener == null) {
+            return;
+        }
 
         Handler handler = new Handler(context.getMainLooper());
         handler.post(new Runnable() {

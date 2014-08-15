@@ -1,11 +1,11 @@
 package com.github.digin.android.models;
 
 /**
- *  We define a chef to mean any person or organization which is making food at this
- *  event. Every chef has a dish they are making and an ingredient contained in
- *  that dish.
- *
- *  Created by mike on 7/11/14.
+ * We define a chef to mean any person or organization which is making food at this
+ * event. Every chef has a dish they are making and an ingredient contained in
+ * that dish.
+ * <p/>
+ * Created by mike on 7/11/14.
  */
 public class Chef extends Participant {
 

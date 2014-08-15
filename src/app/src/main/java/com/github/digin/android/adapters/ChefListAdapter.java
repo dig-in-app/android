@@ -29,7 +29,7 @@ public class ChefListAdapter extends ArrayAdapter<Chef> {
     }
 
     private LayoutInflater getLayoutInflater() {
-        if(inflater == null)
+        if (inflater == null)
             inflater = (LayoutInflater) getContext()
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         return inflater;
@@ -74,24 +74,24 @@ public class ChefListAdapter extends ArrayAdapter<Chef> {
     }
 
     private int getBadgeForChef(Chef chef) {
-        if(chef.getTent().contains("Tent")) {
-            char tentNum = chef.getTent().charAt( chef.getTent().length() - 1);
-            if(tentNum == '1') {
+        if (chef.getTent().contains("Tent")) {
+            char tentNum = chef.getTent().charAt(chef.getTent().length() - 1);
+            if (tentNum == '1') {
                 return R.drawable.tent_one;
-            } else if(tentNum == '2') {
+            } else if (tentNum == '2') {
                 return R.drawable.tent_two;
-            } else if(tentNum == '3') {
+            } else if (tentNum == '3') {
                 return R.drawable.tent_badge; //TODO: Get image for tent 3.
-            } else if(tentNum == '4') {
+            } else if (tentNum == '4') {
                 return R.drawable.tent_four;
-            } else if(tentNum == '5') {
+            } else if (tentNum == '5') {
                 return R.drawable.tent_five;
-            } else if(tentNum == '6') {
+            } else if (tentNum == '6') {
                 return R.drawable.tent_six;
             } else {
                 return R.drawable.tent_badge; //TODO: This image is too large.
             }
-        } else if(chef.getTent().equals("Food Trucks")) {
+        } else if (chef.getTent().equals("Food Trucks")) {
             return R.drawable.truck_badge;
         } else {
             Logger.log(getClass(), "Chef has no tent: " + chef.getName() + " | " + chef.getTent());

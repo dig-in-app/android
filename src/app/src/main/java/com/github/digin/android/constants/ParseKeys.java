@@ -5,16 +5,16 @@ import android.content.Context;
 import com.github.digin.android.R;
 
 /**
- *  Contains parse's application and secret keys
- *
- *  These are read in from a string resources file which is gitignored due to the
- *  open source nature of our application. If you'd like to compile this app, you'll
- *  either need these parse keys or a duplicate parse database with all the information
- *  pertaining to the digin event.
- *
- *  Contact David or Michael on github for help with either of these.
- *
- *  Created by mike on 7/11/14.
+ * Contains parse's application and secret keys
+ * <p/>
+ * These are read in from a string resources file which is gitignored due to the
+ * open source nature of our application. If you'd like to compile this app, you'll
+ * either need these parse keys or a duplicate parse database with all the information
+ * pertaining to the digin event.
+ * <p/>
+ * Contact David or Michael on github for help with either of these.
+ * <p/>
+ * Created by mike on 7/11/14.
  */
 public abstract class ParseKeys {
 

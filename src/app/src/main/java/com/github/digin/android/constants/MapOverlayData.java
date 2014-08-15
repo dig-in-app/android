@@ -1,8 +1,6 @@
 package com.github.digin.android.constants;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.location.Location;
 
 import com.github.digin.android.R;
 import com.google.android.gms.maps.GoogleMap;
@@ -12,8 +10,6 @@ import com.google.android.gms.maps.model.GroundOverlay;
 import com.google.android.gms.maps.model.GroundOverlayOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
-import com.google.android.gms.maps.model.Polygon;
-import com.google.android.gms.maps.model.PolygonOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 
 import java.util.ArrayList;
@@ -23,7 +19,7 @@ import java.util.Map;
 
 public class MapOverlayData {
 
-    private static double[][] gate = new double[][] {
+    private static double[][] gate = new double[][]{
             {39.767502, -86.173003},
             {39.767507, -86.173424},
             {39.767356, -86.173333},
@@ -60,7 +56,7 @@ public class MapOverlayData {
             {39.767511, -86.173019},
             {39.767502, -86.173003}
     };
-
+    private static Map<GroundOverlay, LocationDataHolder> overlays = new HashMap<GroundOverlay, LocationDataHolder>();
 
     public static void buildMap(Context c, GoogleMap map) {
         clearMap(map);
@@ -75,7 +71,7 @@ public class MapOverlayData {
 
     private static void addGate(Context c, GoogleMap map) {
         List<LatLng> gateList = new ArrayList<LatLng>();
-        for(double[] coord : gate) {
+        for (double[] coord : gate) {
             gateList.add(new LatLng(coord[0], coord[1]));
         }
         map.addPolyline(new PolylineOptions()
@@ -83,10 +79,7 @@ public class MapOverlayData {
                 .color(c.getResources().getColor(R.color.digin_orange))).setZIndex(0);
     }
 
-    private static Map<GroundOverlay, LocationDataHolder> overlays = new HashMap<GroundOverlay, LocationDataHolder>();
-
-    private synchronized static void addTents(GoogleMap map)
-    {
+    private synchronized static void addTents(GoogleMap map) {
 
         overlays.put(map.addGroundOverlay(new GroundOverlayOptions()
                 .position(new LatLng(39.767381, -86.171280), 19)
@@ -172,7 +165,7 @@ public class MapOverlayData {
         BitmapDescriptor bitmapDescriptor = BitmapDescriptorFactory.fromResource(R.drawable.food_truck_overlay);
 
         float delta = .00008f;
-        for(int i = 0; i < 7; i++) {
+        for (int i = 0; i < 7; i++) {
             overlays.put(map.addGroundOverlay(new GroundOverlayOptions()
                     .position(new LatLng(39.767382, -86.173280 + (delta * i)), 6)
                     .bearing(2)
@@ -182,10 +175,10 @@ public class MapOverlayData {
     }
 
     public static LocationDataHolder getTitleForClick(LatLng location) {
-        for(GroundOverlay go : overlays.keySet()) {
+        for (GroundOverlay go : overlays.keySet()) {
             LatLngBounds bounds = go.getBounds();
 
-            if(bounds.contains(location)) {
+            if (bounds.contains(location)) {
                 return overlays.get(go);
             }
         }

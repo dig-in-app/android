@@ -7,8 +7,8 @@ import com.github.digin.android.models.Chef;
 import com.parse.ParseObject;
 
 /**
- *  Factory for creating chef objects in various ways.
- *  Created by mike on 7/11/14.
+ * Factory for creating chef objects in various ways.
+ * Created by mike on 7/11/14.
  */
 public abstract class ChefFactory {
 

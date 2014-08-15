@@ -1,27 +1,15 @@
 package com.github.digin.android.fragments;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
-import android.net.Uri;
-import android.os.AsyncTask;
-import android.os.Build;
-import android.os.Bundle;
 import android.app.Fragment;
-import android.util.Log;
+import android.content.Intent;
+import android.graphics.Color;
+import android.net.Uri;
+import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,22 +20,16 @@ import com.github.digin.android.logging.Logger;
 import com.github.digin.android.models.Chef;
 import com.github.digin.android.repositories.ChefsStore;
 import com.github.digin.android.repositories.FavoritesStore;
-import com.loopj.android.image.SmartImage;
 import com.loopj.android.image.SmartImageView;
 import com.manuelpeinado.fadingactionbar.FadingActionBarHelper;
-import com.manuelpeinado.fadingactionbar.view.ObservableScrollView;
-
-import java.util.Random;
 
 /**
  * Created by david on 7/27/14.
  */
 public class DetailsFragment extends Fragment implements View.OnClickListener, OnSingleChefQuery {
 
-    private FadingActionBarHelper mFadingHelper;
-
-
     public Chef mChef;
+    private FadingActionBarHelper mFadingHelper;
     private CharSequence mOldTitle;
     private Button favoriteButton, yelpButton;
 
@@ -107,7 +89,7 @@ public class DetailsFragment extends Fragment implements View.OnClickListener, O
 
     private void tryFillData() {
 
-        if(mChef != null && getView() != null) {
+        if (mChef != null && getView() != null) {
             Logger.log(DetailsFragment.class, "Filling data");
             TextView t = (TextView) getView().findViewById(R.id.nameText);
             t.setText(mChef.getName());
@@ -116,7 +98,7 @@ public class DetailsFragment extends Fragment implements View.OnClickListener, O
             getActivity().getActionBar().setTitle(mChef.getName());
 
             SmartImageView siv = (SmartImageView) getView().findViewById(R.id.logo);
-            if(mChef.getThumbnail() == null)
+            if (mChef.getThumbnail() == null)
                 siv.setImageResource(R.drawable.logo);
             else {
                 Logger.log(DetailsFragment.class, mChef.getThumbnail());
@@ -127,9 +109,9 @@ public class DetailsFragment extends Fragment implements View.OnClickListener, O
             TextView dishText = (TextView) getView().findViewById(R.id.dishText);
             TextView chefText = (TextView) getView().findViewById(R.id.chefText);
 
-            farmText.setText( mChef.getFarm() );
-            dishText.setText( mChef.getDish() );
-            chefText.setText( mChef.getCook() );
+            farmText.setText(mChef.getFarm());
+            dishText.setText(mChef.getDish());
+            chefText.setText(mChef.getCook());
 
         }
     }

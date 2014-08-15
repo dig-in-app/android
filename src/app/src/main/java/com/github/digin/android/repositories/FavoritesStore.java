@@ -4,17 +4,15 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.github.digin.android.listeners.OnChefQueryListener;
-import com.github.digin.android.listeners.OnSingleChefQuery;
 import com.github.digin.android.models.Chef;
 
 import java.util.HashSet;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Set;
 
 /**
- *  Stores a user's favorite restaurants
- *  Created by mike on 8/13/14.
+ * Stores a user's favorite restaurants
+ * Created by mike on 8/13/14.
  */
 public abstract class FavoritesStore {
 
@@ -25,9 +23,9 @@ public abstract class FavoritesStore {
 
         SharedPreferences prefs = context.getSharedPreferences(prefsName, 0);
 
-        Set<String> favorites =  prefs.getStringSet(chefSetPrefId, null);
+        Set<String> favorites = prefs.getStringSet(chefSetPrefId, null);
         if (favorites == null) {
-           favorites = new HashSet<String>();
+            favorites = new HashSet<String>();
         }
 
         // Make sure the chef isn't already a favorite

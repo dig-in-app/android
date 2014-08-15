@@ -1,7 +1,6 @@
 package com.github.digin.android.repositories;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.github.digin.android.listeners.OnChefQueryListener;
 import com.github.digin.android.listeners.OnSingleChefQuery;
@@ -16,20 +15,24 @@ import java.util.List;
 import java.util.Set;
 
 /**
- *  Class which handles downloading Chef data from parse, storing this
- *  data locally, querying for cache information, etc.
- *
- *  Created by mike on 7/11/14.
+ * Class which handles downloading Chef data from parse, storing this
+ * data locally, querying for cache information, etc.
+ * <p/>
+ * Created by mike on 7/11/14.
  */
 public abstract class ChefsStore {
 
-    /** The local cache */
+    /**
+     * The local cache
+     */
     private static List<Chef> chefCache;
 
-    /** Gets a list of all the chefs. This call always returns through the listener
-     *  provided. If a copy of the chefs is available locally (in memory) it is used.
-     *  Otherwise, this call reaches out to parse asynchronously, returns immediately,
-     *  and the list of chefs is provided to the listener on the UI thread. */
+    /**
+     * Gets a list of all the chefs. This call always returns through the listener
+     * provided. If a copy of the chefs is available locally (in memory) it is used.
+     * Otherwise, this call reaches out to parse asynchronously, returns immediately,
+     * and the list of chefs is provided to the listener on the UI thread.
+     */
     public static void getChefs(Context context, final OnChefQueryListener listener) {
 
         // Return the local list if it is available
@@ -67,7 +70,9 @@ public abstract class ChefsStore {
 
     }
 
-    /** Forces this class to reach out to parse to update instead of getting from the local cache */
+    /**
+     * Forces this class to reach out to parse to update instead of getting from the local cache
+     */
     public static void getChefsNoCache(Context context, final OnChefQueryListener listener) {
         chefCache = null;
         getChefs(context, listener);

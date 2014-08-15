@@ -3,21 +3,12 @@ package com.github.digin.android.activities;
 import android.app.Activity;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
-import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.github.digin.android.NavDrawerController;
-import com.github.digin.android.NavDrawerItem;
 import com.github.digin.android.R;
-import com.github.digin.android.adapters.NavDrawerAdapter;
-import com.github.digin.android.constants.ParseKeys;
 import com.github.digin.android.fragments.BoundedMapFragment;
 
 public class MainActivity extends Activity {

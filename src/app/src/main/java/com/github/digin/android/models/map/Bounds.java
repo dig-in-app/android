@@ -1,13 +1,11 @@
 package com.github.digin.android.models.map;
 
-import com.google.android.gms.maps.model.LatLng;
-
 import java.util.LinkedList;
 import java.util.List;
 
 /**
- *  Bounds around a location.
- *  Created by mike on 8/10/14.
+ * Bounds around a location.
+ * Created by mike on 8/10/14.
  */
 public class Bounds {
 
