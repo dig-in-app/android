@@ -48,14 +48,13 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:textColor="@color/digin_orange"
-                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
                 android:text="Our Mission"/>
 
             <TextView
                 android:layout_marginTop="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
                 android:gravity="left"
                 android:textColor="@color/digin_brown"
                 android:id="@+id/chefText"
@@ -79,7 +78,7 @@ Dig IN provides educational resources for agricultural, culinary arts and local 
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:textColor="@color/digin_orange"
-                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
                 android:text="Five years of Digin"/>
 
             <TextView
@@ -93,6 +92,7 @@ Dig IN provides educational resources for agricultural, culinary arts and local 
                 android:id="@+id/dishText"
                 android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
                 android:text="If you don’t know who started Dig IN, that’s not surprising. There was no formalized organization or big event team standing behind that first year. Dig IN 2010 was started by a vision, some luck, and a team of seven immensely dedicated individuals. Fortunately, fifteen chefs/restaurants, six breweries and nine wineries also signed on for what promised to be an exciting, if not downright crazy, ride. There was no roadmap for what was about to happen–no guidelines for who could participate, no history to explain who we were or what we were doing, no formal budget to work from, and no paid staff. Five years later, I marvel at the incredible growth of this adventure.
+
 I can’t describe the thrill I get from seeing people enjoy this day and how much I appreciate all the hard work of everyone who is involved behind the scenes. It’s the biggest celebration of all things local food that I’ll ever be a part of and I couldn’t be more grateful to share it with everyone who comes to Dig IN: A Taste of Indiana. I’d like to extend a HUGE thank you to all the culinary talent, wineries, breweries, volunteers, and board members who participate and another thank you to all of the guests who join us. I can’t wait to see what the next five years bring!"/>
 
 
