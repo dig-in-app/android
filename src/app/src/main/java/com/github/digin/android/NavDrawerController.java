@@ -21,7 +21,7 @@ import com.github.digin.android.fragments.DiginAboutFragment;
 /**
  * Created by david on 8/11/14.
  */
-public class NavDrawerController {
+public class NavDrawerController implements AdapterView.OnItemClickListener {
 
     private final Activity mActivity;
     private DrawerLayout mDrawerLayout;
@@ -42,32 +42,7 @@ public class NavDrawerController {
         // Set the adapter for the list view
         mDrawerList.setAdapter(new NavDrawerAdapter(mActivity, R.layout.drawer_item, NavDrawerItem.getItems()));
         // Set the list's click listener
-        mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if(((NavDrawerAdapter)mDrawerList.getAdapter()).getCurrentItem() != position) {
-
-
-                    ((NavDrawerAdapter) mDrawerList.getAdapter()).setCurrentItem(position);
-
-                    mActivity.getActionBar().setTitle(mActivity.getString(R.string.app_name));
-                    oldTitle = null;
-                    mActivity.getActionBar().setBackgroundDrawable(mActivity.getResources().getDrawable(R.drawable.ab_solid_diginpassport));
-
-                    if (((NavDrawerItem) view.getTag()).getFragment() != null) {
-                        while (mActivity.getFragmentManager().getBackStackEntryCount() > 0)
-                            mActivity.getFragmentManager().popBackStackImmediate();
-
-                        mActivity.getFragmentManager().beginTransaction().replace(R.id.content_frame,
-                                ((NavDrawerItem) view.getTag()).getFragment(),
-                                ((NavDrawerItem) view.getTag()).getFragment().getClass().getName()).commit();
-                        mDrawerLayout.closeDrawers();
-                    }
-                } else {
-                    mDrawerLayout.closeDrawers();
-                }
-            }
-        });
+        mDrawerList.setOnItemClickListener(this);
 
         mDrawerToggle = new ActionBarDrawerToggle(
                 mActivity,                  /* host Activity */
@@ -131,7 +106,7 @@ public class NavDrawerController {
         while (mActivity.getFragmentManager().getBackStackEntryCount() > 0)
             mActivity.getFragmentManager().popBackStackImmediate();
 
-        mActivity.getFragmentManager().beginTransaction().replace(R.id.content_frame,
+        mActivity.getFragmentManager().beginTransaction().addToBackStack(DiginAboutFragment.class.getName()).replace(R.id.content_frame,
                 new DiginAboutFragment(),
                 DiginAboutFragment.class.getName()).commit();
         mDrawerLayout.closeDrawers();
@@ -144,7 +119,7 @@ public class NavDrawerController {
         while (mActivity.getFragmentManager().getBackStackEntryCount() > 0)
             mActivity.getFragmentManager().popBackStackImmediate();
 
-        mActivity.getFragmentManager().beginTransaction().replace(R.id.content_frame,
+        mActivity.getFragmentManager().beginTransaction().addToBackStack(DeveloperFragment.class.getName()).replace(R.id.content_frame,
                 new DeveloperFragment(),
                 DeveloperFragment.class.getName()).commit();
         mDrawerLayout.closeDrawers();
@@ -152,4 +127,28 @@ public class NavDrawerController {
         ((NavDrawerAdapter) mDrawerList.getAdapter()).setCurrentItem(-1);
     }
 
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        if(((NavDrawerAdapter)mDrawerList.getAdapter()).getCurrentItem() != position) {
+
+
+            ((NavDrawerAdapter) mDrawerList.getAdapter()).setCurrentItem(position);
+
+            mActivity.getActionBar().setTitle(mActivity.getString(R.string.app_name));
+            oldTitle = null;
+            mActivity.getActionBar().setBackgroundDrawable(mActivity.getResources().getDrawable(R.drawable.ab_solid_diginpassport));
+
+            if (((NavDrawerItem) view.getTag()).getFragment() != null) {
+                while (mActivity.getFragmentManager().getBackStackEntryCount() > 0)
+                    mActivity.getFragmentManager().popBackStackImmediate();
+
+                mActivity.getFragmentManager().beginTransaction().replace(R.id.content_frame,
+                        ((NavDrawerItem) view.getTag()).getFragment(),
+                        ((NavDrawerItem) view.getTag()).getFragment().getClass().getName()).commit();
+                mDrawerLayout.closeDrawers();
+            }
+        } else {
+            mDrawerLayout.closeDrawers();
+        }
+    }
 }

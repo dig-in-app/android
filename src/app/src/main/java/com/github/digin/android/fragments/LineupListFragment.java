@@ -28,9 +28,21 @@ import com.github.digin.android.repositories.ChefsStore;
 /**
  * Created by david on 7/15/14.
  */
-public class LineupListFragment extends ListFragment {
+public class LineupListFragment extends ListFragment implements AdapterView.OnItemClickListener, OnChefQueryListener {
 
     private boolean mChefsLoaded = false;
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Chef chef = ((ChefListAdapter) getListAdapter()).getItem(position);
+
+        AnalyticsHelper.sendEvent(getActivity(), "List_Click", LineupListFragment.class.getName(), chef.getName());
+
+        Logger.log(LineupListFragment.class, "onItemClick(): " + chef.getName() );
+        DetailsFragment details = DetailsFragment.newInstance(chef);
+        getFragmentManager().beginTransaction().addToBackStack(DetailsFragment.class.getName()).replace(R.id.content_frame, details, DetailsFragment.class.getName()).commit();
+
+    }
 
     public enum Sorting {
         NAME(new Comparator<Chef>() {
@@ -79,33 +91,22 @@ public class LineupListFragment extends ListFragment {
     public void onResume() {
         super.onResume();
         getActivity().invalidateOptionsMenu();
-        getListView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Chef chef = ((ChefListAdapter) getListAdapter()).getItem(position);
-
-                AnalyticsHelper.sendEvent(getActivity(), "List_Click", LineupListFragment.this.getClass().getName(), chef.getName());
-
-                Logger.log(LineupListFragment.this.getClass(), "onItemClick(): " + chef.getName() );
-                DetailsFragment details = DetailsFragment.newInstance(chef);
-                getFragmentManager().beginTransaction().addToBackStack(DetailsFragment.class.getName()).replace(R.id.content_frame, details, DetailsFragment.class.getName()).commit();
-            }
-        });
+        getListView().setOnItemClickListener(this);
     }
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
 
-        ChefsStore.getChefs(activity.getBaseContext(), new OnChefQueryListener() {
-            @Override
-            public void onComplete(List<Chef> chefs) {
-                setListAdapter(new ChefListAdapter(getActivity(), chefs));
-                mChefsLoaded = true;
-                getActivity().invalidateOptionsMenu();
-            }
-        });
-        AnalyticsHelper.sendScreenView(getActivity(), getClass(), "Main List");
+        ChefsStore.getChefs(activity.getBaseContext(), this);
+        AnalyticsHelper.sendScreenView(getActivity(), LineupListFragment.class, "Main List");
+    }
+
+    @Override
+    public void onComplete(List<Chef> chefs) {
+        setListAdapter(new ChefListAdapter(getActivity(), chefs));
+        mChefsLoaded = true;
+        getActivity().invalidateOptionsMenu();
     }
 
     @Override

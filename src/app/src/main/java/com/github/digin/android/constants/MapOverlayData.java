@@ -63,8 +63,14 @@ public class MapOverlayData {
 
 
     public static void buildMap(Context c, GoogleMap map) {
+        clearMap(map);
         addGate(c, map);
         addTents(map);
+    }
+
+    private static void clearMap(GoogleMap map) {
+        map.clear();
+        overlays.clear();
     }
 
     private static void addGate(Context c, GoogleMap map) {
@@ -81,6 +87,7 @@ public class MapOverlayData {
 
     private synchronized static void addTents(GoogleMap map)
     {
+
         overlays.put(map.addGroundOverlay(new GroundOverlayOptions()
                 .position(new LatLng(39.767381, -86.171280), 19)
                 .image(BitmapDescriptorFactory.fromResource(R.drawable.tent_overlay_one))), new LocationDataHolder("CICF Tent", Station.TENT_1));

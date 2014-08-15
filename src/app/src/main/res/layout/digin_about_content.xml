@@ -23,9 +23,9 @@
                 android:textColor="@color/digin_brown"
                 android:id="@+id/nameText"
                 android:padding="20dp"
-                android:textSize="40sp"
+                android:textSize="30sp"
                 android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
-                android:text="Dig IN"
+                android:text="Dig IN: A Taste of Indiana"
                 />
 
         </FrameLayout>

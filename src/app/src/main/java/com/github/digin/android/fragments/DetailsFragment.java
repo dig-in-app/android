@@ -42,7 +42,7 @@ import java.util.Random;
 /**
  * Created by david on 7/27/14.
  */
-public class DetailsFragment extends Fragment implements View.OnClickListener {
+public class DetailsFragment extends Fragment implements View.OnClickListener, OnSingleChefQuery {
 
     private FadingActionBarHelper mFadingHelper;
 
@@ -59,23 +59,6 @@ public class DetailsFragment extends Fragment implements View.OnClickListener {
         details.setArguments(b);
         return details;
     }
-
-//    static int[] images = new int[] {
-//            R.drawable.corn,
-//            R.drawable.wheel,
-//            R.drawable.pigtattoo,
-//            R.drawable.img1,
-//            R.drawable.img2,
-//            R.drawable.img3,
-//            R.drawable.img4,
-//            R.drawable.img5,
-//            R.drawable.img6,
-//            R.drawable.img7,
-//            R.drawable.img8,
-//            R.drawable.img9,
-//            R.drawable.img10,
-//            R.drawable.img12
-//    };
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -115,26 +98,8 @@ public class DetailsFragment extends Fragment implements View.OnClickListener {
     public void onViewCreated(final View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-//        Random r = new Random();
-//        final int res = images[r.nextInt(images.length)];
-//        Log.e("IMAGE RES", "Res: " + res);
 
-
-//        final ImageView iv = ((ImageView)view.findViewById(R.id.header));
-//        new AsyncTask<Integer, Void, Bitmap>() {
-//
-//            @Override
-//            protected Bitmap doInBackground(Integer... params) {
-//                return BitmapFactory.decodeResource(getActivity().getResources(), R.drawable.corn); //res);
-//            }
-//
-//            @Override
-//            protected void onPostExecute(Bitmap bitmap) {
-//                iv.setImageBitmap(bitmap);
-//            }
-//        }.execute(res);
-
-        view.setBackgroundColor(Color.GRAY);
+        view.setBackgroundColor(Color.parseColor("#b48e22")); //Yellowish
 
 
         tryFillData();
@@ -143,7 +108,7 @@ public class DetailsFragment extends Fragment implements View.OnClickListener {
     private void tryFillData() {
 
         if(mChef != null && getView() != null) {
-            Logger.log(getClass(), "Filling data");
+            Logger.log(DetailsFragment.class, "Filling data");
             TextView t = (TextView) getView().findViewById(R.id.nameText);
             t.setText(mChef.getName());
             mOldTitle = getActivity().getActionBar().getTitle();
@@ -154,7 +119,7 @@ public class DetailsFragment extends Fragment implements View.OnClickListener {
             if(mChef.getThumbnail() == null)
                 siv.setImageResource(R.drawable.logo);
             else {
-                Logger.log(getClass(), mChef.getThumbnail());
+                Logger.log(DetailsFragment.class, mChef.getThumbnail());
                 siv.setImageUrl(mChef.getThumbnail());
             }
 
@@ -175,16 +140,8 @@ public class DetailsFragment extends Fragment implements View.OnClickListener {
 
         String chefId = getArguments().getString("ID");
 
-        ChefsStore.getChefById(activity, chefId, new OnSingleChefQuery() {
-
-            @Override
-            public void onComplete(Chef chef) {
-                Logger.log(getClass(), "Chef found for id");
-                DetailsFragment.this.mChef = chef;
-                tryFillData();
-            }
-        });
-        AnalyticsHelper.sendScreenView(getActivity(), getClass());
+        ChefsStore.getChefById(activity, chefId, this);
+        AnalyticsHelper.sendScreenView(getActivity(), DetailsFragment.class);
         getActivity().invalidateOptionsMenu();
     }
 
@@ -248,4 +205,10 @@ public class DetailsFragment extends Fragment implements View.OnClickListener {
         startActivity(browserIntent);
     }
 
+    @Override
+    public void onComplete(Chef chef) {
+        Logger.log(DetailsFragment.class, "Chef found for id");
+        DetailsFragment.this.mChef = chef;
+        tryFillData();
+    }
 }

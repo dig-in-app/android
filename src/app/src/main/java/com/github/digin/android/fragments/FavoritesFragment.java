@@ -37,7 +37,7 @@ public class FavoritesFragment extends LineupListFragment {
                 setListAdapter(new ChefListAdapter(getActivity(), chefs));
             }
         });
-        AnalyticsHelper.sendScreenView(getActivity(), getClass());
+        AnalyticsHelper.sendScreenView(getActivity(), FavoritesFragment.class);
 
     }
 
