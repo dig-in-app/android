@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.github.digin.android.Utils;
+import com.github.digin.android.constants.LocationDataHolder;
 import com.github.digin.android.constants.MapOverlayData;
 import com.github.digin.android.logging.AnalyticsHelper;
 import com.google.android.gms.maps.CameraUpdate;
@@ -74,10 +75,12 @@ public class BoundedMapFragment extends MapFragment {
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(LatLng latLng) {
-                String title = MapOverlayData.getTitleForClick(latLng);
-                if(title != null) {
-                    Toast.makeText(getActivity(), title, Toast.LENGTH_SHORT).show();
-                }
+                LocationDataHolder title = MapOverlayData.getTitleForClick(latLng);
+                if (title == null) return;
+
+                Toast.makeText(getActivity(), title.getName(), Toast.LENGTH_SHORT).show();
+
+                
             }
         });
 

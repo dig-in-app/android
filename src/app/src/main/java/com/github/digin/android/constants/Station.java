@@ -1,0 +1,8 @@
+package com.github.digin.android.constants;
+
+/**
+ * Created by david on 8/14/14.
+ */
+public enum Station {
+    TENT_1, TENT_2, TENT_3, TENT_4, TENT_5, TENT_6, TENT_VIP, BEER_A, BEER_B,BEER_C, WNE_D, WINE_E, WINE_F, WATER, DRINK_TICKETS, VIP_ENTRANCE, ENTRANCE, PEDAL_PARK, MUSIC, INFO, FOOD_TRUCK, TICKETS, DEMOS, VOLUNTEER_SIGNIN, RESTROOMS, HANDWASH, WINE_D, FIRST_AID
+}
