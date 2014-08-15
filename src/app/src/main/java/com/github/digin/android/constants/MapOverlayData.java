@@ -61,7 +61,13 @@ public class MapOverlayData {
             {39.767502, -86.173003}
     };
 
-    public static void addGate(Context c, GoogleMap map) {
+
+    public static void buildMap(Context c, GoogleMap map) {
+        addGate(c, map);
+        addTents(map);
+    }
+
+    private static void addGate(Context c, GoogleMap map) {
         List<LatLng> gateList = new ArrayList<LatLng>();
         for(double[] coord : gate) {
             gateList.add(new LatLng(coord[0], coord[1]));
@@ -73,7 +79,7 @@ public class MapOverlayData {
 
     private static Map<GroundOverlay, LocationDataHolder> overlays = new HashMap<GroundOverlay, LocationDataHolder>();
 
-    public static void addTents(GoogleMap map)
+    private synchronized static void addTents(GoogleMap map)
     {
         overlays.put(map.addGroundOverlay(new GroundOverlayOptions()
                 .position(new LatLng(39.767381, -86.171280), 19)

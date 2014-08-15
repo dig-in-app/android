@@ -7,7 +7,6 @@ import android.graphics.Bitmap;
 import android.util.Log;
 import android.util.LruCache;
 
-import com.github.digin.android.bitmap.BitmapCacheHost;
 import com.github.digin.android.constants.ParseKeys;
 import com.github.digin.android.listeners.OnChefQueryListener;
 import com.github.digin.android.logging.Logger;
@@ -18,24 +17,11 @@ import com.google.android.gms.analytics.Tracker;
 import com.google.android.gms.cast.Cast;
 import com.parse.Parse;
 
-import org.acra.ACRA;
-import org.acra.ReportField;
-import org.acra.ReportingInteractionMode;
-import org.acra.annotation.ReportsCrashes;
 
 import java.util.HashMap;
 import java.util.List;
 
-/**
- * Created by david on 7/16/14.
- */
-//@ReportsCrashes(
-//        formKey = "", // will not be used
-//        mailTo = "dmtschida2@gmail.com",
-//        customReportContent = { ReportField.APP_VERSION_CODE, ReportField.APP_VERSION_NAME, ReportField.ANDROID_VERSION, ReportField.PHONE_MODEL, ReportField.STACK_TRACE, ReportField.LOGCAT },
-//        mode = ReportingInteractionMode.TOAST,
-//        resToastText = R.string.crash_toast_text
-//)
+
 public class DiginApplication extends Application {
 
     /**
@@ -47,8 +33,6 @@ public class DiginApplication extends Application {
      */
     public enum TrackerName {
         APP_TRACKER, // Tracker used only in this app.
-        GLOBAL_TRACKER, // Tracker used by all the apps from a company. eg: roll-up tracking.
-        ECOMMERCE_TRACKER, // Tracker used by all ecommerce transactions from a company.
     }
 
     HashMap<TrackerName, Tracker> mTrackers = new HashMap<TrackerName, Tracker>();

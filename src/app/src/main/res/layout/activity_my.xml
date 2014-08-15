@@ -34,7 +34,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:orientation="vertical" >
+            android:orientation="vertical"
+            android:padding="10dp">
 
 
             <IconTextView
@@ -43,7 +44,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="#FFF"
-                android:text="{fa-info-circle} About Dig Indiana"
+                android:text="@string/about_digin"
                 android:gravity="center"
                 android:padding="10dp" />
 
@@ -53,7 +54,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="#FFF"
-                android:text="{fa-code} About the developers"
+                android:text="@string/about_dev"
                 android:gravity="center"
                 android:padding="10dp" />
 

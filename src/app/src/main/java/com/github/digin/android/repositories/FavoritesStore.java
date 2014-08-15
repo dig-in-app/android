@@ -39,7 +39,7 @@ public abstract class FavoritesStore {
         favorites.add(chef.getId());
 
         // Recommit to the shared prefs
-        prefs.edit().putStringSet(chefSetPrefId, favorites).commit();
+        prefs.edit().putStringSet(chefSetPrefId, favorites).apply();
 
     }
 
@@ -73,7 +73,7 @@ public abstract class FavoritesStore {
 
         favorites.remove(chef.getId());
 
-        prefs.edit().putStringSet(chefSetPrefId, favorites).commit();
+        prefs.edit().putStringSet(chefSetPrefId, favorites).apply();
 
     }
 

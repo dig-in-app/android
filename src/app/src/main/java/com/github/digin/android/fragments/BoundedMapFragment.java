@@ -31,11 +31,13 @@ public class BoundedMapFragment extends MapFragment {
 
     private GoogleMap mMap = getMap();
 
+    private static LatLng CENTER = new LatLng(39.766862, -86.171805);
+
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mMap = getMap();
-        CameraUpdate upd = CameraUpdateFactory.newLatLngZoom(new LatLng(39.766862, -86.172005), 17);
+        CameraUpdate upd = CameraUpdateFactory.newLatLngZoom(CENTER, 17);
         mMap.moveCamera(upd);
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         mMap.setIndoorEnabled(false);
@@ -56,7 +58,7 @@ public class BoundedMapFragment extends MapFragment {
                 if(position.zoom > MAX_ZOOM) zoom = MAX_ZOOM;
 
                 if(results[0] > 600) {
-                    correction = new LatLng(39.766862, -86.172005);
+                    correction = CENTER;
                 } else {
                     correction = getLatLngCorrection(position.target);
                 }
@@ -67,8 +69,6 @@ public class BoundedMapFragment extends MapFragment {
                     CameraUpdate update = CameraUpdateFactory.newCameraPosition(newPosition);
                     mMap.animateCamera(update);
                 }
-
-
             }
         });
 
@@ -88,8 +88,7 @@ public class BoundedMapFragment extends MapFragment {
     }
 
     private void initMap() {
-        MapOverlayData.addTents(mMap);
-        MapOverlayData.addGate(getActivity(), mMap);
+        MapOverlayData.buildMap(getActivity(), mMap);
     }
 
     @Override

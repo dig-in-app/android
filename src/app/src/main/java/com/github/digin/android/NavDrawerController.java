@@ -15,6 +15,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.digin.android.adapters.NavDrawerAdapter;
+import com.github.digin.android.fragments.DeveloperFragment;
+import com.github.digin.android.fragments.DiginAboutFragment;
 
 /**
  * Created by david on 8/11/14.
@@ -126,32 +128,28 @@ public class NavDrawerController {
     }
 
     private void aboutDigin() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(mActivity);
-        builder.setTitle("About Digin");
+        while (mActivity.getFragmentManager().getBackStackEntryCount() > 0)
+            mActivity.getFragmentManager().popBackStackImmediate();
 
-        View view = mActivity.getLayoutInflater().inflate(R.layout.about_popup_window, null);
-        TextView desc = (TextView) view.findViewById(R.id.about_popup_desc);
+        mActivity.getFragmentManager().beginTransaction().replace(R.id.content_frame,
+                new DiginAboutFragment(),
+                DiginAboutFragment.class.getName()).commit();
+        mDrawerLayout.closeDrawers();
 
-        // Yeah this is happening
-        desc.setText("Dig IN demonstrates that investment in Indiana food and agriculture, through education, experiences and conversation, benefits our community and economy. The organization provides educational resources for agricultural, culinary arts and local food sectors in Indiana. It increases awareness of Indiana’s diversity in agriculture and culinary arts, and Dig IN facilitates connections within the Indiana food community to enhance economic development opportunities.");
 
-        builder.setView(view);
-
-        builder.create().show();
+        ((NavDrawerAdapter) mDrawerList.getAdapter()).setCurrentItem(-1);
     }
 
     private void aboutDevs() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(mActivity);
-        builder.setTitle("About the Devs");
+        while (mActivity.getFragmentManager().getBackStackEntryCount() > 0)
+            mActivity.getFragmentManager().popBackStackImmediate();
 
-        View view = mActivity.getLayoutInflater().inflate(R.layout.about_popup_window, null);
-        TextView desc = (TextView) view.findViewById(R.id.about_popup_desc);
+        mActivity.getFragmentManager().beginTransaction().replace(R.id.content_frame,
+                new DeveloperFragment(),
+                DeveloperFragment.class.getName()).commit();
+        mDrawerLayout.closeDrawers();
 
-        desc.setText("This app was developed by Purdue students David Tschida and Michael Hockerman. Repping SIG-APP on the Purdue campus. If you like what you see here... umm... well we don't really sell anything. We're doing this pro-bono. I guess just keep us in your thoughts?");
-
-        builder.setView(view);
-        builder.create().show();
-
+        ((NavDrawerAdapter) mDrawerList.getAdapter()).setCurrentItem(-1);
     }
 
 }

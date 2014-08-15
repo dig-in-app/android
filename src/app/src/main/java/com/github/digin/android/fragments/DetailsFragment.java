@@ -26,7 +26,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.digin.android.R;
-import com.github.digin.android.bitmap.BitmapUtils;
 import com.github.digin.android.listeners.OnSingleChefQuery;
 import com.github.digin.android.logging.AnalyticsHelper;
 import com.github.digin.android.logging.Logger;
@@ -206,9 +205,7 @@ public class DetailsFragment extends Fragment implements View.OnClickListener {
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
 
-        if(isVisible()) {
-
-        } else {
+        if (!isVisible()) {
             getActivity().getActionBar().setBackgroundDrawable(getActivity().getResources().getDrawable(R.drawable.ab_solid_diginpassport));
             getActivity().getActionBar().setTitle(mOldTitle);
         }

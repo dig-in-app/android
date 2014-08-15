@@ -1,25 +1,18 @@
 package com.github.digin.android.adapters;
 
-import android.app.Activity;
 import android.content.Context;
-import android.graphics.BitmapFactory;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.github.digin.android.ImageCacheEntry;
 import com.github.digin.android.R;
-import com.github.digin.android.bitmap.BitmapCacheHost;
-import com.github.digin.android.bitmap.CachedAsyncBitmapLoader;
 import com.github.digin.android.fragments.LineupListFragment;
 import com.github.digin.android.logging.Logger;
 import com.github.digin.android.models.Chef;
-import com.github.digin.android.models.Participant;
 
 import java.util.List;
 

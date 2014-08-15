@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent" android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,16 +12,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/edge_border"
-            android:paddingTop="20dp"
+            android:padding="20dp"
+            android:textSize="40sp"
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
             android:paddingBottom="7dp"
             >
 
-            <com.loopj.android.image.SmartImageView
-                android:id="@+id/logo"
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="120dp"
-                android:padding="10dp"
-                android:src="@drawable/logo"/>
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/digin_brown"
+                android:id="@+id/nameText"
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+                android:text="Purdue ACM Sigapp"
+                />
 
         </FrameLayout>
 
@@ -36,21 +39,6 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/edge_dot_border" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textColor="@color/digin_brown"
-                android:id="@+id/nameText"
-                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
-                android:text="Sun King Brewery"
-                />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:paddingTop="5dp"
                 android:background="@drawable/edge_dot_border" />
 
@@ -59,7 +47,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Chef"/>
+                android:textColor="@color/digin_orange"
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
+                android:text="Who we are"/>
 
             <TextView
                 android:layout_marginTop="5dp"
@@ -68,15 +58,19 @@
                 android:gravity="center"
                 android:textColor="@color/digin_brown"
                 android:id="@+id/chefText"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
                 android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
-                android:text="Robin Williams"/>
+                android:text="Sigapp is an organization at Purdue University that strives to give students a change to apply their computing knowledge in new and interesting ways."/>
 
             <TextView
                 android:layout_marginTop="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Will Be Serving"/>
+                android:textColor="@color/digin_orange"
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
+                android:text="Lead Developers"/>
 
             <TextView
                 android:layout_marginTop="5dp"
@@ -86,24 +80,8 @@
                 android:textColor="@color/digin_brown"
                 android:id="@+id/dishText"
                 android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
-                android:text="Laughter"/>
+                android:text="David Tschida\nMichael Hockerman"/>
 
-            <TextView
-                android:layout_marginTop="20dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="With Ingredients Provided By"/>
-
-            <TextView
-                android:layout_marginTop="5dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textColor="@color/digin_brown"
-                android:id="@+id/farmText"
-                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
-                android:text="The Greatest Movies Ever Made"/>
 
 
             <View
@@ -120,32 +98,18 @@
                 android:layout_height="60dp"
                 android:divider="@drawable/edge_dot_border_vertical"
                 android:showDividers="middle"
-                style="?android:attr/buttonBarStyle"
-                android:dividerPadding="0dp"
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/details_button_favorite"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:padding="5dp"
-                    android:textColor="@color/digin_brown"
-                    style="?android:attr/buttonBarButtonStyle"
-                    android:background="@android:color/transparent"
-                    android:text="Add to favorites" />
-
-                <Button
-                    android:id="@+id/details_button_yelp"
+                    android:id="@+id/acm_link"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:padding="5dp"
                     android:textColor="@color/digin_brown"
                     android:background="@android:color/transparent"
-                    style="?android:attr/buttonBarButtonStyle"
-                    android:drawableLeft="@drawable/yelp_icon"
-                    android:text="View on Yelp"/>
+                    android:text="Visit our website"
+                    />
 
             </LinearLayout>
 
@@ -163,5 +127,4 @@
         </LinearLayout>
 
     </LinearLayout>
-
 </ScrollView>
