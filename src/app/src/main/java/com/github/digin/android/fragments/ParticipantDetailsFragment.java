@@ -50,7 +50,6 @@ public abstract class ParticipantDetailsFragment<T extends Participant> extends 
 
         queryParticipant(participantId);
 
-        AnalyticsHelper.sendScreenView(getActivity(), ParticipantDetailsFragment.class, getParticipant().getName());
         getActivity().invalidateOptionsMenu();
     }
 

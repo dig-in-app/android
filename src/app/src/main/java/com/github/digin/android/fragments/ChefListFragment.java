@@ -24,7 +24,7 @@ public class ChefListFragment extends LineupListFragment<Chef> {
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Chef chef = ((ChefListAdapter) getListAdapter()).getItem(position);
 
-        AnalyticsHelper.sendEvent(getActivity(), "List_Click", LineupListFragment.class.getName(), chef.getName());
+        AnalyticsHelper.sendEvent(getActivity(), "List_Click", ChefListFragment.class.getName(), chef.getName());
 
         Logger.log(LineupListFragment.class, "onItemClick(): " + chef.getName());
         DetailsFragment details = DetailsFragment.newInstance(chef);
@@ -39,7 +39,7 @@ public class ChefListFragment extends LineupListFragment<Chef> {
     public void onAttach(final Activity activity) {
         super.onAttach(activity);
 
-        AnalyticsHelper.sendScreenView(getActivity(), ChefListFragment.class);
+        AnalyticsHelper.sendScreenView(getActivity(), ChefListFragment.class, "Chefs");
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.github.digin.android.fragments;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
@@ -79,6 +80,12 @@ public class BreweryDetailsFragment extends ParticipantDetailsFragment<Brewery> 
         if (FavoritesStore.contains(getActivity(), getParticipant())) {
             favoriteButton.setText("Unfavorite");
         }
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        AnalyticsHelper.sendScreenView(getActivity(), BreweryDetailsFragment.class, getParticipant().getName());
     }
 
     @Override

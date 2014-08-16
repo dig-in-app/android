@@ -44,7 +44,7 @@ public class WineriesFragment extends LineupListFragment<Winery> {
     public void onAttach(final Activity activity) {
         super.onAttach(activity);
 
-        AnalyticsHelper.sendScreenView(getActivity(), WineriesFragment.class);
+        AnalyticsHelper.sendScreenView(getActivity(), WineriesFragment.class, "Wineries");
     }
 
     @Override

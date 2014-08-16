@@ -57,7 +57,7 @@ public class FavoritesFragment extends LineupListFragment<Participant> {
     public void onAttach(final Activity activity) {
         super.onAttach(activity);
 
-        AnalyticsHelper.sendScreenView(getActivity(), FavoritesFragment.class);
+        AnalyticsHelper.sendScreenView(getActivity(), FavoritesFragment.class, "Favorites");
     }
 
     @Override

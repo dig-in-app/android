@@ -99,6 +99,12 @@ public class DetailsFragment extends ParticipantDetailsFragment<Chef> implements
     }
 
     @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        AnalyticsHelper.sendScreenView(getActivity(), DetailsFragment.class, getParticipant().getName());
+    }
+
+    @Override
     public void queryParticipant(String id) {
         ChefsStore.getChefById(getActivity(), id, this);
     }
