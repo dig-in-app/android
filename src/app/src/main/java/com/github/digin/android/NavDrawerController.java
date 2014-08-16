@@ -1,6 +1,7 @@
 package com.github.digin.android;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.content.res.Configuration;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
@@ -99,52 +100,39 @@ public class NavDrawerController implements AdapterView.OnItemClickListener {
     }
 
     private void aboutDigin() {
-        while (mActivity.getFragmentManager().getBackStackEntryCount() > 0)
-            mActivity.getFragmentManager().popBackStackImmediate();
-
-        mActivity.getFragmentManager().beginTransaction().addToBackStack(DiginAboutFragment.class.getName()).replace(R.id.content_frame,
-                new DiginAboutFragment(),
-                DiginAboutFragment.class.getName()).commit();
-        mDrawerLayout.closeDrawers();
-
-
-        ((NavDrawerAdapter) mDrawerList.getAdapter()).setCurrentItem(-1);
+        displayNewFragment(-2, new NavDrawerItem(DiginAboutFragment.class, "About Dig IN"));
     }
 
     private void aboutDevs() {
-        while (mActivity.getFragmentManager().getBackStackEntryCount() > 0)
-            mActivity.getFragmentManager().popBackStackImmediate();
-
-        mActivity.getFragmentManager().beginTransaction().addToBackStack(DeveloperFragment.class.getName()).replace(R.id.content_frame,
-                new DeveloperFragment(),
-                DeveloperFragment.class.getName()).commit();
-        mDrawerLayout.closeDrawers();
-
-        ((NavDrawerAdapter) mDrawerList.getAdapter()).setCurrentItem(-1);
+        displayNewFragment(-1, new NavDrawerItem(DeveloperFragment.class, "About the developers"));
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        displayNewFragment(position, (NavDrawerItem) view.getTag());
+    }
+
+    public void displayNewFragment(int position, NavDrawerItem item) {
         if (((NavDrawerAdapter) mDrawerList.getAdapter()).getCurrentItem() != position) {
-
-
             ((NavDrawerAdapter) mDrawerList.getAdapter()).setCurrentItem(position);
 
             mActivity.getActionBar().setTitle(mActivity.getString(R.string.app_name));
             oldTitle = null;
             mActivity.getActionBar().setBackgroundDrawable(mActivity.getResources().getDrawable(R.drawable.ab_solid_diginpassport));
 
-            if (((NavDrawerItem) view.getTag()).getFragment() != null) {
+            Fragment frag = item.getFragment();
+            if (frag != null) {
                 while (mActivity.getFragmentManager().getBackStackEntryCount() > 0)
                     mActivity.getFragmentManager().popBackStackImmediate();
 
                 mActivity.getFragmentManager().beginTransaction().replace(R.id.content_frame,
-                        ((NavDrawerItem) view.getTag()).getFragment(),
-                        ((NavDrawerItem) view.getTag()).getFragment().getClass().getName()).commit();
-                mDrawerLayout.closeDrawers();
+                        frag,
+                        frag.getClass().getName()).commit();
+
             }
-        } else {
-            mDrawerLayout.closeDrawers();
         }
+        mDrawerLayout.closeDrawers();
     }
+
+
 }

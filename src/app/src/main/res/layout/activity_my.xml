@@ -45,7 +45,7 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="#FFF"
                 android:text="@string/about_digin"
-                android:gravity="center"
+                android:gravity="left"
                 android:padding="10dp" />
 
             <IconTextView
@@ -55,7 +55,7 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="#FFF"
                 android:text="@string/about_dev"
-                android:gravity="center"
+                android:gravity="left"
                 android:padding="10dp" />
 
         </LinearLayout>

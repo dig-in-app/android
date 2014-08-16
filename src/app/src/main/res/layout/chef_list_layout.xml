@@ -4,14 +4,10 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.nirhart.parallaxscroll.views.ParallaxListView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <ListView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@android:id/list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:circular_parallax="true"
-        app:parallax_factor="1.9"
-        app:alpha_factor=".8"
         />
 
     <RelativeLayout

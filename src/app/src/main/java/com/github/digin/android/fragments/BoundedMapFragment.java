@@ -18,7 +18,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 
 
-public class BoundedMapFragment extends MapFragment {
+public class BoundedMapFragment extends MapFragment implements GoogleMap.OnMapClickListener {
 
     private static LatLng CENTER = new LatLng(39.766862, -86.171805);
     private final LatLngBounds BOUNDS = new LatLngBounds(new LatLng(39.766111, -86.173218), new LatLng(39.767892, -86.170160));
@@ -65,19 +65,9 @@ public class BoundedMapFragment extends MapFragment {
             }
         });
 
-        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
-            @Override
-            public void onMapClick(LatLng latLng) {
-                LocationDataHolder title = MapOverlayData.getTitleForClick(latLng);
-                if (title == null) return;
+        mMap.setOnMapClickListener(this);
 
-                Toast.makeText(getActivity(), title.getName(), Toast.LENGTH_SHORT).show();
-
-
-            }
-        });
-
-        AnalyticsHelper.sendScreenView(getActivity(), getClass(), "Map");
+        AnalyticsHelper.sendScreenView(getActivity(), BoundedMapFragment.class, "Map");
     }
 
     private void initMap() {
@@ -88,6 +78,20 @@ public class BoundedMapFragment extends MapFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Utils.fixForActionBarHeight(getActivity(), view);
+    }
+
+    @Override
+    public void onMapClick(LatLng latLng) {
+        LocationDataHolder locationDataHolder = MapOverlayData.getTitleForClick(latLng);
+        if (locationDataHolder == null) return;
+
+        openFragmentForLocation(locationDataHolder);
+
+        Toast.makeText(getActivity(), locationDataHolder.getName(), Toast.LENGTH_SHORT).show();
+    }
+
+    private void openFragmentForLocation(LocationDataHolder locationDataHolder) {
+
     }
 
     /**
