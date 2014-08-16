@@ -25,11 +25,45 @@
 
         <TextView
             android:layout_below="@+id/progress"
+            android:id="@+id/txt_progress"
             android:layout_centerHorizontal="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Loading Chefs"/>
     </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/error"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Uh oh..."
+            android:textAppearance="?android:textAppearanceLarge"
+            android:textColor="@color/digin_brown"
+            android:paddingBottom="20dp"
+            />
+
+        <TextView
+            android:id="@+id/error_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Something may have gone wrong.\nPlease try again."
+            android:textAppearance="?android:textAppearanceMedium"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:textColor="@android:color/darker_gray"
+            />
+
+
+
+    </LinearLayout>
 
 
 </FrameLayout>

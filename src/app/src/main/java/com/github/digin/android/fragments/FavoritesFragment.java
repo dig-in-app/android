@@ -1,7 +1,14 @@
 package com.github.digin.android.fragments;
 
 import android.app.Activity;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
+import com.github.digin.android.R;
 import com.github.digin.android.adapters.ChefListAdapter;
 import com.github.digin.android.listeners.OnChefQueryListener;
 import com.github.digin.android.logging.AnalyticsHelper;
@@ -22,14 +29,25 @@ public class FavoritesFragment extends LineupListFragment {
     public void onAttach(final Activity activity) {
         super.onAttach(activity);
 
-        FavoritesStore.getFavorites(getActivity(), new OnChefQueryListener() {
-            @Override
-            public void onComplete(List<Chef> chefs) {
-                setListAdapter(new ChefListAdapter(getActivity(), chefs));
-            }
-        });
         AnalyticsHelper.sendScreenView(getActivity(), FavoritesFragment.class);
+    }
 
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View v =  super.onCreateView(inflater, container, savedInstanceState);
+        TextView tv = (TextView) v.findViewById(R.id.txt_progress);
+        tv.setText("Loading Favorites");
+        return v;
+    }
+
+    @Override
+    public String getErrorMessage() {
+        return "It looks like you have not selected any favorites.\nClick \"favorite\" at the bottom of any chef's page to favorite them.";
+    }
+
+    @Override
+    public void getChefs() {
+        FavoritesStore.getFavorites(getActivity(), this);
     }
 
 

@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.github.digin.android.R;
+import com.github.digin.android.logging.AnalyticsHelper;
 import com.manuelpeinado.fadingactionbar.FadingActionBarHelper;
 import com.manuelpeinado.fadingactionbar.FadingActionBarHelperBase;
 
@@ -34,6 +35,7 @@ public class DiginAboutFragment extends Fragment {
                 .actionBarBackground(R.drawable.ab_solid_diginpassport)
                 .headerLayout(R.layout.digin_header)
                 .contentLayout(R.layout.digin_about_content).lightActionBar(true);
+        AnalyticsHelper.sendScreenView(getActivity(), DiginAboutFragment.class);
     }
 
     @Override

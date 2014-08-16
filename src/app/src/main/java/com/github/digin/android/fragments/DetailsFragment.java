@@ -32,6 +32,7 @@ public class DetailsFragment extends Fragment implements View.OnClickListener, O
     private FadingActionBarHelper mFadingHelper;
     private CharSequence mOldTitle;
     private Button favoriteButton, yelpButton;
+    private Button webButton;
 
     public static DetailsFragment newInstance(Chef chef) {
         Bundle b = new Bundle();
@@ -65,6 +66,9 @@ public class DetailsFragment extends Fragment implements View.OnClickListener, O
         } else {
             yelpButton.setOnClickListener(this);
         }
+
+        webButton = (Button) view.findViewById(R.id.details_button_website);
+        webButton.setOnClickListener(this);
 
         favoriteButton = (Button) view.findViewById(R.id.details_button_favorite);
         favoriteButton.setOnClickListener(this);
@@ -133,6 +137,8 @@ public class DetailsFragment extends Fragment implements View.OnClickListener, O
         getActivity().invalidateOptionsMenu();
     }
 
+
+
     @Override
     public void onResume() {
         super.onResume();
@@ -160,8 +166,21 @@ public class DetailsFragment extends Fragment implements View.OnClickListener, O
             case R.id.details_button_yelp:
                 goToYelp();
                 break;
+            case R.id.details_button_website:
+                goToWeb();
+                break;
         }
 
+    }
+
+    private void goToWeb() {
+        if (mChef.getWebsite() == null || mChef.getWebsite().equals("")) {
+            Toast.makeText(getActivity(), "We are sorry, this participant does not have a website.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(mChef.getWebsite()));
+        AnalyticsHelper.sendEvent(getActivity(), "Details_Item_Click", "Web", mChef.getName());
+        startActivity(browserIntent);
     }
 
     private void setFavorite() {
@@ -179,7 +198,7 @@ public class DetailsFragment extends Fragment implements View.OnClickListener, O
 
     private void goToYelp() {
         if (mChef.getYelpURL() == null || mChef.getYelpURL().equals("")) {
-            Toast.makeText(getActivity(), "This chef doesn't appear to have a Yelp page :(", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "This participant doesn't appear to have a Yelp page", Toast.LENGTH_SHORT).show();
             return;
         }
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(mChef.getYelpURL()));

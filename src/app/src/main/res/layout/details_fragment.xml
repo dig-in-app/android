@@ -112,10 +112,23 @@
                 android:layout_marginTop="30dp"
                 android:background="@drawable/edge_dot_border" />
 
+            <Button
+                android:id="@+id/details_button_website"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:padding="5dp"
+                android:textColor="@color/digin_brown"
+                style="?android:attr/buttonBarButtonStyle"
+                android:background="@android:color/transparent"
+                android:text="Website" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edge_dot_border" />
+
 
             <LinearLayout
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:divider="@drawable/edge_dot_border_vertical"
@@ -148,6 +161,7 @@
                     android:text="View on Yelp"/>
 
             </LinearLayout>
+
 
             <View
                 android:layout_width="match_parent"

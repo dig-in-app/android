@@ -113,7 +113,8 @@ public class NavDrawerController implements AdapterView.OnItemClickListener {
     }
 
     public void displayNewFragment(int position, NavDrawerItem item) {
-        if (((NavDrawerAdapter) mDrawerList.getAdapter()).getCurrentItem() != position) {
+        if(mActivity.getFragmentManager().findFragmentById(R.id.content_frame) != item.getFragment()) {
+
             ((NavDrawerAdapter) mDrawerList.getAdapter()).setCurrentItem(position);
 
             mActivity.getActionBar().setTitle(mActivity.getString(R.string.app_name));

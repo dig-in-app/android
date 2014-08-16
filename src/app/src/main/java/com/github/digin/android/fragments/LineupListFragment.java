@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.TextView;
 
 import com.github.digin.android.R;
 import com.github.digin.android.Utils;
@@ -34,6 +35,7 @@ public class LineupListFragment extends ListFragment implements AdapterView.OnIt
     public static final String SORTTEXT = "Sort by %s";
     Sorting otherSorting = Sorting.LOCATION;
     private boolean mChefsLoaded = false;
+    private boolean mLoadingError = false;
 
     public LineupListFragment() {
     }
@@ -54,6 +56,8 @@ public class LineupListFragment extends ListFragment implements AdapterView.OnIt
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+
+        getChefs();
     }
 
     @Override
@@ -73,15 +77,39 @@ public class LineupListFragment extends ListFragment implements AdapterView.OnIt
     public void onAttach(Activity activity) {
         super.onAttach(activity);
 
-        ChefsStore.getChefs(activity.getBaseContext(), this);
         AnalyticsHelper.sendScreenView(getActivity(), LineupListFragment.class, "Main List");
     }
 
     @Override
     public void onComplete(List<Chef> chefs) {
-        setListAdapter(new ChefListAdapter(getActivity(), chefs));
-        mChefsLoaded = true;
-        getActivity().invalidateOptionsMenu();
+        if(chefs == null || chefs.size() == 0) {
+
+            mLoadingError = true;
+
+            trySetErrorView();
+
+        } else {
+            setListAdapter(new ChefListAdapter(getActivity(), chefs));
+            mChefsLoaded = true;
+            getActivity().invalidateOptionsMenu();
+        }
+    }
+
+    public void getChefs() {
+        ChefsStore.getChefs(getActivity().getBaseContext(), this);
+    }
+
+    private void trySetErrorView() {
+        if(getView() != null && mLoadingError) {
+            View error = getView().findViewById(R.id.error);
+
+            TextView message = (TextView) error.findViewById(R.id.error_message);
+            message.setText(getErrorMessage());
+            error.setVisibility(View.VISIBLE);
+
+            View loading = getView().findViewById(android.R.id.empty);
+            loading.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -90,6 +118,8 @@ public class LineupListFragment extends ListFragment implements AdapterView.OnIt
         view.setBackgroundColor(getResources().getColor(android.R.color.white));
 
         Utils.fixForActionBarHeight(getActivity(), view);
+
+        trySetErrorView();
     }
 
     @Override
@@ -138,5 +168,9 @@ public class LineupListFragment extends ListFragment implements AdapterView.OnIt
         public Comparator<Chef> getComparator() {
             return comparator;
         }
+    }
+
+    public String getErrorMessage() {
+        return "We are sorry, we can't load the list right now.\nPlease try loading it again.";
     }
 }
