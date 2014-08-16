@@ -3,6 +3,7 @@ package com.github.digin.android.fragments;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -10,9 +11,11 @@ import android.widget.ListAdapter;
 import android.widget.TextView;
 
 import com.github.digin.android.R;
+import com.github.digin.android.adapters.ChefListAdapter;
 import com.github.digin.android.adapters.ParticipantListAdapter;
 import com.github.digin.android.logging.AnalyticsHelper;
 import com.github.digin.android.logging.Logger;
+import com.github.digin.android.models.Participant;
 import com.github.digin.android.models.Winery;
 import com.github.digin.android.repositories.WineryStore;
 
@@ -67,5 +70,17 @@ public class WineriesFragment extends LineupListFragment<Winery> {
         return new ParticipantListAdapter<Winery>(getActivity(), items);
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_sort:
+                ((ParticipantListAdapter<Winery>) getListAdapter()).sort(otherSorting);
+                otherSorting = ((otherSorting == Sorting.NAME) ? Sorting.LOCATION : Sorting.NAME);
+                item.setTitle(String.format(SORTTEXT, otherSorting.name().toLowerCase()));
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
 }

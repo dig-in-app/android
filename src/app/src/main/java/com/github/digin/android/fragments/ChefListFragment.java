@@ -1,6 +1,7 @@
 package com.github.digin.android.fragments;
 
 import android.app.Activity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListAdapter;
@@ -51,4 +52,16 @@ public class ChefListFragment extends LineupListFragment<Chef> {
     }
 
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_sort:
+                ((ChefListAdapter) getListAdapter()).sort(otherSorting);
+                otherSorting = ((otherSorting == Sorting.NAME) ? Sorting.LOCATION : Sorting.NAME);
+                item.setTitle(String.format(SORTTEXT, otherSorting.name().toLowerCase()));
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 }

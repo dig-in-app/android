@@ -1,11 +1,13 @@
 package com.github.digin.android.fragments;
 
 import android.app.Activity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListAdapter;
 
 import com.github.digin.android.R;
+import com.github.digin.android.adapters.ChefListAdapter;
 import com.github.digin.android.adapters.ParticipantListAdapter;
 import com.github.digin.android.logging.AnalyticsHelper;
 import com.github.digin.android.logging.Logger;
@@ -51,5 +53,18 @@ public class BreweriesFragment extends LineupListFragment<Brewery> {
     @Override
     public String getErrorMessage() {
         return "We were not able to load your beer at this time. Please try again";
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_sort:
+                ((ParticipantListAdapter<Brewery>) getListAdapter()).sort(otherSorting);
+                otherSorting = ((otherSorting == Sorting.NAME) ? Sorting.LOCATION : Sorting.NAME);
+                item.setTitle(String.format(SORTTEXT, otherSorting.name().toLowerCase()));
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

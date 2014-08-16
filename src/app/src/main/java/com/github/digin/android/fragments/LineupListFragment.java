@@ -130,18 +130,7 @@ public abstract class LineupListFragment<T extends Participant> extends ListFrag
 
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_sort:
-                ((ChefListAdapter) getListAdapter()).sort(otherSorting);
-                otherSorting = ((otherSorting == Sorting.NAME) ? Sorting.LOCATION : Sorting.NAME);
-                item.setTitle(String.format(SORTTEXT, otherSorting.name().toLowerCase()));
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
+
 
     public enum Sorting {
         NAME(new Comparator<Participant>() {
