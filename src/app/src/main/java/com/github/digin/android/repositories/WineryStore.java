@@ -2,7 +2,7 @@ package com.github.digin.android.repositories;
 
 import android.content.Context;
 
-import com.github.digin.android.listeners.OnWineryQueryListener;
+import com.github.digin.android.listeners.OnParticipantQueryListener;
 import com.github.digin.android.models.Winery;
 import com.github.digin.android.tasks.ParseAllWineriesTask;
 
@@ -17,7 +17,7 @@ public abstract class WineryStore {
 
     private static List<Winery> wineryCache;
 
-    public static void getWineries(Context context, final OnWineryQueryListener listener) {
+    public static void getWineries(Context context, final OnParticipantQueryListener<Winery> listener) {
 
         if (wineryCache != null) {
             if (listener != null) {
@@ -26,7 +26,7 @@ public abstract class WineryStore {
             return;
         }
 
-        ParseAllWineriesTask task = new ParseAllWineriesTask(context, new OnWineryQueryListener() {
+        ParseAllWineriesTask task = new ParseAllWineriesTask(context, new OnParticipantQueryListener<Winery>() {
 
             @Override
             public void onComplete(List<Winery> wineries) {
@@ -49,7 +49,7 @@ public abstract class WineryStore {
 
     }
 
-    public static void getWineriesNoCache(Context context, OnWineryQueryListener listener) {
+    public static void getWineriesNoCache(Context context, OnParticipantQueryListener<Winery> listener) {
         wineryCache = null;
         getWineries(context, listener);
     }

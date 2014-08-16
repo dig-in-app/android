@@ -2,9 +2,7 @@ package com.github.digin.android;
 
 import android.app.Fragment;
 
-import com.github.digin.android.fragments.BoundedMapFragment;
-import com.github.digin.android.fragments.FavoritesFragment;
-import com.github.digin.android.fragments.LineupListFragment;
+import com.github.digin.android.fragments.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -13,7 +11,7 @@ public class NavDrawerItem {
 
     static NavDrawerItem[] items = new NavDrawerItem[]{
             new NavDrawerItem(BoundedMapFragment.class, "Map"),
-            new NavDrawerItem(LineupListFragment.class, "Chefs"),
+            new NavDrawerItem(ChefListFragment.class, "Chefs"),
             new NavDrawerItem(FavoritesFragment.class, "Favorites")
     };
     String itemName;

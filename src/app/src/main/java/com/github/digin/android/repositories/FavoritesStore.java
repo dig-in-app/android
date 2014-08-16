@@ -3,7 +3,7 @@ package com.github.digin.android.repositories;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.github.digin.android.listeners.OnChefQueryListener;
+import com.github.digin.android.listeners.OnParticipantQueryListener;
 import com.github.digin.android.models.Chef;
 
 import java.util.HashSet;
@@ -75,7 +75,7 @@ public abstract class FavoritesStore {
 
     }
 
-    public static void getFavorites(final Context context, final OnChefQueryListener listener) {
+    public static void getFavorites(final Context context, final OnParticipantQueryListener<Chef> listener) {
 
         SharedPreferences prefs = context.getSharedPreferences(prefsName, 0);
 

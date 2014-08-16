@@ -6,7 +6,7 @@ import android.os.Handler;
 
 import com.github.digin.android.constants.ParseID;
 import com.github.digin.android.factories.BreweryFactory;
-import com.github.digin.android.listeners.OnBreweryQueryListener;
+import com.github.digin.android.listeners.OnParticipantQueryListener;
 import com.github.digin.android.logging.Logger;
 import com.github.digin.android.models.Brewery;
 import com.parse.ParseException;
@@ -22,9 +22,9 @@ import java.util.List;
 public class ParseAllBreweriesTask extends AsyncTask<Void, Void, Void> {
 
     private Context context;
-    private OnBreweryQueryListener listener;
+    private OnParticipantQueryListener<Brewery> listener;
 
-    public ParseAllBreweriesTask(Context context, OnBreweryQueryListener listener) {
+    public ParseAllBreweriesTask(Context context, OnParticipantQueryListener<Brewery> listener) {
         this.context = context;
         this.listener = listener;
     }

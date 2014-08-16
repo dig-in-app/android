@@ -6,7 +6,7 @@ import android.os.Handler;
 
 import com.github.digin.android.constants.ParseID;
 import com.github.digin.android.factories.ChefFactory;
-import com.github.digin.android.listeners.OnChefQueryListener;
+import com.github.digin.android.listeners.OnParticipantQueryListener;
 import com.github.digin.android.logging.Logger;
 import com.github.digin.android.models.Chef;
 import com.parse.ParseException;
@@ -26,9 +26,9 @@ import java.util.List;
 public class ParseAllChefsTask extends AsyncTask<Void, Void, Void> {
 
     private Context context;
-    private OnChefQueryListener listener;
+    private OnParticipantQueryListener<Chef> listener;
 
-    public ParseAllChefsTask(Context context, OnChefQueryListener listener) {
+    public ParseAllChefsTask(Context context, OnParticipantQueryListener<Chef> listener) {
         this.context = context;
         this.listener = listener;
     }

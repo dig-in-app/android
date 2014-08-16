@@ -13,24 +13,28 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.BaseAdapter;
+import android.widget.ListAdapter;
 import android.widget.TextView;
 
 import com.github.digin.android.R;
 import com.github.digin.android.Utils;
 import com.github.digin.android.adapters.ChefListAdapter;
-import com.github.digin.android.listeners.OnChefQueryListener;
+import com.github.digin.android.listeners.OnParticipantQueryListener;
 import com.github.digin.android.logging.AnalyticsHelper;
 import com.github.digin.android.logging.Logger;
 import com.github.digin.android.models.Chef;
+import com.github.digin.android.models.Participant;
 import com.github.digin.android.repositories.ChefsStore;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
 /**
  * Created by david on 7/15/14.
  */
-public class LineupListFragment extends ListFragment implements AdapterView.OnItemClickListener, OnChefQueryListener {
+public abstract class LineupListFragment<T extends Participant> extends ListFragment implements AdapterView.OnItemClickListener, OnParticipantQueryListener<T> {
 
     public static final String SORTTEXT = "Sort by %s";
     Sorting otherSorting = Sorting.LOCATION;
@@ -41,23 +45,13 @@ public class LineupListFragment extends ListFragment implements AdapterView.OnIt
     }
 
     @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Chef chef = ((ChefListAdapter) getListAdapter()).getItem(position);
-
-        AnalyticsHelper.sendEvent(getActivity(), "List_Click", LineupListFragment.class.getName(), chef.getName());
-
-        Logger.log(LineupListFragment.class, "onItemClick(): " + chef.getName());
-        DetailsFragment details = DetailsFragment.newInstance(chef);
-        getFragmentManager().beginTransaction().addToBackStack(DetailsFragment.class.getName()).replace(R.id.content_frame, details, DetailsFragment.class.getName()).commit();
-
-    }
+    public abstract void onItemClick(AdapterView<?> parent, View view, int position, long id);
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
 
-        getChefs();
     }
 
     @Override
@@ -71,6 +65,8 @@ public class LineupListFragment extends ListFragment implements AdapterView.OnIt
         super.onResume();
         getActivity().invalidateOptionsMenu();
         getListView().setOnItemClickListener(this);
+
+        getChefs();
     }
 
     @Override
@@ -81,34 +77,37 @@ public class LineupListFragment extends ListFragment implements AdapterView.OnIt
     }
 
     @Override
-    public void onComplete(List<Chef> chefs) {
+    public void onComplete(List<T> chefs) {
         if(chefs == null || chefs.size() == 0) {
-
             mLoadingError = true;
-
-            trySetErrorView();
-
+            mChefsLoaded = false;
+            setListAdapter(getAdapterForParticipants(new ArrayList<T>()));
         } else {
-            setListAdapter(new ChefListAdapter(getActivity(), chefs));
+            mLoadingError = false;
+            setListAdapter(getAdapterForParticipants(chefs));
             mChefsLoaded = true;
             getActivity().invalidateOptionsMenu();
         }
+        trySetErrorView();
     }
 
-    public void getChefs() {
-        ChefsStore.getChefs(getActivity().getBaseContext(), this);
-    }
+    public abstract void getChefs();
+
+    public abstract ListAdapter getAdapterForParticipants(List<T> items);
 
     private void trySetErrorView() {
-        if(getView() != null && mLoadingError) {
+        if(getView() != null) {
             View error = getView().findViewById(R.id.error);
-
-            TextView message = (TextView) error.findViewById(R.id.error_message);
-            message.setText(getErrorMessage());
-            error.setVisibility(View.VISIBLE);
-
             View loading = getView().findViewById(android.R.id.empty);
-            loading.setVisibility(View.GONE);
+            if (mLoadingError) {
+                TextView message = (TextView) error.findViewById(R.id.error_message);
+                message.setText(getErrorMessage());
+                error.setVisibility(View.VISIBLE);
+
+                loading.setVisibility(View.GONE);
+            } else {
+                error.setVisibility(View.GONE);
+            }
         }
     }
 
@@ -147,30 +146,28 @@ public class LineupListFragment extends ListFragment implements AdapterView.OnIt
     }
 
     public enum Sorting {
-        NAME(new Comparator<Chef>() {
+        NAME(new Comparator<Participant>() {
             @Override
-            public int compare(Chef lhs, Chef rhs) {
+            public int compare(Participant lhs, Participant rhs) {
                 return lhs.getName().compareTo(rhs.getName());
             }
-        }), LOCATION(new Comparator<Chef>() {
+        }), LOCATION(new Comparator<Participant>() {
             @Override
-            public int compare(Chef lhs, Chef rhs) {
+            public int compare(Participant lhs, Participant rhs) {
                 return lhs.getTent().compareTo(rhs.getTent());
             }
         });
 
-        Comparator<Chef> comparator;
+        Comparator<Participant> comparator;
 
-        Sorting(Comparator<Chef> comparator) {
+        Sorting(Comparator<Participant> comparator) {
             this.comparator = comparator;
         }
 
-        public Comparator<Chef> getComparator() {
+        public Comparator<Participant> getComparator() {
             return comparator;
         }
     }
 
-    public String getErrorMessage() {
-        return "We are sorry, we can't load the list right now.\nPlease try loading it again.";
-    }
+    public abstract String getErrorMessage();
 }

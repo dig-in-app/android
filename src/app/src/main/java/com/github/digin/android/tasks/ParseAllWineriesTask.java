@@ -6,7 +6,7 @@ import android.os.Handler;
 
 import com.github.digin.android.constants.ParseID;
 import com.github.digin.android.factories.WineryFactory;
-import com.github.digin.android.listeners.OnWineryQueryListener;
+import com.github.digin.android.listeners.OnParticipantQueryListener;
 import com.github.digin.android.logging.Logger;
 import com.github.digin.android.models.Winery;
 import com.parse.ParseException;
@@ -22,9 +22,9 @@ import java.util.List;
 public class ParseAllWineriesTask extends AsyncTask<Void, Void, Void> {
 
     private Context context;
-    private OnWineryQueryListener listener;
+    private OnParticipantQueryListener<Winery> listener;
 
-    public ParseAllWineriesTask(Context context, OnWineryQueryListener listener) {
+    public ParseAllWineriesTask(Context context, OnParticipantQueryListener<Winery> listener) {
         this.context = context;
         this.listener = listener;
     }

@@ -2,7 +2,7 @@ package com.github.digin.android.repositories;
 
 import android.content.Context;
 
-import com.github.digin.android.listeners.OnBreweryQueryListener;
+import com.github.digin.android.listeners.OnParticipantQueryListener;
 import com.github.digin.android.models.Brewery;
 import com.github.digin.android.tasks.ParseAllBreweriesTask;
 
@@ -20,7 +20,7 @@ public abstract class BreweryStore {
 
     private static List<Brewery> breweriesCache;
 
-    public static void getBreweries(Context context, final OnBreweryQueryListener listener) {
+    public static void getBreweries(Context context, final OnParticipantQueryListener<Brewery> listener) {
 
         if (breweriesCache != null) {
             if (listener != null) {
@@ -29,7 +29,7 @@ public abstract class BreweryStore {
             return;
         }
 
-        ParseAllBreweriesTask task = new ParseAllBreweriesTask(context, new OnBreweryQueryListener() {
+        ParseAllBreweriesTask task = new ParseAllBreweriesTask(context, new OnParticipantQueryListener<Brewery>() {
             @Override
             public void onComplete(List<Brewery> breweries) {
 
@@ -50,7 +50,7 @@ public abstract class BreweryStore {
 
     }
 
-    public static void getBreweriesNoCache(Context context, final OnBreweryQueryListener listener) {
+    public static void getBreweriesNoCache(Context context, final OnParticipantQueryListener<Brewery> listener) {
         breweriesCache = null;
         getBreweries(context, listener);
     }
