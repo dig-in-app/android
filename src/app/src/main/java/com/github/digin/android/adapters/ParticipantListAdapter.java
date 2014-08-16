@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.github.digin.android.R;
 import com.github.digin.android.fragments.LineupListFragment;
 import com.github.digin.android.logging.Logger;
+import com.github.digin.android.models.Brewery;
 import com.github.digin.android.models.Chef;
 import com.github.digin.android.models.Participant;
 import com.github.digin.android.models.Winery;
@@ -62,6 +63,7 @@ public class ParticipantListAdapter<T extends Participant> extends ArrayAdapter<
             viewHolder.location = (TextView) rowView.findViewById(R.id.tableLetter);
             viewHolder.badge_image = (ImageView) rowView.findViewById(R.id.badge_image);
             viewHolder.badge_text = (ViewGroup) rowView.findViewById(R.id.badge_text);
+            viewHolder.type_text = (TextView) rowView.findViewById(R.id.typeText);
             rowView.setTag(viewHolder);
         }
 
@@ -70,6 +72,8 @@ public class ParticipantListAdapter<T extends Participant> extends ArrayAdapter<
 
         T item = getItem(position);
         holder.title.setText(item.getName());
+
+        holder.type_text.setText( getTypeString(item) );
 
 
         int resid = getResIdForParticipant(getItem(position));
@@ -86,6 +90,13 @@ public class ParticipantListAdapter<T extends Participant> extends ArrayAdapter<
         }
 
         return rowView;
+    }
+
+    private String getTypeString(T item) {
+        if( item instanceof Chef ) return "Chef";
+        else if( item instanceof Winery ) return "Winery";
+        else if( item instanceof Brewery) return "Brewery";
+        else return "Other";
     }
 
     private int getResIdForParticipant(Participant participant) {
@@ -123,5 +134,6 @@ public class ParticipantListAdapter<T extends Participant> extends ArrayAdapter<
         public TextView location;
         public ImageView badge_image;
         public ViewGroup badge_text;
+        public TextView type_text;
     }
 }

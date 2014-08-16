@@ -3,6 +3,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent"
     android:id="@+id/listItemLeft"
+    android:padding="5dp"
     android:layout_marginTop="15dp"
     android:layout_marginBottom="15dp"
     android:background="@android:color/white" >
@@ -11,11 +12,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:padding="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:id="@+id/badge"
-        android:layout_centerVertical="true">
+        android:id="@+id/badge">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:id="@+id/badge_image"
+            android:src="@drawable/tent_one"
+            android:padding="10dp" />
 
         <LinearLayout
             android:id="@+id/badge_text"
@@ -42,26 +47,36 @@
 
         </LinearLayout>
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/badge_image"
-            android:padding="10dp" />
+
     </FrameLayout>
 
-
-
-    <TextView
-        android:layout_toRightOf="@+id/badge"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="#F38032"
-        android:textStyle="bold"
-        android:layout_centerVertical="true"
-        android:text="Local Eatery and Pub, Westfield"
-        android:id="@+id/titleView"
-        android:textSize="25sp"
-        android:layout_marginLeft="10dp"/>
+        android:layout_toRightOf="@id/badge"
+        android:paddingTop="10dp"
+        android:orientation="vertical">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#F38032"
+            android:textStyle="bold"
+            android:text="Local Eatery and Pub, Westfield"
+            android:id="@+id/titleView"
+            android:textSize="18sp"
+            android:layout_marginLeft="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:id="@+id/typeText"
+            android:textColor="#613117"
+            android:paddingTop="2dp"
+            android:layout_marginLeft="10dp"
+            android:text="Brewery"/>
+
+    </LinearLayout>
 </RelativeLayout>
