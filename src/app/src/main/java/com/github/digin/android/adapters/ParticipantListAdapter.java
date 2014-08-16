@@ -78,12 +78,12 @@ public class ParticipantListAdapter<T extends Participant> extends ArrayAdapter<
 
         int resid = getResIdForParticipant(getItem(position));
         if(resid > 0) {
-            holder.badge_text.setVisibility(View.GONE);
+            holder.badge_text.setVisibility(View.INVISIBLE);
             holder.badge_image.setVisibility(View.VISIBLE);
             holder.badge_image.setImageResource(resid);
         } else if( resid == 0 ) {
             holder.badge_image.setImageBitmap(null);
-            holder.badge_image.setVisibility(View.GONE);
+            holder.badge_image.setVisibility(View.INVISIBLE);
             holder.badge_text.setVisibility(View.VISIBLE);
 
             holder.location.setText(getLocationForParticipant(item));
