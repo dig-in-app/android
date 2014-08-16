@@ -37,7 +37,7 @@ public class WineriesFragment extends LineupListFragment<Winery> {
         Logger.log(WineriesFragment.class, "onItemClick(): " + winery.getName());
 
         WineryDetailsFragment details = WineryDetailsFragment.newInstance(winery);
-        getFragmentManager().beginTransaction().addToBackStack(DetailsFragment.class.getName()).replace(R.id.content_frame, details, ParticipantDetailsFragment.class.getName()).commit();
+        getFragmentManager().beginTransaction().addToBackStack(DetailsFragment.class.getName()).add(R.id.content_frame, details, ParticipantDetailsFragment.class.getName()).commit();
     }
 
     @Override

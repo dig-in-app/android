@@ -66,6 +66,8 @@ public class MainActivity extends Activity {
     @Override
     public void onBackPressed() {
 
+        invalidateOptionsMenu();
+        
         getActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.ab_solid_diginpassport));
         getActionBar().setTitle(getString(R.string.app_name));
 

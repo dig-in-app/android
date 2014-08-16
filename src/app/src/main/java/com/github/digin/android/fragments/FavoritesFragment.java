@@ -43,13 +43,13 @@ public class FavoritesFragment extends LineupListFragment<Participant> {
 
         if(participant instanceof Chef) {
             DetailsFragment details = DetailsFragment.newInstance((Chef) participant);
-            getFragmentManager().beginTransaction().addToBackStack(DetailsFragment.class.getName()).replace(R.id.content_frame, details, DetailsFragment.class.getName()).commit();
+            getFragmentManager().beginTransaction().addToBackStack(DetailsFragment.class.getName()).add(R.id.content_frame, details, DetailsFragment.class.getName()).commit();
         } else if (participant instanceof Brewery) {
             BreweryDetailsFragment details = BreweryDetailsFragment.newInstance((Brewery) participant);
-            getFragmentManager().beginTransaction().addToBackStack(DetailsFragment.class.getName()).replace(R.id.content_frame, details, BreweryDetailsFragment.class.getName()).commit();
+            getFragmentManager().beginTransaction().addToBackStack(DetailsFragment.class.getName()).add(R.id.content_frame, details, BreweryDetailsFragment.class.getName()).commit();
         } else if (participant instanceof Winery) {
             WineryDetailsFragment details = WineryDetailsFragment.newInstance((Winery) participant);
-            getFragmentManager().beginTransaction().addToBackStack(DetailsFragment.class.getName()).replace(R.id.content_frame, details, WineryDetailsFragment.class.getName()).commit();
+            getFragmentManager().beginTransaction().addToBackStack(DetailsFragment.class.getName()).add(R.id.content_frame, details, WineryDetailsFragment.class.getName()).commit();
         }
     }
 

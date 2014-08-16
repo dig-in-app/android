@@ -121,13 +121,13 @@ public abstract class LineupListFragment<T extends Participant> extends ListFrag
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-
-        if (mChefsLoaded) {
-            inflater.inflate(R.menu.list, menu);
-            MenuItem item = menu.findItem(R.id.action_sort);
-            item.setTitle(String.format(SORTTEXT, otherSorting.name().toLowerCase()));
+        if( getFragmentManager().findFragmentById(R.id.content_frame) == this ) {
+            if (mChefsLoaded) {
+                inflater.inflate(R.menu.list, menu);
+                MenuItem item = menu.findItem(R.id.action_sort);
+                item.setTitle(String.format(SORTTEXT, otherSorting.name().toLowerCase()));
+            }
         }
-
     }
 
 

@@ -75,7 +75,6 @@ public class ParticipantListAdapter<T extends Participant> extends ArrayAdapter<
 
         holder.type_text.setText( getTypeString(item) );
 
-
         int resid = getResIdForParticipant(getItem(position));
         if(resid > 0) {
             holder.badge_text.setVisibility(View.INVISIBLE);
