@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edge_border"
+            android:paddingTop="20dp"
+            android:paddingBottom="7dp"
+            >
+
+            <com.loopj.android.image.SmartImageView
+                android:id="@+id/logo"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:padding="10dp"
+                android:src="@drawable/logo"/>
+
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/white"
+            android:orientation="vertical">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edge_dot_border" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/digin_brown"
+                android:id="@+id/nameText"
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+                android:text="Sun King Brewery"
+                />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="5dp"
+                android:background="@drawable/edge_dot_border" />
+
+
+
+            <Button
+                android:id="@+id/details_button_website"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:padding="5dp"
+                android:textColor="@color/digin_brown"
+                style="?android:attr/buttonBarButtonStyle"
+                android:background="@android:color/transparent"
+                android:text="Website" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edge_dot_border" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:divider="@drawable/edge_dot_border_vertical"
+                android:showDividers="middle"
+                style="?android:attr/buttonBarStyle"
+                android:dividerPadding="0dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/details_button_favorite"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:padding="5dp"
+                    android:textColor="@color/digin_brown"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:background="@android:color/transparent"
+                    android:text="Add to favorites" />
+
+                <Button
+                    android:id="@+id/details_button_yelp"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:padding="5dp"
+                    android:textColor="@color/digin_brown"
+                    android:background="@android:color/transparent"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:drawableLeft="@drawable/yelp_icon"
+                    android:text="View on Yelp"/>
+
+            </LinearLayout>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edge_dot_border" />
+
+            <View
+                android:layout_marginTop="30dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/footer_background" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

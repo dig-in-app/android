@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:id="@+id/listItemLeft"
+    android:padding="5dp"
+    android:layout_marginTop="15dp"
+    android:layout_marginBottom="15dp"
+    android:background="@android:color/white" >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tableLetter"
+        android:layout_alignParentLeft="true"
+        android:textColor="@color/digin_brown"
+        android:text="A"
+        android:layout_centerVertical="true"
+        android:textSize="40sp"
+        android:padding="20dp" />
+
+    <TextView
+        android:layout_toRightOf="@+id/tableLetter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#F38032"
+        android:textStyle="bold"
+        android:text="Local Eatery and Pub, Westfield"
+        android:id="@+id/titleView"
+        android:layout_centerVertical="true"
+        android:textSize="25sp"
+        android:layout_marginLeft="10dp"/>
+
+</RelativeLayout>

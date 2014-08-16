@@ -14,7 +14,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.digin.android.R;
-import com.github.digin.android.listeners.OnSingleChefQuery;
 import com.github.digin.android.logging.AnalyticsHelper;
 import com.github.digin.android.logging.Logger;
 import com.github.digin.android.models.Chef;
@@ -26,11 +25,8 @@ import com.manuelpeinado.fadingactionbar.FadingActionBarHelper;
 /**
  * Created by david on 7/27/14.
  */
-public class DetailsFragment extends Fragment implements View.OnClickListener, OnSingleChefQuery {
+public class DetailsFragment extends ParticipantDetailsFragment<Chef> implements View.OnClickListener {
 
-    public Chef mChef;
-    private FadingActionBarHelper mFadingHelper;
-    private CharSequence mOldTitle;
     private Button favoriteButton, yelpButton;
     private Button webButton;
 
@@ -44,117 +40,69 @@ public class DetailsFragment extends Fragment implements View.OnClickListener, O
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        mFadingHelper = new FadingActionBarHelper()
-                .actionBarBackground(R.drawable.ab_solid_diginpassport)
-                .headerLayout(R.layout.details_header_image)
-                .contentLayout(R.layout.details_fragment).lightActionBar(true);
-
+    public int getHeaderResource() {
+        return R.layout.details_header_image;
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = mFadingHelper.createView(inflater);
+    public int getContentResource() {
+        return R.layout.details_fragment;
+    }
+
+    public void fillContent() {
+        Chef mChef = getParticipant();
+
+        getView().setBackgroundColor(Color.parseColor("#b48e22")); //Yellowish
+
+        Logger.log(DetailsFragment.class, "Filling data");
+        TextView t = (TextView) getView().findViewById(R.id.nameText);
+        t.setText(mChef.getName());
+
+
+        getActivity().getActionBar().setTitle(mChef.getName());
+
+        SmartImageView siv = (SmartImageView) getView().findViewById(R.id.logo);
+        if (mChef.getThumbnail() == null)
+            siv.setImageResource(R.drawable.logo);
+        else {
+            Logger.log(DetailsFragment.class, mChef.getThumbnail());
+            siv.setImageUrl(mChef.getThumbnail());
+        }
+
+        TextView farmText = (TextView) getView().findViewById(R.id.farmText);
+        TextView dishText = (TextView) getView().findViewById(R.id.dishText);
+        TextView chefText = (TextView) getView().findViewById(R.id.chefText);
+
+        farmText.setText(mChef.getFarm());
+        dishText.setText(mChef.getDish());
+        chefText.setText(mChef.getCook());
+
 
         // prepare buttons
 
-        yelpButton = (Button) view.findViewById(R.id.details_button_yelp);
+        yelpButton = (Button) getView().findViewById(R.id.details_button_yelp);
         if (mChef.getYelpURL() == null || mChef.getYelpURL().equals("")) {
             yelpButton.setVisibility(View.GONE);
         } else {
             yelpButton.setOnClickListener(this);
         }
 
-        webButton = (Button) view.findViewById(R.id.details_button_website);
+        webButton = (Button) getView().findViewById(R.id.details_button_website);
         webButton.setOnClickListener(this);
 
-        favoriteButton = (Button) view.findViewById(R.id.details_button_favorite);
+        favoriteButton = (Button) getView().findViewById(R.id.details_button_favorite);
         favoriteButton.setOnClickListener(this);
 
         if (FavoritesStore.contains(getActivity(), mChef)) {
             favoriteButton.setText("Unfavorite");
         }
-
-        return view;
     }
 
     @Override
-    public void onViewCreated(final View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-
-        view.setBackgroundColor(Color.parseColor("#b48e22")); //Yellowish
-
-
-        tryFillData();
+    public void queryParticipant(String id) {
+        ChefsStore.getChefById(getActivity(), id, this);
     }
 
-    private void tryFillData() {
-
-        if (mChef != null && getView() != null) {
-            Logger.log(DetailsFragment.class, "Filling data");
-            TextView t = (TextView) getView().findViewById(R.id.nameText);
-            t.setText(mChef.getName());
-            mOldTitle = getActivity().getActionBar().getTitle();
-
-            getActivity().getActionBar().setTitle(mChef.getName());
-
-            SmartImageView siv = (SmartImageView) getView().findViewById(R.id.logo);
-            if (mChef.getThumbnail() == null)
-                siv.setImageResource(R.drawable.logo);
-            else {
-                Logger.log(DetailsFragment.class, mChef.getThumbnail());
-                siv.setImageUrl(mChef.getThumbnail());
-            }
-
-            TextView farmText = (TextView) getView().findViewById(R.id.farmText);
-            TextView dishText = (TextView) getView().findViewById(R.id.dishText);
-            TextView chefText = (TextView) getView().findViewById(R.id.chefText);
-
-            farmText.setText(mChef.getFarm());
-            dishText.setText(mChef.getDish());
-            chefText.setText(mChef.getCook());
-
-        }
-    }
-
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-
-        String chefId = getArguments().getString("ID");
-
-        ChefsStore.getChefById(activity, chefId, this);
-        AnalyticsHelper.sendScreenView(getActivity(), DetailsFragment.class);
-        getActivity().invalidateOptionsMenu();
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        getActivity().invalidateOptionsMenu();
-    }
-
-
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        mFadingHelper.initActionBar(getActivity());
-        getActivity().invalidateOptionsMenu();
-    }
-
-    @Override
-    public void onHiddenChanged(boolean hidden) {
-        super.onHiddenChanged(hidden);
-
-        if (!isVisible()) {
-            getActivity().getActionBar().setBackgroundDrawable(getActivity().getResources().getDrawable(R.drawable.ab_solid_diginpassport));
-            getActivity().getActionBar().setTitle(mOldTitle);
-        }
-    }
 
     @Override
     public void onClick(View v) {
@@ -174,6 +122,9 @@ public class DetailsFragment extends Fragment implements View.OnClickListener, O
     }
 
     private void goToWeb() {
+
+        Chef mChef = getParticipant();
+
         if (mChef.getWebsite() == null || mChef.getWebsite().equals("")) {
             Toast.makeText(getActivity(), "We are sorry, this participant does not have a website.", Toast.LENGTH_SHORT).show();
             return;
@@ -184,6 +135,7 @@ public class DetailsFragment extends Fragment implements View.OnClickListener, O
     }
 
     private void setFavorite() {
+        Chef mChef = getParticipant();
         boolean isFavorited = FavoritesStore.contains(getActivity(), mChef);
         if (isFavorited) {
             FavoritesStore.removeFavorite(getActivity(), mChef);
@@ -197,6 +149,7 @@ public class DetailsFragment extends Fragment implements View.OnClickListener, O
     }
 
     private void goToYelp() {
+        Chef mChef = getParticipant();
         if (mChef.getYelpURL() == null || mChef.getYelpURL().equals("")) {
             Toast.makeText(getActivity(), "This participant doesn't appear to have a Yelp page", Toast.LENGTH_SHORT).show();
             return;
@@ -204,12 +157,5 @@ public class DetailsFragment extends Fragment implements View.OnClickListener, O
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(mChef.getYelpURL()));
         AnalyticsHelper.sendEvent(getActivity(), "Details_Item_Click", "Yelp", mChef.getName());
         startActivity(browserIntent);
-    }
-
-    @Override
-    public void onComplete(Chef chef) {
-        Logger.log(DetailsFragment.class, "Chef found for id");
-        DetailsFragment.this.mChef = chef;
-        tryFillData();
     }
 }

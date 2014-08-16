@@ -12,6 +12,7 @@ public class NavDrawerItem {
     static NavDrawerItem[] items = new NavDrawerItem[]{
             new NavDrawerItem(BoundedMapFragment.class, "Map"),
             new NavDrawerItem(ChefListFragment.class, "Chefs"),
+            new NavDrawerItem(WineriesFragment.class, "Wineries"),
             new NavDrawerItem(FavoritesFragment.class, "Favorites")
     };
     String itemName;

@@ -3,7 +3,7 @@ package com.github.digin.android.repositories;
 import android.content.Context;
 
 import com.github.digin.android.listeners.OnParticipantQueryListener;
-import com.github.digin.android.listeners.OnSingleChefQuery;
+import com.github.digin.android.listeners.OnSingleParticipantQueryListener;
 import com.github.digin.android.logging.Logger;
 import com.github.digin.android.models.Chef;
 import com.github.digin.android.tasks.ParseAllChefsTask;
@@ -78,7 +78,7 @@ public abstract class ChefsStore {
         getChefs(context, listener);
     }
 
-    public static void getChefById(Context context, final String id, final OnSingleChefQuery listener) {
+    public static void getChefById(Context context, final String id, final OnSingleParticipantQueryListener<Chef> listener) {
         Logger.log(ChefsStore.class, "Getting chef for ID");
         getChefs(context, new OnParticipantQueryListener<Chef>() {
             @Override
