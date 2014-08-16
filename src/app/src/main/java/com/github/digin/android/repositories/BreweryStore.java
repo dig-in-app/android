@@ -1,9 +1,14 @@
 package com.github.digin.android.repositories;
 
+import android.app.Activity;
 import android.content.Context;
 
+import com.github.digin.android.fragments.BreweryDetailsFragment;
 import com.github.digin.android.listeners.OnParticipantQueryListener;
+import com.github.digin.android.listeners.OnSingleParticipantQueryListener;
+import com.github.digin.android.logging.Logger;
 import com.github.digin.android.models.Brewery;
+import com.github.digin.android.models.Winery;
 import com.github.digin.android.tasks.ParseAllBreweriesTask;
 
 import java.util.Collections;
@@ -55,4 +60,23 @@ public abstract class BreweryStore {
         getBreweries(context, listener);
     }
 
+    //TODO: Change wine to beer.
+    public static void getBreweryById(Context context, final String id, final OnSingleParticipantQueryListener<Brewery> listener) {
+        Logger.log(ChefsStore.class, "Getting chef for ID");
+        getBreweries(context, new OnParticipantQueryListener<Brewery>() {
+            @Override
+            public void onComplete(List<Brewery> wineries) {
+
+                for (Brewery winery : wineries) {
+                    if (winery.getId().equals(id)) {
+                        listener.onComplete(winery);
+                        return;
+                    }
+
+                }
+                Logger.log(BreweryStore.class, "Found no brewery matching given ID");
+                listener.onComplete(null);
+            }
+        });
+    }
 }

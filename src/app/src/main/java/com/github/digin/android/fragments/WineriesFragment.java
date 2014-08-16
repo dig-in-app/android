@@ -29,11 +29,9 @@ public class WineriesFragment extends LineupListFragment<Winery> {
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Winery winery = ((ParticipantListAdapter<Winery>) getListAdapter()).getItem(position);
 
-
-
         AnalyticsHelper.sendEvent(getActivity(), "List_Click", WineriesFragment.class.getName(), winery.getName());
 
-        Logger.log(LineupListFragment.class, "onItemClick(): " + winery.getName());
+        Logger.log(WineriesFragment.class, "onItemClick(): " + winery.getName());
 
         WineryDetailsFragment details = WineryDetailsFragment.newInstance(winery);
         getFragmentManager().beginTransaction().addToBackStack(DetailsFragment.class.getName()).replace(R.id.content_frame, details, ParticipantDetailsFragment.class.getName()).commit();

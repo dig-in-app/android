@@ -13,6 +13,7 @@ public class NavDrawerItem {
             new NavDrawerItem(BoundedMapFragment.class, "Map"),
             new NavDrawerItem(ChefListFragment.class, "Chefs"),
             new NavDrawerItem(WineriesFragment.class, "Wineries"),
+            new NavDrawerItem(BreweriesFragment.class, "Breweries"),
             new NavDrawerItem(FavoritesFragment.class, "Favorites")
     };
     String itemName;

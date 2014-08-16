@@ -70,7 +70,7 @@ public abstract class WineryStore {
                     }
 
                 }
-                Logger.log(ChefsStore.class, "Found no winery matching given ID");
+                Logger.log(WineryStore.class, "Found no winery matching given ID");
                 listener.onComplete(null);
             }
         });

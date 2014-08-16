@@ -1,5 +1,6 @@
 package com.github.digin.android.fragments;
 
+import android.app.Activity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListAdapter;
@@ -31,6 +32,13 @@ public class ChefListFragment extends LineupListFragment<Chef> {
 
     public void getChefs() {
         ChefsStore.getChefs(getActivity().getBaseContext(), this);
+    }
+
+    @Override
+    public void onAttach(final Activity activity) {
+        super.onAttach(activity);
+
+        AnalyticsHelper.sendScreenView(getActivity(), ChefListFragment.class);
     }
 
     @Override

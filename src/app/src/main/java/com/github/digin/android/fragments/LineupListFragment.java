@@ -72,8 +72,6 @@ public abstract class LineupListFragment<T extends Participant> extends ListFrag
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-
-        AnalyticsHelper.sendScreenView(getActivity(), LineupListFragment.class, "Main List");
     }
 
     @Override
