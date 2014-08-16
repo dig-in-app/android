@@ -10,12 +10,10 @@ import android.widget.ListAdapter;
 import android.widget.TextView;
 
 import com.github.digin.android.R;
-import com.github.digin.android.adapters.ChefListAdapter;
+import com.github.digin.android.adapters.ParticipantListAdapter;
 import com.github.digin.android.logging.AnalyticsHelper;
 import com.github.digin.android.logging.Logger;
-import com.github.digin.android.models.Chef;
 import com.github.digin.android.models.Winery;
-import com.github.digin.android.repositories.FavoritesStore;
 import com.github.digin.android.repositories.WineryStore;
 
 import java.util.List;

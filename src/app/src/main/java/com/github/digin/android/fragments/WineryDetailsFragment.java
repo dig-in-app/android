@@ -49,6 +49,8 @@ public class WineryDetailsFragment extends ParticipantDetailsFragment<Winery> im
 
         getView().setBackgroundColor(Color.BLACK);
 
+        getActivity().getActionBar().setTitle(getParticipant().getName());
+
         TextView name = (TextView) getView().findViewById(R.id.nameText);
         name.setText( getParticipant().getName() );
 

@@ -1,4 +1,4 @@
-package com.github.digin.android.fragments;
+package com.github.digin.android.adapters;
 
 import android.app.Activity;
 import android.content.Context;
@@ -12,6 +12,7 @@ import android.widget.ListAdapter;
 import android.widget.TextView;
 
 import com.github.digin.android.R;
+import com.github.digin.android.fragments.LineupListFragment;
 import com.github.digin.android.models.Chef;
 import com.github.digin.android.models.Participant;
 import com.github.digin.android.models.Winery;
