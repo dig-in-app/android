@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.github.digin.android.R;
 import com.github.digin.android.fragments.LineupListFragment;
+import com.github.digin.android.logging.Logger;
 import com.github.digin.android.models.Chef;
 import com.github.digin.android.models.Participant;
 import com.github.digin.android.models.Winery;
@@ -59,6 +60,8 @@ public class ParticipantListAdapter<T extends Participant> extends ArrayAdapter<
             ViewHolder viewHolder = new ViewHolder();
             viewHolder.title = (TextView) rowView.findViewById(R.id.titleView);
             viewHolder.location = (TextView) rowView.findViewById(R.id.tableLetter);
+            viewHolder.badge_image = (ImageView) rowView.findViewById(R.id.badge_image);
+            viewHolder.badge_text = (ViewGroup) rowView.findViewById(R.id.badge_text);
             rowView.setTag(viewHolder);
         }
 
@@ -68,9 +71,47 @@ public class ParticipantListAdapter<T extends Participant> extends ArrayAdapter<
         T item = getItem(position);
         holder.title.setText(item.getName());
 
-        holder.location.setText(getLocationForParticipant(item));
+
+        int resid = getResIdForParticipant(getItem(position));
+        if(resid > 0) {
+            holder.badge_text.setVisibility(View.GONE);
+            holder.badge_image.setVisibility(View.VISIBLE);
+            holder.badge_image.setImageResource(resid);
+        } else if( resid == 0 ) {
+            holder.badge_image.setImageBitmap(null);
+            holder.badge_image.setVisibility(View.GONE);
+            holder.badge_text.setVisibility(View.VISIBLE);
+
+            holder.location.setText(getLocationForParticipant(item));
+        }
 
         return rowView;
+    }
+
+    private int getResIdForParticipant(Participant participant) {
+        if (participant.getTent().contains("Tent")) {
+            char tentNum = participant.getTent().charAt(participant.getTent().length() - 1);
+            if (tentNum == '1') {
+                return R.drawable.tent_one;
+            } else if (tentNum == '2') {
+                return R.drawable.tent_two;
+            } else if (tentNum == '3') {
+                return R.drawable.tent_badge; //TODO: Get image for tent 3.
+            } else if (tentNum == '4') {
+                return R.drawable.tent_four;
+            } else if (tentNum == '5') {
+                return R.drawable.tent_five;
+            } else if (tentNum == '6') {
+                return R.drawable.tent_six;
+            } else {
+                return R.drawable.tent_badge; //TODO: This image is too large.
+            }
+        } else if (participant.getTent().equals("Food Trucks")) {
+            return R.drawable.truck_badge;
+        } else if (participant.getTent().contains("Table")) {
+            return 0; //TODO: This image is too large.
+        } else return -1;
+
     }
 
     private String getLocationForParticipant(T item) {
@@ -80,5 +121,7 @@ public class ParticipantListAdapter<T extends Participant> extends ArrayAdapter<
     static class ViewHolder {
         public TextView title;
         public TextView location;
+        public ImageView badge_image;
+        public ViewGroup badge_text;
     }
 }

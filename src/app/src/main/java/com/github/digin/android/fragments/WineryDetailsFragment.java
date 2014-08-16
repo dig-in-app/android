@@ -72,9 +72,9 @@ public class WineryDetailsFragment extends ParticipantDetailsFragment<Winery> im
         favoriteButton = (Button) getView().findViewById(R.id.details_button_favorite);
         favoriteButton.setOnClickListener(this);
 
-//        if (FavoritesStore.contains(getActivity(), getParticipant())) {
-//            favoriteButton.setText("Unfavorite");
-//        }
+        if (FavoritesStore.contains(getActivity(), getParticipant())) {
+            favoriteButton.setText("Unfavorite");
+        }
     }
 
     @Override
@@ -82,7 +82,7 @@ public class WineryDetailsFragment extends ParticipantDetailsFragment<Winery> im
 
         switch (v.getId()) {
             case R.id.details_button_favorite:
-//                setFavorite();
+                setFavorite();
                 break;
             case R.id.details_button_yelp:
                 goToYelp();
@@ -105,18 +105,18 @@ public class WineryDetailsFragment extends ParticipantDetailsFragment<Winery> im
         startActivity(browserIntent);
     }
 
-//    private void setFavorite() {
-//        boolean isFavorited = FavoritesStore.contains(getActivity(), getParticipant());
-//        if (isFavorited) {
-//            FavoritesStore.removeFavorite(getActivity(), getParticipant());
-//            favoriteButton.setText("Add to favorites");
-//            AnalyticsHelper.sendEvent(getActivity(), "Details_Item_Click", "Unfavorite", getParticipant().getName());
-//        } else {
-//            FavoritesStore.storeFavorite(getActivity(), getParticipant());
-//            favoriteButton.setText("Unfavorite");
-//            AnalyticsHelper.sendEvent(getActivity(), "Details_Item_Click", "Favorite", getParticipant().getName());
-//        }
-//    }
+    private void setFavorite() {
+        boolean isFavorited = FavoritesStore.contains(getActivity(), getParticipant());
+        if (isFavorited) {
+            FavoritesStore.removeFavorite(getActivity(), getParticipant());
+            favoriteButton.setText("Add to favorites");
+            AnalyticsHelper.sendEvent(getActivity(), "Details_Item_Click", "Unfavorite", getParticipant().getName());
+        } else {
+            FavoritesStore.storeFavorite(getActivity(), getParticipant());
+            favoriteButton.setText("Unfavorite");
+            AnalyticsHelper.sendEvent(getActivity(), "Details_Item_Click", "Favorite", getParticipant().getName());
+        }
+    }
 
     private void goToYelp() {
         if (getParticipant().getYelpURL() == null || getParticipant().getYelpURL().equals("")) {

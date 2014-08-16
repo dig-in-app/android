@@ -3,32 +3,64 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent"
     android:id="@+id/listItemLeft"
-    android:padding="5dp"
     android:layout_marginTop="15dp"
     android:layout_marginBottom="15dp"
     android:background="@android:color/white" >
 
-    <TextView
+    <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/tableLetter"
         android:layout_alignParentLeft="true"
-        android:textColor="@color/digin_brown"
-        android:text="A"
-        android:layout_centerVertical="true"
-        android:textSize="40sp"
-        android:padding="20dp" />
+        android:padding="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:id="@+id/badge"
+        android:layout_centerVertical="true">
+
+        <LinearLayout
+            android:id="@+id/badge_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Table"
+                android:textColor="@color/digin_brown"
+                android:layout_centerHorizontal="true"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tableLetter"
+                android:textColor="@color/digin_brown"
+                android:text="A"
+                android:textSize="40sp" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/badge_image"
+            android:padding="10dp" />
+    </FrameLayout>
+
+
 
     <TextView
-        android:layout_toRightOf="@+id/tableLetter"
+        android:layout_toRightOf="@+id/badge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#F38032"
         android:textStyle="bold"
+        android:layout_centerVertical="true"
         android:text="Local Eatery and Pub, Westfield"
         android:id="@+id/titleView"
-        android:layout_centerVertical="true"
         android:textSize="25sp"
         android:layout_marginLeft="10dp"/>
 

@@ -8,12 +8,15 @@ import com.github.digin.android.listeners.OnParticipantQueryListener;
 import com.github.digin.android.listeners.OnSingleParticipantQueryListener;
 import com.github.digin.android.logging.Logger;
 import com.github.digin.android.models.Brewery;
+import com.github.digin.android.models.Chef;
 import com.github.digin.android.models.Winery;
 import com.github.digin.android.tasks.ParseAllBreweriesTask;
 
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Contains methods which return a list of breweries either stored
@@ -78,5 +81,27 @@ public abstract class BreweryStore {
                 listener.onComplete(null);
             }
         });
+    }
+
+    public static void batchGetBreweryById(Context context, final Set<String> ids, final OnParticipantQueryListener<Brewery> listener) {
+        Logger.log(ChefsStore.class, "Getting a subset of chefs by id");
+
+        getBreweries(context, new OnParticipantQueryListener<Brewery>() {
+            public void onComplete(List<Brewery> chefs) {
+
+                List<Brewery> subset = new LinkedList<Brewery>();
+                for (Brewery chef : chefs) {
+                    if (ids.contains(chef.getId())) {
+                        subset.add(chef);
+                    }
+                }
+
+                if (listener != null) {
+                    listener.onComplete(subset);
+                }
+
+            }
+        });
+
     }
 }

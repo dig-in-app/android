@@ -8,7 +8,9 @@ import android.view.MenuItem;
 import android.widget.ListView;
 
 import com.github.digin.android.NavDrawerController;
+import com.github.digin.android.NavDrawerItem;
 import com.github.digin.android.R;
+import com.github.digin.android.adapters.NavDrawerAdapter;
 import com.github.digin.android.fragments.BoundedMapFragment;
 
 public class MainActivity extends Activity {
@@ -63,9 +65,18 @@ public class MainActivity extends Activity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
 
         getActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.ab_solid_diginpassport));
         getActionBar().setTitle(getString(R.string.app_name));
+
+        if(getFragmentManager().getBackStackEntryCount() == 0) {
+            if (getFragmentManager().findFragmentById(R.id.content_frame).getClass().equals(BoundedMapFragment.class)) {
+                super.onBackPressed();
+            } else {
+                controller.displayNewFragment(0, NavDrawerItem.getItems().get(0));
+            }
+        } else {
+            super.onBackPressed();
+        }
     }
 }

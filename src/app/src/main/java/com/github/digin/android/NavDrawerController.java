@@ -35,6 +35,10 @@ public class NavDrawerController implements AdapterView.OnItemClickListener {
         this.mActivity = activity;
     }
 
+    public int getCurrentItem() {
+        return ((NavDrawerAdapter) mDrawerList.getAdapter()).getCurrentItem();
+    }
+
     public void init() {
         // Set the adapter for the list view
         mDrawerList.setAdapter(new NavDrawerAdapter(mActivity, R.layout.drawer_item, NavDrawerItem.getItems()));

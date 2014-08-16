@@ -38,32 +38,30 @@
             android:padding="10dp">
 
 
-            <IconTextView
+            <IconButton
                 android:id="@+id/drawer_about_digin"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="#FFF"
+                android:background="@android:color/transparent"
                 android:text="@string/about_digin"
                 android:gravity="left"
                 android:padding="10dp" />
 
-            <IconTextView
+            <IconButton
                 android:id="@+id/drawer_about_developers"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="#FFF"
+                android:background="@android:color/transparent"
                 android:text="@string/about_dev"
                 android:gravity="left"
                 android:padding="10dp" />
 
         </LinearLayout>
 
-
-
-
     </RelativeLayout>
-
 
 </android.support.v4.widget.DrawerLayout>

@@ -11,7 +11,9 @@ import com.github.digin.android.tasks.ParseAllWineriesTask;
 
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by mike on 8/10/14.
@@ -74,6 +76,28 @@ public abstract class WineryStore {
                 listener.onComplete(null);
             }
         });
+    }
+
+    public static void batchGetWineryById(Context context, final Set<String> ids, final OnParticipantQueryListener<Winery> listener) {
+        Logger.log(ChefsStore.class, "Getting a subset of chefs by id");
+
+        getWineries(context, new OnParticipantQueryListener<Winery>() {
+            public void onComplete(List<Winery> chefs) {
+
+                List<Winery> subset = new LinkedList<Winery>();
+                for (Winery chef : chefs) {
+                    if (ids.contains(chef.getId())) {
+                        subset.add(chef);
+                    }
+                }
+
+                if (listener != null) {
+                    listener.onComplete(subset);
+                }
+
+            }
+        });
+
     }
 
 }
