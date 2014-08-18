@@ -13,3 +13,4 @@ src/app/src/main/res/values/secret_keys.xml
 src/app/app-debug.apk
 src/ParallaxScroll/build
 digin-keystore.jks
+src/app/app-release.apk
